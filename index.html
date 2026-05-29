@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Élevage & Pastorale - Qualité Locale</title>
+  <!-- Font Awesome (version gratuite) pour icônes élégantes -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background-color: #fefcf7;
+      color: #2c3e2f;
+      scroll-behavior: smooth;
+    }
+
+    /* Import Google Font pour plus de style */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap');
+
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation */
+    nav {
+      background: #ffffffdd;
+      backdrop-filter: blur(12px);
+      background-color: rgba(255, 255, 245, 0.96);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+      border-bottom: 1px solid #e2e8d5;
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: #2b5e2b;
+    }
+    .logo span {
+      color: #d48f3b;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #2c4a2e;
+      transition: 0.2s;
+      font-size: 1rem;
+    }
+    .nav-links a:hover {
+      color: #d48f3b;
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #2c4a2e;
+    }
+
+    /* sections génériques */
+    section {
+      padding: 80px 0;
+      border-bottom: 1px solid #ece5d8;
+    }
+    .section-title {
+      font-size: 2.3rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: #2c5a2a;
+      position: relative;
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: #d48f3b;
+      margin: 12px auto 0;
+      border-radius: 4px;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(107deg, #f4f7ec 0%, #eef3e6 100%);
+      padding: 60px 0 70px;
+    }
+    .hero-grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
+    }
+    .hero-content {
+      flex: 1.2;
+    }
+    .hero-badge {
+      background: #d48f3b20;
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #b4621a;
+      margin-bottom: 1rem;
+    }
+    .hero-content h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      color: #1e3a1e;
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      color: #3f5a3a;
+      margin-bottom: 2rem;
+    }
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .btn-primary {
+      background: #2b5e2b;
+      color: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+    .btn-primary:hover {
+      background: #1f461f;
+      transform: scale(1.02);
+    }
+    .btn-outline {
+      border: 2px solid #2b5e2b;
+      background: transparent;
+      color: #2b5e2b;
+    }
+    .btn-outline:hover {
+      background: #2b5e2b10;
+      border-color: #d48f3b;
+      color: #d48f3b;
+    }
+    .hero-image {
+      flex: 1;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.2);
+    }
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    /* chiffres clés */
+    .stats-row {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 3rem 0 2rem;
+      text-align: center;
+    }
+    .stat-item {
+      flex: 1;
+      background: white;
+      border-radius: 28px;
+      padding: 1.8rem 0.5rem;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.02);
+      border: 1px solid #e7e2d4;
+    }
+    .stat-number {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: #d48f3b;
+    }
+    .testimonials {
+      background: #f9f7f0;
+      border-radius: 48px;
+      padding: 2rem 1.5rem;
+      margin-top: 2rem;
+    }
+    .testimonial-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+    .testi-card {
+      background: white;
+      border-radius: 28px;
+      padding: 1.8rem;
+      max-width: 280px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      border: 1px solid #eee5d8;
+    }
+    .testi-card i {
+      color: #d48f3b;
+      font-size: 1.6rem;
+      margin-bottom: 0.8rem;
+    }
+    .testi-card p {
+      font-style: italic;
+      margin: 0.6rem 0;
+    }
+
+    /* about / valeurs */
+    .about-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    .about-text {
+      flex: 1.2;
+    }
+    .about-text h3 {
+      font-size: 1.8rem;
+      margin: 1rem 0 0.5rem;
+    }
+    .valeurs-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin: 2rem 0;
+    }
+    .valeur-item {
+      background: #eef3e6;
+      padding: 0.6rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 500;
+    }
+    .about-img {
+      flex: 0.9;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 12px 24px -8px rgba(0,0,0,0.1);
+    }
+    .about-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* catalogue / produits */
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .filter-btn {
+      background: #ede8dd;
+      border: none;
+      padding: 0.6rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 0.9rem;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: #2b5e2b;
+      color: white;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 2rem;
+    }
+    .product-card {
+      background: white;
+      border-radius: 32px;
+      overflow: hidden;
+      transition: transform 0.2s;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.04);
+      border: 1px solid #eee5d8;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+    }
+    .product-img {
+      height: 200px;
+      background: #eef0e3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      color: #5c7a4a;
+    }
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .product-info {
+      padding: 1.2rem;
+    }
+    .product-title {
+      font-weight: 800;
+      font-size: 1.3rem;
+    }
+    .product-desc {
+      font-size: 0.9rem;
+      margin: 0.5rem 0;
+      color: #4b5e3b;
+    }
+    .whatsapp-btn {
+      background: #25D366;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: white;
+      padding: 0.6rem 1rem;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: 0.2s;
+      width: 100%;
+      justify-content: center;
+      margin-top: 0.8rem;
+    }
+    .whatsapp-btn:hover {
+      background: #1daa53;
+    }
+    /* contact & map */
+    .contact-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .contact-form {
+      flex: 1;
+      background: white;
+      padding: 2rem;
+      border-radius: 32px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 0.9rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ddd2c0;
+      border-radius: 28px;
+      font-family: inherit;
+    }
+    .contact-info {
+      flex: 0.9;
+      background: #faf8f2;
+      border-radius: 32px;
+      padding: 2rem;
+    }
+    .contact-info i {
+      width: 40px;
+      color: #d48f3b;
+      font-size: 1.4rem;
+    }
+    .info-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+    .map-container {
+      margin-top: 2rem;
+      border-radius: 28px;
+      overflow: hidden;
+    }
+    footer {
+      background: #1f3620;
+      color: #d9e0cb;
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    /* responsive */
+    @media (max-width: 860px) {
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 0;
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .hero-content h1 {
+        font-size: 2.3rem;
+      }
+      .section-title {
+        font-size: 1.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <div class="nav-container container">
+    <div class="logo">Élevage <span>Pastoral</span></div>
+    <div class="menu-toggle" id="mobile-menu">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#qui-sommes-nous">Qui sommes-nous ?</a></li>
+      <li><a href="#catalogue">Catalogue</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Section Accueil (Hero + chiffres + avis) -->
+<section id="accueil" class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge"><i class="fas fa-leaf"></i> Production locale & durable</div>
+        <h1>Des produits pastoraux de qualité supérieure, élevés localement pour votre santé.</h1>
+        <p>Viande fraîche, volaille, produits laitiers et bien plus — traçabilité totale, élevage éthique et normes d'hygiène rigoureuses.</p>
+        <div class="btn-group">
+          <a href="#catalogue" class="btn btn-primary">Voir nos produits</a>
+          <a href="#contact" class="btn btn-outline">Nous contacter</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="https://placehold.co/600x400/e9f0df/4d6a3a?text=Élevage+Propre+&+Moderne" alt="Ferme moderne et propre">
+      </div>
+    </div>
+
+    <!-- Chiffres clés -->
+    <div class="stats-row">
+      <div class="stat-item"><div class="stat-number">1,200+</div><div>Clients livrés</div></div>
+      <div class="stat-item"><div class="stat-number">14 ans</div><div>Années d'excellence</div></div>
+      <div class="stat-item"><div class="stat-number">25 T</div><div>Capacité mensuelle</div></div>
+    </div>
+
+    <!-- Aperçu avis clients -->
+    <div class="testimonials">
+      <h3 style="text-align:center; margin-bottom:1.5rem;">💬 Ce qu'ils disent de nous</h3>
+      <div class="testimonial-grid">
+        <div class="testi-card"><i class="fas fa-star-of-life"></i><p>"Viande exceptionnelle, respect des délais et qualité irréprochable. Notre cantine scolaire est ravie."</p><strong>- Mme Diop, Restauration collective</strong></div>
+        <div class="testi-card"><i class="fas fa-tractor"></i><p>"Œufs frais et poulets savoureux. Le sérieux de leur élevage se voit à la propreté des installations."</p><strong>- Karim, Grossiste</strong></div>
+        <div class="testi-card"><i class="fas fa-hand-holding-heart"></i><p>"Un service client réactif et des produits qui respectent la santé des consommateurs. Je recommande!"</p><strong>- Aïcha, Particulière</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Qui sommes-nous ? -->
+<section id="qui-sommes-nous">
+  <div class="container">
+    <div class="section-title">Qui sommes-nous ?</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <h3>Notre histoire & mission</h3>
+        <p>Fondée en 2010 par la famille Diallo, notre exploitation pastorale est née d'une passion : fournir des produits animaux sains, tout en respectant le bien-être animal et l'environnement. Nous avons bâti notre réputation sur la transparence et la rigueur sanitaire.</p>
+        <div class="valeurs-list">
+          <span class="valeur-item"><i class="fas fa-stethoscope"></i> Suivi vétérinaire rigoureux</span>
+          <span class="valeur-item"><i class="fas fa-apple-alt"></i> Alimentation saine & contrôlée</span>
+          <span class="valeur-item"><i class="fas fa-hand-sparkles"></i> Normes d'hygiène locales certifiées</span>
+        </div>
+        <p><strong>Notre engagement :</strong> Zéro additif nocif, pâturages naturels, traçabilité complète de l'élevage à la livraison.</p>
+      </div>
+      <div class="about-img">
+        <img src="https://placehold.co/500x400/d9e3cf/3c5a2f?text=Coulisses+Elevage" alt="Coulisses de la ferme">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Catalogue produits (avec filtrage) -->
+<section id="catalogue">
+  <div class="container">
+    <div class="section-title">Nos produits d'exception</div>
+    <div class="filters" id="filter-buttons">
+      <button class="filter-btn active" data-cat="all">Tous</button>
+      <button class="filter-btn" data-cat="volaille">Volaille</button>
+      <button class="filter-btn" data-cat="betail">Bétail</button>
+      <button class="filter-btn" data-cat="laitier">Produits laitiers</button>
+      <button class="filter-btn" data-cat="aliments">Aliments</button>
+    </div>
+    <div class="products-grid" id="products-container"></div>
+  </div>
+</section>
+
+<!-- Contact & Localisation -->
+<section id="contact">
+  <div class="container">
+    <div class="section-title">Contact & Localisation</div>
+    <div class="contact-wrap">
+      <div class="contact-form">
+        <h3>Demande de devis professionnel</h3>
+        <form id="devisForm">
+          <input type="text" placeholder="Nom complet" required id="name">
+          <input type="email" placeholder="Email professionnel" required id="email">
+          <input type="tel" placeholder="Téléphone">
+          <textarea rows="4" placeholder="Votre message (hôtels, restaurants, collectivités...)" id="message"></textarea>
+          <button type="submit" class="btn btn-primary" style="width:100%">Envoyer la demande</button>
+        </form>
+        <p id="formFeedback" style="margin-top:10px;font-size:0.85rem;"></p>
+      </div>
+      <div class="contact-info">
+        <h3>Coordonnées directes</h3>
+        <div class="info-line"><i class="fas fa-phone-alt"></i> <span>+221 77 123 45 67</span></div>
+        <div class="info-line"><i class="fab fa-whatsapp"></i> <span>+221 78 987 65 43 (WhatsApp Business)</span></div>
+        <div class="info-line"><i class="fas fa-envelope"></i> <span>contact@elevagepastoral.sn</span></div>
+        <div class="info-line"><i class="fas fa-map-marker-alt"></i> <span>Ferme de Keur Mbaye, Route de Thiès, Sénégal</span></div>
+        <a href="https://wa.me/221789876543?text=Bonjour%2C%20je%20souhaite%20obtenir%20un%20devis%20ou%20plus%20d%27informations%20sur%20vos%20produits." class="btn btn-primary" style="display:flex; gap:8px; justify-content:center; margin-top:1rem;"><i class="fab fa-whatsapp"></i>Nous écrire sur WhatsApp</a>
+        <div class="map-container">
+          <!-- Intégration Google Maps (cadre) -->
+          <iframe width="100%" height="180" style="border:0; border-radius:20px;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d123456!2d-17.463129!3d14.6937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDQxJzM3LjIiTiAxN8KwMjcnNDcuMiJX!5e0!3m2!1sfr!2ssn!4v1680000000000!5m2!1sfr!2ssn"></iframe>
+          <p style="font-size:12px; text-align:center;">Route de Thiès, à 15 km de Dakar – Point de vente sur place et livraison</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>© 2025 Élevage Pastoral – Des produits frais et sains, directement de notre ferme à votre table.</p>
+    <p style="margin-top: 8px;"><i class="fas fa-heart" style="color:#d48f3b;"></i> Élevage responsable, qualité certifiée</p>
+  </div>
+</footer>
+
+<script>
+  // Données produits
+  const products = [
+    { id:1, name:"Poulet de chair", desc:"Poids moyen 2.2kg, élevé en plein air, alimentation céréales", category:"volaille", imgIcon:"🐔", priceTxt:"à partir de 4500 FCFA" },
+    { id:2, name:"Carton d'œufs frais (30 œufs)", desc:"Œufs extra frais, label fermier, coquille calibrée", category:"volaille", imgIcon:"🥚", priceTxt:"3500 FCFA" },
+    { id:3, name:"Mouton pour Tabaski", desc:"Sélectionné, suivi vétérinaire, poids 35-45kg", category:"betail", imgIcon:"🐏", priceTxt:"sur devis" },
+    { id:4, name:"Viande bovine (1/4 ou 1/2 bœuf)", desc:"Découpe personnalisée, élevé en prairie naturelle", category:"betail", imgIcon:"🐄", priceTxt:"sur mesure" },
+    { id:5, name:"Lait frais pasteurisé (1L)", desc:"Traite quotidienne, sans conservateurs, normes HACCP", category:"laitier", imgIcon:"🥛", priceTxt:"1200 FCFA" },
+    { id:6, name:"Fromage blanc fermier", desc:"250g, saveur authentique, produit artisanal", category:"laitier", imgIcon:"🧀", priceTxt:"2000 FCFA" },
+    { id:7, name:"Aliment volaille (sac 25kg)", desc:"Mélange céréales + protéines, sans OGM", category:"aliments", imgIcon:"🌽", priceTxt:"12500 FCFA" },
+    { id:8, name:"Aliment bétail (sac 50kg)", desc:"Complément nutritif pour bovins/ovins", category:"aliments", imgIcon:"🌾", priceTxt:"18500 FCFA" }
+  ];
+
+  function renderProducts(category = "all") {
+    const container = document.getElementById("products-container");
+    if(!container) return;
+    let filtered = products;
+    if(category !== "all") {
+      filtered = products.filter(p => p.category === category);
+    }
+    container.innerHTML = filtered.map(prod => {
+      const whatsappMsg = encodeURIComponent(`Bonjour, je souhaite commander le produit "${prod.name}" (${prod.priceTxt}) vu sur votre site. Merci de me donner les détails de disponibilité.`);
+      const waLink = `https://wa.me/221789876543?text=${whatsappMsg}`;
+      return `
+        <div class="product-card" data-category="${prod.category}">
+          <div class="product-img">${prod.imgIcon}</div>
+          <div class="product-info">
+            <div class="product-title">${prod.name}</div>
+            <div class="product-desc">${prod.desc}</div>
+            <div style="font-weight:600; margin:0.3rem 0;">💰 ${prod.priceTxt}</div>
+            <a href="${waLink}" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Commander via WhatsApp</a>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // filtrage dynamique
+  function setupFilters() {
+    const btns = document.querySelectorAll('.filter-btn');
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.getAttribute('data-cat');
+        renderProducts(cat);
+      });
+    });
+  }
+
+  // Mobile menu toggle
+  function mobileMenu() {
+    const toggle = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
+    if(toggle && navLinks) {
+      toggle.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
+      });
+    }
+    // fermer le menu après clic sur lien
+    const links = document.querySelectorAll('.nav-links a');
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('show');
+      });
+    });
+  }
+
+  // Formulaire contact (simulation envoi)
+  function initContactForm() {
+    const form = document.getElementById('devisForm');
+    if(!form) return;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name')?.value.trim();
+      const email = document.getElementById('email')?.value.trim();
+      const msg = document.getElementById('message')?.value.trim();
+      if(!name || !email) {
+        document.getElementById('formFeedback').innerHTML = '⚠️ Veuillez remplir nom et email.';
+        return;
+      }
+      // simulation d'envoi
+      document.getElementById('formFeedback').innerHTML = '✅ Demande envoyée ! Notre équipe vous recontactera sous 24h.';
+      form.reset();
+      setTimeout(() => {
+        document.getElementById('formFeedback').innerHTML = '';
+      }, 4000);
+    });
+  }
+
+  // Smooth scroll for all anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if(href === "#" || href === "") return;
+      const target = document.querySelector(href);
+      if(target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Remplacer les images placeholder par des émojis améliorés? Garder des images "propres" mais ajouter une petite amélioration pour l'affichage
+  // Option: remplacer le héros img par un SVG symbolique ? mais conservons style propre.
+  // On peut également forcer les images produit à afficher des icônes plus soignées via la data, déjà fait.
+  // Petite amélioration pour l'image hero et about si besoin, on change les placeholder en images plus "réalistes" via background, mais reste fonctionnel.
+  
+  // Ajouter des gestionnaires d'images manquantes (optionnelle)
+  document.querySelectorAll('.hero-image img').forEach(img => {
+    if(img.src.includes('placehold.co')) {
+      img.alt = "Ferme moderne élevage local";
+    }
+  });
+  document.querySelectorAll('.about-img img').forEach(img => {
+    if(img.src.includes('placehold.co')) {
+      img.alt = "Installations et équipe de la ferme";
+    }
+  });
+
+  // initialize all
+  renderProducts('all');
+  setupFilters();
+  mobileMenu();
+  initContactForm();
+</script>
+</body>
+</html>
