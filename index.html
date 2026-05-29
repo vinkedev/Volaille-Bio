@@ -20,7 +20,6 @@
         /* Animations */
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(35px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(27,94,32,0.6); } 70% { transform: scale(1.03); box-shadow: 0 0 0 12px rgba(27,94,32,0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(27,94,32,0); } }
         @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-6px); } 100% { transform: translateY(0px); } }
         
         .animate-on-scroll { opacity: 0; transform: translateY(35px); transition: opacity 0.7s cubic-bezier(0.2,0.9,0.4,1.1), transform 0.7s cubic-bezier(0.2,0.9,0.4,1.1); }
@@ -31,21 +30,8 @@
         header.scrolled { background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); }
         .header-container { display: flex; justify-content: space-between; align-items: center; padding: 8px 20px; max-width: 1280px; margin: 0 auto; gap: 15px; }
         .logo { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-        .logo-img { 
-            width: 50px; 
-            height: 50px; 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            overflow: hidden;
-            background: #1B5E20;
-        }
-        .logo-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .logo-img { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #1B5E20; }
+        .logo-img img { width: 100%; height: 100%; object-fit: cover; }
         .logo-text h1 { font-size: 1.2rem; font-weight: 700; color: #1B5E20; line-height: 1.2; }
         .logo-text p { font-size: 0.6rem; color: #7A3A07; letter-spacing: 0.5px; }
         nav ul { display: flex; gap: 25px; list-style: none; }
@@ -53,12 +39,12 @@
         nav a:hover { color: #1B5E20; }
         .mobile-menu-btn { display: none; font-size: 24px; background: none; border: none; width: 40px; height: 40px; cursor: pointer; color: #1B5E20; }
         
-        /* Hero Slider - overlay plus clair */
+        /* Hero Slider */
         .hero { position: relative; min-height: 500px; display: flex; align-items: center; text-align: center; color: white; overflow: hidden; padding: 60px 0; }
         .hero-slides { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
         .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 1s ease-in-out; background-color: #1B5E20; }
         .hero-slide.active { opacity: 1; z-index: 1; }
-        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.25); z-index: 1; } /* PLUS CLAIR : 0.25 au lieu de 0.45 */
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.25); z-index: 1; }
         .hero-content { position: relative; z-index: 2; animation: fadeInUp 0.9s ease-out; max-width: 800px; margin: 0 auto; }
         .hero-content h2 { font-size: 2rem; margin-bottom: 15px; font-weight: 800; line-height: 1.3; }
         .hero-content h2 span { background: #FCDD11; color: #1B5E20; padding: 4px 12px; border-radius: 50px; display: inline-block; font-size: 1.3rem; margin-top: 5px; }
@@ -98,7 +84,7 @@
         .presentation-image { border-radius: 28px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
         .presentation-image img { width: 100%; height: auto; display: block; object-fit: cover; }
         
-        /* Cartes catégories (VOTRE CATALOGUE - inchangé) */
+        /* Cartes catégories */
         .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 20px; }
         .card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; border: 1px solid #eef2f6; }
         .card:hover { transform: translateY(-8px); box-shadow: 0 20px 35px rgba(0,0,0,0.12); }
@@ -107,68 +93,42 @@
         .card-content h3 { font-size: 1.3rem; color: #1B5E20; margin-bottom: 10px; }
         .card-content p { color: #64748b; font-size: 0.9rem; line-height: 1.5; margin-bottom: 15px; }
         
-        /* Style pour la liste des poussins */
+        /* Liste des poussins */
         .poussin-list { margin: 15px 0; }
-        .poussin-item { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            padding: 10px 12px; 
-            margin-bottom: 6px;
-            background: #F9F9F6;
-            border-radius: 12px;
-            border-left: 4px solid #FCDD11;
-            transition: all 0.2s ease;
-        }
-        .poussin-item:hover {
-            background: #f0ede5;
-            transform: translateX(3px);
-        }
-        .poussin-name {
-            font-weight: 600;
-            color: #1B5E20;
-            font-size: 0.9rem;
-        }
-        .poussin-price {
-            font-weight: 800;
-            color: #7A3A07;
-            font-size: 1rem;
-            background: white;
-            padding: 3px 10px;
-            border-radius: 20px;
-        }
+        .poussin-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; margin-bottom: 6px; background: #F9F9F6; border-radius: 12px; border-left: 4px solid #FCDD11; transition: all 0.2s ease; }
+        .poussin-item:hover { background: #f0ede5; transform: translateX(3px); }
+        .poussin-name { font-weight: 600; color: #1B5E20; font-size: 0.9rem; }
+        .poussin-price { font-weight: 800; color: #7A3A07; font-size: 1rem; background: white; padding: 3px 10px; border-radius: 20px; }
         
-        /* Tableau garanties */
-        .garanties-table { background: white; border-radius: 28px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eef2f6; margin-top: 20px; }
-        .garanties-row { display: grid; grid-template-columns: 1fr 1fr; }
-        .garantie-item { padding: 25px; display: flex; gap: 15px; align-items: flex-start; border-bottom: 1px solid #eef2f6; }
-        .garantie-item:first-child { border-right: 1px solid #eef2f6; }
-        .garantie-icon { font-size: 2rem; color: #FCDD11; min-width: 55px; }
-        .garantie-text h4 { font-size: 1rem; margin-bottom: 8px; color: #1B5E20; }
-        .garantie-text p { color: #64748b; font-size: 0.85rem; line-height: 1.5; }
+        /* Galerie d'images (remplace la section garanties) */
+        .gallery-section { background: #f8fafc; padding: 70px 0; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 20px; }
+        .gallery-item { border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer; }
+        .gallery-item:hover { transform: translateY(-5px); }
+        .gallery-item img { width: 100%; height: 280px; object-fit: cover; display: block; }
+        .gallery-caption { text-align: center; padding: 12px; background: white; font-weight: 600; color: #1B5E20; }
         
-        /* SECTION POURQUOI NOUS CHOISIR - AMÉLIORÉE (6 avantages) */
-        .avantages { background: #F9F9F6; padding: 70px 0; }
-        .avantages-inner { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
-        .avantages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 40px; }
-        .avantage { background: white; border-radius: 20px; padding: 30px 20px; text-align: center; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #eef2f6; }
-        .avantage:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
-        .av-icon { font-size: 2.5rem; margin-bottom: 15px; display: inline-block; }
-        .av-title { font-size: 1.2rem; font-weight: 700; color: #1B5E20; margin-bottom: 10px; }
-        .av-desc { color: #64748b; font-size: 0.9rem; line-height: 1.6; }
+        /* Pourquoi nous choisir - 3 cartes */
+        .avantages { background: white; padding: 70px 0; }
+        .avantages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 20px; }
+        .avantage { background: #F9F9F6; border-radius: 20px; padding: 40px 20px; text-align: center; transition: all 0.3s ease; border: 1px solid #eef2f6; }
+        .avantage:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); background: white; }
+        .av-icon { font-size: 3rem; margin-bottom: 20px; display: inline-block; }
+        .av-title { font-size: 1.3rem; font-weight: 700; color: #1B5E20; margin-bottom: 12px; }
+        .av-desc { color: #64748b; font-size: 0.95rem; line-height: 1.6; }
         
-        /* SECTION AVIS CLIENTS - AMÉLIORÉE (4 témoignages) */
-        .temoignages { padding: 70px 0; background: white; }
+        /* Avis clients */
+        .temoignages { padding: 70px 0; background: #f8fafc; }
         .temo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 40px; }
-        .temo-card { background: #F9F9F6; border-radius: 20px; padding: 25px; border-left: 4px solid #FCDD11; transition: all 0.3s ease; }
-        .temo-card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+        .temo-card { background: white; border-radius: 20px; padding: 25px; border-left: 4px solid #FCDD11; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .temo-card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .temo-stars { color: #FCDD11; font-size: 1rem; margin-bottom: 15px; letter-spacing: 2px; }
         .temo-texte { color: #1e293b; font-size: 0.9rem; line-height: 1.6; margin-bottom: 15px; font-style: italic; }
         .temo-nom { font-weight: 600; font-size: 0.85rem; color: #1B5E20; }
         
-        /* SECTION COMMANDER - AMÉLIORÉE */
+        /* Section Commander */
         .commande-section { background: linear-gradient(135deg, #1B5E20, #0f3d12); padding: 70px 0; text-align: center; }
-        .commande-section h2 { font-family: inherit; font-size: 2rem; color: white; margin-bottom: 15px; }
+        .commande-section h2 { font-size: 2rem; color: white; margin-bottom: 15px; }
         .commande-section p { color: rgba(255,255,255,0.85); font-size: 1rem; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
         .commande-btns { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
         .btn-commande { padding: 14px 32px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1rem; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease; }
@@ -185,6 +145,31 @@
         .contact-info-line i { width: 30px; color: #1B5E20; font-size: 1.1rem; }
         .double-buttons { display: flex; gap: 12px; margin: 20px 0; flex-wrap: wrap; }
         
+        /* WhatsApp flottant en CERCLE */
+        .whatsapp-float { 
+            position: fixed; 
+            bottom: 20px; 
+            right: 20px; 
+            background: #25D366; 
+            color: white; 
+            width: 60px;
+            height: 60px;
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            text-decoration: none; 
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+            z-index: 99; 
+            animation: float 3s ease-in-out infinite; 
+            transition: all 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background: #1daa53;
+        }
+        
         /* Footer */
         footer { background: #0f172a; color: #cbd5e1; padding: 45px 0 25px; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; margin-bottom: 30px; }
@@ -193,34 +178,32 @@
         .footer-grid a:hover { color: #FCDD11; }
         .footer-bottom { text-align: center; padding-top: 25px; border-top: 1px solid #334155; font-size: 0.85rem; }
         
-        /* WhatsApp flottant */
-        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #25D366; color: white; border-radius: 50px; padding: 12px 22px; display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 99; animation: float 3s ease-in-out infinite; }
-        
         @media (max-width: 768px) {
             .mobile-menu-btn { display: block; }
             nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 20px; gap: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-radius: 0 0 20px 20px; z-index: 999; }
             nav ul.show { display: flex; }
             .cards-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .avantages-grid { grid-template-columns: 1fr; gap: 20px; }
             .presentation-grid { grid-template-columns: 1fr; gap: 30px; }
             .contact-grid { grid-template-columns: 1fr; }
-            .garanties-row { grid-template-columns: 1fr; }
-            .garantie-item:first-child { border-right: none; border-bottom: 1px solid #eef2f6; }
             .hero-content h2 { font-size: 1.5rem; }
             .hero-content h2 span { font-size: 1rem; }
             .section-title { font-size: 1.6rem; }
-            .avantages-grid { grid-template-columns: 1fr; }
-            .temo-grid { grid-template-columns: 1fr; }
+            .whatsapp-float { width: 50px; height: 50px; font-size: 25px; bottom: 15px; right: 15px; }
         }
         @media (min-width: 769px) and (max-width: 1024px) {
             .cards-grid { grid-template-columns: repeat(2, 1fr); }
-            .avantages-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .avantages-grid { grid-template-columns: repeat(3, 1fr); }
         }
     </style>
 </head>
 <body>
 
+<!-- WhatsApp flottant en CERCLE -->
 <a href="https://wa.me/22655796925?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20vos%20produits" class="whatsapp-float" target="_blank">
-    <i class="fab fa-whatsapp"></i> Commander sur WhatsApp
+    <i class="fab fa-whatsapp"></i>
 </a>
 
 <header>
@@ -239,7 +222,7 @@
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#presentation">Présentation</a></li>
                 <li><a href="#produits">Nos produits</a></li>
-                <li><a href="#garanties">Nos garanties</a></li>
+                <li><a href="#galerie">Galerie</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -248,7 +231,7 @@
 </header>
 
 <main>
-    <!-- SECTION HERO SLIDER avec vos images et overlay plus clair -->
+    <!-- SECTION HERO SLIDER -->
     <section id="accueil" class="hero">
         <div class="hero-slides" id="heroSlides"></div>
         <div class="hero-overlay"></div>
@@ -293,7 +276,7 @@
         </div>
     </section>
 
-    <!-- SECTION PRODUITS - VOTRE CATALOGUE (inchangé, exactement comme vous l'avez) -->
+    <!-- SECTION PRODUITS - VOTRE CATALOGUE -->
     <section id="produits">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Le Catalogue de la Ferme</h2>
@@ -350,63 +333,52 @@
         </div>
     </section>
 
-    <!-- SECTION GARANTIES -->
-    <section id="garanties" style="background: #f8fafc;">
+    <!-- SECTION GALERIE D'IMAGES (remplace les garanties) -->
+    <section id="galerie" class="gallery-section">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Les Garanties de Volaille Bio</h2>
-            <div class="garanties-table">
-                <div class="garanties-row">
-                    <div class="garantie-item"><div class="garantie-icon"><i class="fas fa-leaf"></i></div><div class="garantie-text"><h4>Alimentation Saine</h4><p>Tous nos animaux sont nourris avec des aliments naturels, sans hormones de croissance ni additifs chimiques.</p></div></div>
-                    <div class="garantie-item"><div class="garantie-icon"><i class="fas fa-dna"></i></div><div class="garantie-text"><h4>Souche Sélectionnée</h4><p>Nos poussins proviennent de souches rigoureusement sélectionnées pour assurer un excellent rendement.</p></div></div>
+            <h2 class="section-title animate-on-scroll">Nos poussins en images</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item animate-on-scroll">
+                    <img src="elevage/im1.jpg" alt="Poussins Volaille Bio" onerror="this.src='https://placehold.co/400x300/1B5E20/FCDD11?text=Image+1'">
+                    <div class="gallery-caption">🐤 Poussins de qualité</div>
                 </div>
-                <div class="garanties-row">
-                    <div class="garantie-item"><div class="garantie-icon"><i class="fas fa-clinic-medical"></i></div><div class="garantie-text"><h4>Hygiène & Traçabilité</h4><p>Nos infrastructures respectent des normes sanitaires strictes pour garantir des produits sains et sûrs.</p></div></div>
-                    <div class="garantie-item"><div class="garantie-icon"><i class="fas fa-truck"></i></div><div class="garantie-text"><h4>Service de Livraison</h4><p>Commandez en toute simplicité et faites-vous livrer rapidement à domicile sur Ouagadougou.</p></div></div>
+                <div class="gallery-item animate-on-scroll">
+                    <img src="elevage/im2.jpg" alt="Poussins Volaille Bio" onerror="this.src='https://placehold.co/400x300/1B5E20/FCDD11?text=Image+2'">
+                    <div class="gallery-caption">🌿 Élevage naturel</div>
+                </div>
+                <div class="gallery-item animate-on-scroll">
+                    <img src="elevage/im3.jpg" alt="Poussins Volaille Bio" onerror="this.src='https://placehold.co/400x300/1B5E20/FCDD11?text=Image+3'">
+                    <div class="gallery-caption">🏆 Robustesse garantie</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION POURQUOI NOUS CHOISIR - AMÉLIORÉE (6 avantages) -->
+    <!-- SECTION POURQUOI NOUS CHOISIR - 3 CARTES -->
     <div class="avantages" id="pourquoi-nous">
-        <div class="avantages-inner">
+        <div class="container">
             <h2 class="section-title animate-on-scroll">Pourquoi nous choisir</h2>
             <div class="avantages-grid">
                 <div class="avantage animate-on-scroll">
                     <span class="av-icon">🌿</span>
-                    <p class="av-title">100% Bio & Naturel</p>
-                    <p class="av-desc">Aucun produit chimique, aucun antibiotique. Que du naturel de la ferme à votre table.</p>
+                    <p class="av-title">100% Naturel</p>
+                    <p class="av-desc">Aucun produit chimique, aucun antibiotique. Nos volailles sont élevées en plein air avec une alimentation 100% naturelle.</p>
                 </div>
                 <div class="avantage animate-on-scroll">
-                    <span class="av-icon">🐣</span>
-                    <p class="av-title">Poussins de qualité</p>
-                    <p class="av-desc">6 souches sélectionnées : Coquelets, Bleu d'Hollande, Local Amélioré, Pondeuses, Cob500, Sasso.</p>
+                    <span class="av-icon">💰</span>
+                    <p class="av-title">Prix abordable</p>
+                    <p class="av-desc">Bio ne veut pas dire cher. Nous offrons le meilleur rapport qualité-prix du marché. Poussins dès 8 500 F, poulet dès 5 000 F.</p>
                 </div>
                 <div class="avantage animate-on-scroll">
                     <span class="av-icon">🚚</span>
                     <p class="av-title">Livraison rapide</p>
-                    <p class="av-desc">Commandez et recevez vos produits frais à domicile. Livraison sur Ouagadougou.</p>
-                </div>
-                <div class="avantage animate-on-scroll">
-                    <span class="av-icon">💯</span>
-                    <p class="av-title">Qualité garantie</p>
-                    <p class="av-desc">Chaque produit est contrôlé avant l'envoi. Satisfaction client garantie.</p>
-                </div>
-                <div class="avantage animate-on-scroll">
-                    <span class="av-icon">💰</span>
-                    <p class="av-title">Prix abordables</p>
-                    <p class="av-desc">Bio ne veut pas dire cher. Le meilleur rapport qualité-prix du marché.</p>
-                </div>
-                <div class="avantage animate-on-scroll">
-                    <span class="av-icon">📞</span>
-                    <p class="av-title">Service réactif</p>
-                    <p class="av-desc">Réponse rapide sur WhatsApp et Facebook. À votre écoute 7j/7.</p>
+                    <p class="av-desc">Commandez et recevez vos produits frais à domicile. Livraison rapide sur Ouagadougou et ses environs.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- SECTION AVIS CLIENTS - AMÉLIORÉE (4 témoignages) -->
+    <!-- SECTION AVIS CLIENTS -->
     <div class="temoignages" id="avis">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Ils nous font confiance</h2>
@@ -435,7 +407,7 @@
         </div>
     </div>
 
-    <!-- SECTION COMMANDER - AMÉLIORÉE -->
+    <!-- SECTION COMMANDER -->
     <div class="commande-section">
         <div class="container">
             <h2>Prêt à commander ?</h2>
@@ -485,7 +457,7 @@
         <div class="footer-grid">
             <div><h4>Volaille Bio</h4><p>Le choix de la nature et de la fraîcheur pour votre élevage et votre table.</p></div>
             <div><h4>Contact</h4><p><i class="fab fa-whatsapp"></i> +226 55 79 69 25<br><i class="fas fa-phone-alt"></i> +226 61 15 66 88<br><i class="fas fa-map-marker-alt"></i> Tampouy, Ouagadougou</p></div>
-            <div><h4>Liens rapides</h4><a href="#produits">Nos produits</a><a href="#garanties">Nos garanties</a><a href="#contact">Contact</a><a href="https://www.facebook.com/volaillebio1" target="_blank">Facebook</a></div>
+            <div><h4>Liens rapides</h4><a href="#produits">Nos produits</a><a href="#galerie">Galerie</a><a href="#contact">Contact</a><a href="https://www.facebook.com/volaillebio1" target="_blank">Facebook</a></div>
         </div>
         <div class="footer-bottom">
             <p>© 2025 Volaille Bio – Tous droits réservés</p>
