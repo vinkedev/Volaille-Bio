@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>Élevage & Pastorale - Qualité Locale</title>
-  <!-- Font Awesome (version gratuite) pour icônes élégantes -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -14,18 +13,13 @@
     }
 
     body {
-      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
       background-color: #fefcf7;
       color: #2c3e2f;
       scroll-behavior: smooth;
     }
 
-    /* Import Google Font pour plus de style */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap');
-
-    body {
-      font-family: 'Inter', sans-serif;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap');
 
     .container {
       max-width: 1280px;
@@ -35,9 +29,8 @@
 
     /* Navigation */
     nav {
-      background: #ffffffdd;
+      background: rgba(255, 255, 245, 0.98);
       backdrop-filter: blur(12px);
-      background-color: rgba(255, 255, 245, 0.96);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -53,7 +46,7 @@
     }
     .logo {
       font-size: 1.6rem;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: -0.3px;
       color: #2b5e2b;
     }
@@ -82,7 +75,6 @@
       color: #2c4a2e;
     }
 
-    /* sections génériques */
     section {
       padding: 80px 0;
       border-bottom: 1px solid #ece5d8;
@@ -188,7 +180,8 @@
       display: block;
       object-fit: cover;
     }
-    /* chiffres clés */
+
+    /* Stats */
     .stats-row {
       display: flex;
       justify-content: space-between;
@@ -210,11 +203,78 @@
       font-weight: 800;
       color: #d48f3b;
     }
+
+    /* Aperçu produits (sur accueil) */
+    .preview-products {
+      margin: 3rem 0 2rem;
+    }
+    .preview-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #2c5a2a;
+    }
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.8rem;
+    }
+    .preview-card {
+      background: white;
+      border-radius: 28px;
+      overflow: hidden;
+      transition: transform 0.2s;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.04);
+      border: 1px solid #eee5d8;
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+    .preview-card:hover {
+      transform: translateY(-5px);
+    }
+    .preview-icon {
+      font-size: 3.5rem;
+      margin-bottom: 0.8rem;
+    }
+    .preview-card h4 {
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+    .preview-card p {
+      font-size: 0.85rem;
+      margin: 0.5rem 0;
+      color: #5a6e4a;
+    }
+    .preview-price {
+      font-weight: 700;
+      color: #d48f3b;
+      margin: 0.5rem 0;
+    }
+    .wa-small-btn {
+      background: #25D366;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      transition: 0.2s;
+    }
+    .wa-small-btn:hover {
+      background: #1daa53;
+    }
+
+    /* Témoignages */
     .testimonials {
       background: #f9f7f0;
       border-radius: 48px;
       padding: 2rem 1.5rem;
-      margin-top: 2rem;
+      margin-top: 1rem;
     }
     .testimonial-grid {
       display: flex;
@@ -235,12 +295,8 @@
       font-size: 1.6rem;
       margin-bottom: 0.8rem;
     }
-    .testi-card p {
-      font-style: italic;
-      margin: 0.6rem 0;
-    }
 
-    /* about / valeurs */
+    /* About */
     .about-grid {
       display: flex;
       flex-wrap: wrap;
@@ -278,7 +334,7 @@
       display: block;
     }
 
-    /* catalogue / produits */
+    /* Catalogue complet */
     .filters {
       display: flex;
       justify-content: center;
@@ -317,18 +373,12 @@
       transform: translateY(-6px);
     }
     .product-img {
-      height: 200px;
+      height: 180px;
       background: #eef0e3;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 4rem;
-      color: #5c7a4a;
-    }
-    .product-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
     }
     .product-info {
       padding: 1.2rem;
@@ -336,11 +386,6 @@
     .product-title {
       font-weight: 800;
       font-size: 1.3rem;
-    }
-    .product-desc {
-      font-size: 0.9rem;
-      margin: 0.5rem 0;
-      color: #4b5e3b;
     }
     .whatsapp-btn {
       background: #25D366;
@@ -358,10 +403,8 @@
       justify-content: center;
       margin-top: 0.8rem;
     }
-    .whatsapp-btn:hover {
-      background: #1daa53;
-    }
-    /* contact & map */
+
+    /* Contact */
     .contact-wrap {
       display: flex;
       flex-wrap: wrap;
@@ -411,7 +454,6 @@
       padding: 2rem 0;
     }
 
-    /* responsive */
     @media (max-width: 860px) {
       .nav-links {
         display: none;
@@ -433,6 +475,14 @@
       .section-title {
         font-size: 1.9rem;
       }
+      .preview-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 500px) {
+      .preview-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -452,21 +502,21 @@
   </div>
 </nav>
 
-<!-- Section Accueil (Hero + chiffres + avis) -->
+<!-- ACCUEIL (Vitrine principale + aperçu produits direct) -->
 <section id="accueil" class="hero">
   <div class="container">
     <div class="hero-grid">
       <div class="hero-content">
         <div class="hero-badge"><i class="fas fa-leaf"></i> Production locale & durable</div>
         <h1>Des produits pastoraux de qualité supérieure, élevés localement pour votre santé.</h1>
-        <p>Viande fraîche, volaille, produits laitiers et bien plus — traçabilité totale, élevage éthique et normes d'hygiène rigoureuses.</p>
+        <p>Viande fraîche, volaille, produits laitiers — traçabilité totale, élevage éthique et normes d'hygiène rigoureuses.</p>
         <div class="btn-group">
-          <a href="#catalogue" class="btn btn-primary">Voir nos produits</a>
+          <a href="#catalogue" class="btn btn-primary">Voir tout le catalogue</a>
           <a href="#contact" class="btn btn-outline">Nous contacter</a>
         </div>
       </div>
       <div class="hero-image">
-        <img src="https://placehold.co/600x400/e9f0df/4d6a3a?text=Élevage+Propre+&+Moderne" alt="Ferme moderne et propre">
+        <img src="https://placehold.co/600x400/e9f0df/4d6a3a?text=Élevage+Propre+%26+Moderne" alt="Ferme moderne">
       </div>
     </div>
 
@@ -477,7 +527,16 @@
       <div class="stat-item"><div class="stat-number">25 T</div><div>Capacité mensuelle</div></div>
     </div>
 
-    <!-- Aperçu avis clients -->
+    <!-- APERÇU PRODUITS DIRECT SUR ACCUEIL (pour éviter de passer à côté) -->
+    <div class="preview-products">
+      <div class="preview-title">🔥 Nos produits les plus demandés</div>
+      <div class="preview-grid" id="preview-products-list"></div>
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <a href="#catalogue" class="btn btn-outline">Découvrir tous nos produits <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <!-- Avis clients -->
     <div class="testimonials">
       <h3 style="text-align:center; margin-bottom:1.5rem;">💬 Ce qu'ils disent de nous</h3>
       <div class="testimonial-grid">
@@ -489,7 +548,7 @@
   </div>
 </section>
 
-<!-- Qui sommes-nous ? -->
+<!-- QUI SOMMES-NOUS -->
 <section id="qui-sommes-nous">
   <div class="container">
     <div class="section-title">Qui sommes-nous ?</div>
@@ -505,16 +564,16 @@
         <p><strong>Notre engagement :</strong> Zéro additif nocif, pâturages naturels, traçabilité complète de l'élevage à la livraison.</p>
       </div>
       <div class="about-img">
-        <img src="https://placehold.co/500x400/d9e3cf/3c5a2f?text=Coulisses+Elevage" alt="Coulisses de la ferme">
+        <img src="https://placehold.co/500x400/d9e3cf/3c5a2f?text=Coulisses+Elevage" alt="Ferme">
       </div>
     </div>
   </div>
 </section>
 
-<!-- Catalogue produits (avec filtrage) -->
+<!-- CATALOGUE COMPLET -->
 <section id="catalogue">
   <div class="container">
-    <div class="section-title">Nos produits d'exception</div>
+    <div class="section-title">Notre catalogue complet</div>
     <div class="filters" id="filter-buttons">
       <button class="filter-btn active" data-cat="all">Tous</button>
       <button class="filter-btn" data-cat="volaille">Volaille</button>
@@ -526,7 +585,7 @@
   </div>
 </section>
 
-<!-- Contact & Localisation -->
+<!-- CONTACT -->
 <section id="contact">
   <div class="container">
     <div class="section-title">Contact & Localisation</div>
@@ -548,11 +607,9 @@
         <div class="info-line"><i class="fab fa-whatsapp"></i> <span>+221 78 987 65 43 (WhatsApp Business)</span></div>
         <div class="info-line"><i class="fas fa-envelope"></i> <span>contact@elevagepastoral.sn</span></div>
         <div class="info-line"><i class="fas fa-map-marker-alt"></i> <span>Ferme de Keur Mbaye, Route de Thiès, Sénégal</span></div>
-        <a href="https://wa.me/221789876543?text=Bonjour%2C%20je%20souhaite%20obtenir%20un%20devis%20ou%20plus%20d%27informations%20sur%20vos%20produits." class="btn btn-primary" style="display:flex; gap:8px; justify-content:center; margin-top:1rem;"><i class="fab fa-whatsapp"></i>Nous écrire sur WhatsApp</a>
+        <a href="https://wa.me/221789876543?text=Bonjour%2C%20je%20souhaite%20obtenir%20un%20devis%20ou%20plus%20d%27informations" class="btn btn-primary" style="display:flex; gap:8px; justify-content:center; margin-top:1rem;"><i class="fab fa-whatsapp"></i>Nous écrire sur WhatsApp</a>
         <div class="map-container">
-          <!-- Intégration Google Maps (cadre) -->
-          <iframe width="100%" height="180" style="border:0; border-radius:20px;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d123456!2d-17.463129!3d14.6937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDQxJzM3LjIiTiAxN8KwMjcnNDcuMiJX!5e0!3m2!1sfr!2ssn!4v1680000000000!5m2!1sfr!2ssn"></iframe>
-          <p style="font-size:12px; text-align:center;">Route de Thiès, à 15 km de Dakar – Point de vente sur place et livraison</p>
+          <iframe width="100%" height="180" style="border:0; border-radius:20px;" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d123456!2d-17.463129!3d14.6937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDQxJzM3LjIiTiAxN8KwMjcnNDcuMiJX!5e0!3m2!1sfr!2ssn!4v1680000000000!5m2!1sfr!2ssn"></iframe>
         </div>
       </div>
     </div>
@@ -567,43 +624,60 @@
 </footer>
 
 <script>
-  // Données produits
+  // Base de données produits
   const products = [
-    { id:1, name:"Poulet de chair", desc:"Poids moyen 2.2kg, élevé en plein air, alimentation céréales", category:"volaille", imgIcon:"🐔", priceTxt:"à partir de 4500 FCFA" },
-    { id:2, name:"Carton d'œufs frais (30 œufs)", desc:"Œufs extra frais, label fermier, coquille calibrée", category:"volaille", imgIcon:"🥚", priceTxt:"3500 FCFA" },
-    { id:3, name:"Mouton pour Tabaski", desc:"Sélectionné, suivi vétérinaire, poids 35-45kg", category:"betail", imgIcon:"🐏", priceTxt:"sur devis" },
-    { id:4, name:"Viande bovine (1/4 ou 1/2 bœuf)", desc:"Découpe personnalisée, élevé en prairie naturelle", category:"betail", imgIcon:"🐄", priceTxt:"sur mesure" },
-    { id:5, name:"Lait frais pasteurisé (1L)", desc:"Traite quotidienne, sans conservateurs, normes HACCP", category:"laitier", imgIcon:"🥛", priceTxt:"1200 FCFA" },
-    { id:6, name:"Fromage blanc fermier", desc:"250g, saveur authentique, produit artisanal", category:"laitier", imgIcon:"🧀", priceTxt:"2000 FCFA" },
-    { id:7, name:"Aliment volaille (sac 25kg)", desc:"Mélange céréales + protéines, sans OGM", category:"aliments", imgIcon:"🌽", priceTxt:"12500 FCFA" },
-    { id:8, name:"Aliment bétail (sac 50kg)", desc:"Complément nutritif pour bovins/ovins", category:"aliments", imgIcon:"🌾", priceTxt:"18500 FCFA" }
+    { id:1, name:"Poulet de chair", desc:"Poids moyen 2.2kg, élevé en plein air", category:"volaille", icon:"🐔", price:"4 500 FCFA" },
+    { id:2, name:"Carton d'œufs frais (30 œufs)", desc:"Œufs extra frais, label fermier", category:"volaille", icon:"🥚", price:"3 500 FCFA" },
+    { id:3, name:"Mouton pour Tabaski", desc:"Sélectionné, suivi vétérinaire, 35-45kg", category:"betail", icon:"🐏", price:"Sur devis" },
+    { id:4, name:"Viande bovine (1/4 bœuf)", desc:"Découpe personnalisée, prairie naturelle", category:"betail", icon:"🐄", price:"Sur mesure" },
+    { id:5, name:"Lait frais pasteurisé (1L)", desc:"Sans conservateurs, normes HACCP", category:"laitier", icon:"🥛", price:"1 200 FCFA" },
+    { id:6, name:"Fromage blanc fermier (250g)", desc:"Saveur authentique, artisanal", category:"laitier", icon:"🧀", price:"2 000 FCFA" },
+    { id:7, name:"Aliment volaille (sac 25kg)", desc:"Mélange céréales + protéines", category:"aliments", icon:"🌽", price:"12 500 FCFA" },
+    { id:8, name:"Aliment bétail (sac 50kg)", desc:"Complément nutritif", category:"aliments", icon:"🌾", price:"18 500 FCFA" }
   ];
 
+  const whatsappNumber = "221789876543";
+
+  function getWhatsappLink(productName, productPrice) {
+    const msg = encodeURIComponent(`Bonjour, je souhaite commander le produit "${productName}" (${productPrice}) vu sur votre site. Merci de me donner les détails de disponibilité.`);
+    return `https://wa.me/${whatsappNumber}?text=${msg}`;
+  }
+
+  // Aperçu sur accueil (4 produits phares)
+  function renderPreview() {
+    const previewContainer = document.getElementById("preview-products-list");
+    if(!previewContainer) return;
+    const topProducts = products.slice(0, 4);
+    previewContainer.innerHTML = topProducts.map(prod => `
+      <div class="preview-card">
+        <div class="preview-icon">${prod.icon}</div>
+        <h4>${prod.name}</h4>
+        <p>${prod.desc.substring(0, 50)}...</p>
+        <div class="preview-price">${prod.price}</div>
+        <a href="${getWhatsappLink(prod.name, prod.price)}" target="_blank" class="wa-small-btn"><i class="fab fa-whatsapp"></i> Commander</a>
+      </div>
+    `).join('');
+  }
+
+  // Catalogue complet avec filtres
   function renderProducts(category = "all") {
     const container = document.getElementById("products-container");
     if(!container) return;
-    let filtered = products;
-    if(category !== "all") {
-      filtered = products.filter(p => p.category === category);
-    }
-    container.innerHTML = filtered.map(prod => {
-      const whatsappMsg = encodeURIComponent(`Bonjour, je souhaite commander le produit "${prod.name}" (${prod.priceTxt}) vu sur votre site. Merci de me donner les détails de disponibilité.`);
-      const waLink = `https://wa.me/221789876543?text=${whatsappMsg}`;
-      return `
-        <div class="product-card" data-category="${prod.category}">
-          <div class="product-img">${prod.imgIcon}</div>
-          <div class="product-info">
-            <div class="product-title">${prod.name}</div>
-            <div class="product-desc">${prod.desc}</div>
-            <div style="font-weight:600; margin:0.3rem 0;">💰 ${prod.priceTxt}</div>
-            <a href="${waLink}" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Commander via WhatsApp</a>
-          </div>
+    let filtered = category === "all" ? products : products.filter(p => p.category === category);
+    container.innerHTML = filtered.map(prod => `
+      <div class="product-card">
+        <div class="product-img">${prod.icon}</div>
+        <div class="product-info">
+          <div class="product-title">${prod.name}</div>
+          <div class="product-desc" style="margin:8px 0; font-size:0.9rem;">${prod.desc}</div>
+          <div style="font-weight:700; margin:0.3rem 0;">💰 ${prod.price}</div>
+          <a href="${getWhatsappLink(prod.name, prod.price)}" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Commander via WhatsApp</a>
         </div>
-      `;
-    }).join('');
+      </div>
+    `).join('');
   }
 
-  // filtrage dynamique
+  // Filtres dynamiques
   function setupFilters() {
     const btns = document.querySelectorAll('.filter-btn');
     btns.forEach(btn => {
@@ -616,25 +690,19 @@
     });
   }
 
-  // Mobile menu toggle
+  // Menu mobile
   function mobileMenu() {
     const toggle = document.getElementById('mobile-menu');
     const navLinks = document.getElementById('nav-links');
     if(toggle && navLinks) {
-      toggle.addEventListener('click', () => {
-        navLinks.classList.toggle('show');
+      toggle.addEventListener('click', () => navLinks.classList.toggle('show'));
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => navLinks.classList.remove('show'));
       });
     }
-    // fermer le menu après clic sur lien
-    const links = document.querySelectorAll('.nav-links a');
-    links.forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('show');
-      });
-    });
   }
 
-  // Formulaire contact (simulation envoi)
+  // Formulaire contact
   function initContactForm() {
     const form = document.getElementById('devisForm');
     if(!form) return;
@@ -642,21 +710,17 @@
       e.preventDefault();
       const name = document.getElementById('name')?.value.trim();
       const email = document.getElementById('email')?.value.trim();
-      const msg = document.getElementById('message')?.value.trim();
       if(!name || !email) {
         document.getElementById('formFeedback').innerHTML = '⚠️ Veuillez remplir nom et email.';
         return;
       }
-      // simulation d'envoi
       document.getElementById('formFeedback').innerHTML = '✅ Demande envoyée ! Notre équipe vous recontactera sous 24h.';
       form.reset();
-      setTimeout(() => {
-        document.getElementById('formFeedback').innerHTML = '';
-      }, 4000);
+      setTimeout(() => document.getElementById('formFeedback').innerHTML = '', 4000);
     });
   }
 
-  // Smooth scroll for all anchor links
+  // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       const href = this.getAttribute('href');
@@ -669,24 +733,8 @@
     });
   });
 
-  // Remplacer les images placeholder par des émojis améliorés? Garder des images "propres" mais ajouter une petite amélioration pour l'affichage
-  // Option: remplacer le héros img par un SVG symbolique ? mais conservons style propre.
-  // On peut également forcer les images produit à afficher des icônes plus soignées via la data, déjà fait.
-  // Petite amélioration pour l'image hero et about si besoin, on change les placeholder en images plus "réalistes" via background, mais reste fonctionnel.
-  
-  // Ajouter des gestionnaires d'images manquantes (optionnelle)
-  document.querySelectorAll('.hero-image img').forEach(img => {
-    if(img.src.includes('placehold.co')) {
-      img.alt = "Ferme moderne élevage local";
-    }
-  });
-  document.querySelectorAll('.about-img img').forEach(img => {
-    if(img.src.includes('placehold.co')) {
-      img.alt = "Installations et équipe de la ferme";
-    }
-  });
-
-  // initialize all
+  // Initialisation
+  renderPreview();
   renderProducts('all');
   setupFilters();
   mobileMenu();
