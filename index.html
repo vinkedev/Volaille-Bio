@@ -17,16 +17,25 @@
         body { overflow-x: hidden !important; width: 100%; color: #1e293b; line-height: 1.6; background: #F8F9FA; font-family: 'Inter', system-ui, -apple-system, sans-serif; }
         .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 20px; overflow-x: hidden; }
         
-        /* Animations */
+        /* Animations de base */
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(35px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-6px); } 100% { transform: translateY(0px); } }
+        @keyframes fadeInScale { to { opacity: 1; transform: scale(1); } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-8px); } 100% { transform: translateY(0px); } }
+        @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(27,94,32,0.6); } 70% { transform: scale(1.03); box-shadow: 0 0 0 12px rgba(27,94,32,0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(27,94,32,0); } }
         
+        /* Animation au scroll */
         .animate-on-scroll { opacity: 0; transform: translateY(35px); transition: opacity 0.7s cubic-bezier(0.2,0.9,0.4,1.1), transform 0.7s cubic-bezier(0.2,0.9,0.4,1.1); }
         .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+        .animate-on-scroll:nth-child(1) { transition-delay: 0.05s; }
+        .animate-on-scroll:nth-child(2) { transition-delay: 0.1s; }
+        .animate-on-scroll:nth-child(3) { transition-delay: 0.15s; }
+        .animate-on-scroll:nth-child(4) { transition-delay: 0.2s; }
+        .animate-on-scroll:nth-child(5) { transition-delay: 0.25s; }
+        .animate-on-scroll:nth-child(6) { transition-delay: 0.3s; }
         
         /* Header */
-        header { background: white; box-shadow: 0 2px 20px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; transition: all 0.4s ease; }
+        header { background: white; box-shadow: 0 2px 20px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; transition: background 0.3s ease, backdrop-filter 0.3s ease; }
         header.scrolled { background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); }
         .header-container { display: flex; justify-content: space-between; align-items: center; padding: 8px 20px; max-width: 1280px; margin: 0 auto; gap: 15px; }
         .logo { display: flex; align-items: center; gap: 10px; cursor: pointer; }
@@ -55,17 +64,35 @@
         .slider-prev { left: 15px; }
         .slider-next { right: 15px; }
         .slider-dots { position: absolute; bottom: 20px; left: 0; right: 0; display: flex; justify-content: center; gap: 12px; z-index: 15; }
-        .dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; border: none; transition: all 0.3s; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; border: none; transition: all 0.3s ease; }
         .dot.active { background: #FCDD11; transform: scale(1.2); width: 28px; border-radius: 20px; }
         
-        /* Boutons */
-        .btn { display: inline-block; padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; font-size: 0.9rem; border: none; cursor: pointer; }
+        /* Boutons avec effet ripple */
+        .btn { display: inline-block; padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; font-size: 0.9rem; border: none; cursor: pointer; position: relative; overflow: hidden; }
         .btn-primary { background: #1B5E20; color: white; box-shadow: 0 6px 18px rgba(27,94,32,0.3); }
         .btn-primary:hover { background: #0f3d12; transform: translateY(-3px); }
         .btn-outline { background: transparent; border: 2px solid white; color: white; }
         .btn-outline:hover { background: white; color: #1B5E20; transform: translateY(-3px); }
         .btn-wa { background: #25D366; color: white; display: inline-flex; align-items: center; gap: 8px; }
         .btn-wa:hover { background: #1daa53; transform: translateY(-2px); }
+        
+        /* Effet ripple sur tous les boutons */
+        .btn:after, .btn-commande:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.4);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s, height 0.4s;
+        }
+        .btn:active:after, .btn-commande:active:after {
+            width: 200px;
+            height: 200px;
+        }
         
         /* Sections */
         section { padding: 70px 0; background: white; }
@@ -81,14 +108,16 @@
         /* Présentation */
         .presentation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
         .presentation-text p { margin-bottom: 15px; color: #475569; line-height: 1.7; }
-        .presentation-image { border-radius: 28px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .presentation-image { border-radius: 28px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1); transition: transform 0.4s ease; }
+        .presentation-image:hover { transform: scale(1.02); }
         .presentation-image img { width: 100%; height: auto; display: block; object-fit: cover; }
         
-        /* Cartes catégories */
+        /* Cartes catégories avec zoom au survol */
         .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 20px; }
-        .card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; border: 1px solid #eef2f6; }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 35px rgba(0,0,0,0.12); }
-        .card-icon { height: 160px; background: linear-gradient(135deg, #e8f5e9, #d4edda); display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+        .card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.3s ease; border: 1px solid #eef2f6; }
+        .card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 25px 40px rgba(0,0,0,0.15); }
+        .card-icon { height: 160px; background: linear-gradient(135deg, #e8f5e9, #d4edda); display: flex; align-items: center; justify-content: center; font-size: 4rem; transition: transform 0.3s ease; }
+        .card:hover .card-icon { transform: scale(1.05); }
         .card-content { padding: 20px; }
         .card-content h3 { font-size: 1.3rem; color: #1B5E20; margin-bottom: 10px; }
         .card-content p { color: #64748b; font-size: 0.9rem; line-height: 1.5; margin-bottom: 15px; }
@@ -100,27 +129,39 @@
         .poussin-name { font-weight: 600; color: #1B5E20; font-size: 0.9rem; }
         .poussin-price { font-weight: 800; color: #7A3A07; font-size: 1rem; background: white; padding: 3px 10px; border-radius: 20px; }
         
-        /* Galerie d'images (remplace la section garanties) */
+        /* Galerie d'images avec zoom */
         .gallery-section { background: #f8fafc; padding: 70px 0; }
         .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 20px; }
         .gallery-item { border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer; }
         .gallery-item:hover { transform: translateY(-5px); }
-        .gallery-item img { width: 100%; height: 280px; object-fit: cover; display: block; }
-        .gallery-caption { text-align: center; padding: 12px; background: white; font-weight: 600; color: #1B5E20; }
+        .gallery-item img { width: 100%; height: 280px; object-fit: cover; display: block; transition: transform 0.5s ease, filter 0.3s ease; }
+        .gallery-item:hover img { transform: scale(1.08); filter: brightness(1.05); }
+        .gallery-caption { text-align: center; padding: 12px; background: white; font-weight: 600; color: #1B5E20; transition: all 0.3s ease; }
+        .gallery-item:hover .gallery-caption { background: #1B5E20; color: #FCDD11; }
         
-        /* Pourquoi nous choisir - 3 cartes */
+        /* Pourquoi nous choisir - 3 cartes avec animation */
         .avantages { background: white; padding: 70px 0; }
         .avantages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 20px; }
-        .avantage { background: #F9F9F6; border-radius: 20px; padding: 40px 20px; text-align: center; transition: all 0.3s ease; border: 1px solid #eef2f6; }
+        .avantage { background: #F9F9F6; border-radius: 20px; padding: 40px 20px; text-align: center; transition: all 0.3s ease; border: 1px solid #eef2f6; animation: fadeInScale 0.5s ease forwards; opacity: 0; transform: scale(0.95); }
+        .avantage:nth-child(1) { animation-delay: 0.1s; }
+        .avantage:nth-child(2) { animation-delay: 0.2s; }
+        .avantage:nth-child(3) { animation-delay: 0.3s; }
+        @keyframes fadeInScale { to { opacity: 1; transform: scale(1); } }
         .avantage:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); background: white; }
-        .av-icon { font-size: 3rem; margin-bottom: 20px; display: inline-block; }
+        .av-icon { font-size: 3rem; margin-bottom: 20px; display: inline-block; transition: transform 0.3s ease, color 0.2s ease; }
+        .avantage:hover .av-icon { transform: rotate(8deg) scale(1.1); color: #FCDD11; }
         .av-title { font-size: 1.3rem; font-weight: 700; color: #1B5E20; margin-bottom: 12px; }
         .av-desc { color: #64748b; font-size: 0.95rem; line-height: 1.6; }
         
-        /* Avis clients */
+        /* Avis clients avec animation latérale */
         .temoignages { padding: 70px 0; background: #f8fafc; }
         .temo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 40px; }
-        .temo-card { background: white; border-radius: 20px; padding: 25px; border-left: 4px solid #FCDD11; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .temo-card { background: white; border-radius: 20px; padding: 25px; border-left: 4px solid #FCDD11; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.05); opacity: 0; animation: slideInLeft 0.5s ease forwards; }
+        .temo-card:nth-child(1) { animation-delay: 0.1s; }
+        .temo-card:nth-child(2) { animation-delay: 0.2s; }
+        .temo-card:nth-child(3) { animation-delay: 0.3s; }
+        .temo-card:nth-child(4) { animation-delay: 0.4s; }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
         .temo-card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .temo-stars { color: #FCDD11; font-size: 1rem; margin-bottom: 15px; letter-spacing: 2px; }
         .temo-texte { color: #1e293b; font-size: 0.9rem; line-height: 1.6; margin-bottom: 15px; font-style: italic; }
@@ -131,7 +172,7 @@
         .commande-section h2 { font-size: 2rem; color: white; margin-bottom: 15px; }
         .commande-section p { color: rgba(255,255,255,0.85); font-size: 1rem; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
         .commande-btns { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-        .btn-commande { padding: 14px 32px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1rem; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease; }
+        .btn-commande { padding: 14px 32px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1rem; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease; position: relative; overflow: hidden; }
         .btn-wa-commande { background: #25D366; color: white; }
         .btn-wa-commande:hover { background: #1daa53; transform: translateY(-3px); }
         .btn-fb-commande { background: #1877F2; color: white; }
@@ -139,13 +180,15 @@
         
         /* Contact */
         .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        .contact-card { background: #f8fafc; border-radius: 24px; padding: 30px; border: 1px solid #eef2f6; }
+        .contact-card { background: #f8fafc; border-radius: 24px; padding: 30px; border: 1px solid #eef2f6; transition: transform 0.3s ease; }
+        .contact-card:hover { transform: translateY(-3px); }
         .contact-card h3 { color: #1B5E20; margin-bottom: 20px; }
-        .contact-info-line { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
-        .contact-info-line i { width: 30px; color: #1B5E20; font-size: 1.1rem; }
+        .contact-info-line { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; transition: all 0.2s ease; }
+        .contact-info-line i { width: 30px; color: #1B5E20; font-size: 1.1rem; transition: transform 0.3s ease, color 0.2s ease; }
+        .contact-info-line i:hover { transform: scale(1.1); color: #FCDD11; }
         .double-buttons { display: flex; gap: 12px; margin: 20px 0; flex-wrap: wrap; }
         
-        /* WhatsApp flottant en CERCLE */
+        /* WhatsApp flottant en CERCLE avec animation */
         .whatsapp-float { 
             position: fixed; 
             bottom: 20px; 
@@ -333,7 +376,7 @@
         </div>
     </section>
 
-    <!-- SECTION GALERIE D'IMAGES (remplace les garanties) -->
+    <!-- SECTION GALERIE D'IMAGES -->
     <section id="galerie" class="gallery-section">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Nos poussins en images</h2>
@@ -359,17 +402,17 @@
         <div class="container">
             <h2 class="section-title animate-on-scroll">Pourquoi nous choisir</h2>
             <div class="avantages-grid">
-                <div class="avantage animate-on-scroll">
+                <div class="avantage">
                     <span class="av-icon">🌿</span>
                     <p class="av-title">100% Naturel</p>
                     <p class="av-desc">Aucun produit chimique, aucun antibiotique. Nos volailles sont élevées en plein air avec une alimentation 100% naturelle.</p>
                 </div>
-                <div class="avantage animate-on-scroll">
+                <div class="avantage">
                     <span class="av-icon">💰</span>
                     <p class="av-title">Prix abordable</p>
                     <p class="av-desc">Bio ne veut pas dire cher. Nous offrons le meilleur rapport qualité-prix du marché. Poussins dès 8 500 F, poulet dès 5 000 F.</p>
                 </div>
-                <div class="avantage animate-on-scroll">
+                <div class="avantage">
                     <span class="av-icon">🚚</span>
                     <p class="av-title">Livraison rapide</p>
                     <p class="av-desc">Commandez et recevez vos produits frais à domicile. Livraison rapide sur Ouagadougou et ses environs.</p>
@@ -383,22 +426,22 @@
         <div class="container">
             <h2 class="section-title animate-on-scroll">Ils nous font confiance</h2>
             <div class="temo-grid">
-                <div class="temo-card animate-on-scroll">
+                <div class="temo-card">
                     <div class="temo-stars">★★★★★</div>
                     <p class="temo-texte">"Je commande régulièrement des poussins pour mon élevage. Ils sont robustes et le taux de croissance est excellent. Service fiable !"</p>
                     <p class="temo-nom">— Issa O., Éleveur à Ouagadougou</p>
                 </div>
-                <div class="temo-card animate-on-scroll">
+                <div class="temo-card">
                     <div class="temo-stars">★★★★★</div>
                     <p class="temo-texte">"Le poulet bio est le meilleur que j'ai goûté. Mes clients au restaurant sont ravis. Livraison ponctuelle et qualité constante."</p>
                     <p class="temo-nom">— Awa D., Restauratrice à Cissin</p>
                 </div>
-                <div class="temo-card animate-on-scroll">
+                <div class="temo-card">
                     <div class="temo-stars">★★★★★</div>
                     <p class="temo-texte">"Œufs frais et savoureux, poulet tendre. Toute la famille apprécie. Je recommande vivement !"</p>
                     <p class="temo-nom">— Mariam K., Mère de famille à Tampouy</p>
                 </div>
-                <div class="temo-card animate-on-scroll">
+                <div class="temo-card">
                     <div class="temo-stars">★★★★☆</div>
                     <p class="temo-texte">"J'ai acheté des pondeuses, elles sont en très bonne santé. Le suivi après-vente est appréciable."</p>
                     <p class="temo-nom">— Karim S., Aviculteur débutant</p>
