@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Élevage & Pastorale - Qualité Locale</title>
+  <title>Volaille Bio - Poussins, Poulets & Lapins - Ouagadougou</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -128,10 +128,11 @@
       margin-bottom: 1rem;
       color: #1e3a1e;
     }
-    .hero-content p {
+    .hero-content .sous-titre {
       font-size: 1.2rem;
       color: #3f5a3a;
       margin-bottom: 2rem;
+      line-height: 1.5;
     }
     .btn-group {
       display: flex;
@@ -181,277 +182,251 @@
       object-fit: cover;
     }
 
-    /* Stats */
-    .stats-row {
+    /* Bannière poussins */
+    .poussin-alert {
+      background: linear-gradient(135deg, #fff7e0, #ffefc0);
+      border-radius: 36px;
+      padding: 1.5rem 2rem;
+      margin: 2rem 0 1rem;
+      text-align: center;
+      border: 1px solid #f0db9e;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .poussin-alert h3 {
+      font-size: 1.6rem;
+      color: #b4621a;
+      margin-bottom: 0.5rem;
+    }
+    .poussin-alert .mardi {
+      font-weight: 800;
+      color: #2b5e2b;
+      background: white;
+      display: inline-block;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      margin: 0.5rem 0;
+    }
+    .poussin-grid {
       display: flex;
-      justify-content: space-between;
       flex-wrap: wrap;
-      gap: 2rem;
-      margin: 3rem 0 2rem;
-      text-align: center;
-    }
-    .stat-item {
-      flex: 1;
-      background: white;
-      border-radius: 28px;
-      padding: 1.8rem 0.5rem;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.02);
-      border: 1px solid #e7e2d4;
-    }
-    .stat-number {
-      font-size: 2.6rem;
-      font-weight: 800;
-      color: #d48f3b;
-    }
-
-    /* Aperçu produits (sur accueil) */
-    .preview-products {
-      margin: 3rem 0 2rem;
-    }
-    .preview-title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 2rem;
-      color: #2c5a2a;
-    }
-    .preview-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.8rem;
-    }
-    .preview-card {
-      background: white;
-      border-radius: 28px;
-      overflow: hidden;
-      transition: transform 0.2s;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.04);
-      border: 1px solid #eee5d8;
-      text-align: center;
-      padding: 1.5rem 1rem;
-    }
-    .preview-card:hover {
-      transform: translateY(-5px);
-    }
-    .preview-icon {
-      font-size: 3.5rem;
-      margin-bottom: 0.8rem;
-    }
-    .preview-card h4 {
-      font-size: 1.2rem;
-      font-weight: 800;
-    }
-    .preview-card p {
-      font-size: 0.85rem;
-      margin: 0.5rem 0;
-      color: #5a6e4a;
-    }
-    .preview-price {
-      font-weight: 700;
-      color: #d48f3b;
-      margin: 0.5rem 0;
-    }
-    .wa-small-btn {
-      background: #25D366;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 40px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.8rem;
-      margin-top: 0.5rem;
-      transition: 0.2s;
-    }
-    .wa-small-btn:hover {
-      background: #1daa53;
-    }
-
-    /* Témoignages */
-    .testimonials {
-      background: #f9f7f0;
-      border-radius: 48px;
-      padding: 2rem 1.5rem;
+      justify-content: center;
+      gap: 1.2rem;
       margin-top: 1rem;
     }
-    .testimonial-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      justify-content: center;
-    }
-    .testi-card {
+    .poussin-tag {
       background: white;
-      border-radius: 28px;
-      padding: 1.8rem;
-      max-width: 280px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-      border: 1px solid #eee5d8;
+      border-radius: 50px;
+      padding: 0.5rem 1.2rem;
+      font-weight: 600;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
-    .testi-card i {
+    .poussin-tag span {
       color: #d48f3b;
-      font-size: 1.6rem;
-      margin-bottom: 0.8rem;
+      font-weight: 800;
     }
 
-    /* About */
-    .about-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2.5rem;
-      align-items: center;
-    }
-    .about-text {
-      flex: 1.2;
-    }
-    .about-text h3 {
-      font-size: 1.8rem;
-      margin: 1rem 0 0.5rem;
-    }
-    .valeurs-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.2rem;
+    /* Cartes catégories */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
       margin: 2rem 0;
     }
-    .valeur-item {
-      background: #eef3e6;
-      padding: 0.6rem 1.2rem;
-      border-radius: 40px;
-      font-weight: 500;
-    }
-    .about-img {
-      flex: 0.9;
-      border-radius: 32px;
-      overflow: hidden;
-      box-shadow: 0 12px 24px -8px rgba(0,0,0,0.1);
-    }
-    .about-img img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* Catalogue complet */
-    .filters {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 3rem;
-    }
-    .filter-btn {
-      background: #ede8dd;
-      border: none;
-      padding: 0.6rem 1.5rem;
-      border-radius: 40px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
-      font-size: 0.9rem;
-    }
-    .filter-btn.active, .filter-btn:hover {
-      background: #2b5e2b;
-      color: white;
-    }
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-      gap: 2rem;
-    }
-    .product-card {
+    .category-card {
       background: white;
       border-radius: 32px;
       overflow: hidden;
-      transition: transform 0.2s;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.04);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
       border: 1px solid #eee5d8;
+      transition: transform 0.2s;
     }
-    .product-card:hover {
-      transform: translateY(-6px);
+    .category-card:hover {
+      transform: translateY(-5px);
     }
-    .product-img {
-      height: 180px;
+    .category-img {
+      height: 200px;
       background: #eef0e3;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 4rem;
+      font-size: 5rem;
     }
-    .product-info {
-      padding: 1.2rem;
+    .category-content {
+      padding: 1.8rem;
     }
-    .product-title {
+    .category-content h3 {
+      font-size: 1.6rem;
+      color: #2b5e2b;
+      margin-bottom: 1rem;
+    }
+    .category-content p {
+      color: #5a6e4a;
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+    .price-tag {
       font-weight: 800;
-      font-size: 1.3rem;
+      color: #d48f3b;
+      font-size: 1.2rem;
+      margin: 1rem 0;
     }
-    .whatsapp-btn {
+    .wa-btn {
       background: #25D366;
       display: inline-flex;
       align-items: center;
       gap: 8px;
       color: white;
-      padding: 0.6rem 1rem;
+      padding: 0.7rem 1.2rem;
       border-radius: 40px;
       text-decoration: none;
       font-weight: 600;
-      font-size: 0.85rem;
       transition: 0.2s;
-      width: 100%;
-      justify-content: center;
-      margin-top: 0.8rem;
+    }
+    .wa-btn:hover {
+      background: #1daa53;
     }
 
-    /* Contact */
-    .contact-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
-    .contact-form {
-      flex: 1;
+    /* Tableau des garanties */
+    .garanties-table {
       background: white;
-      padding: 2rem;
       border-radius: 32px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
-    }
-    .contact-form input, .contact-form textarea {
-      width: 100%;
-      padding: 0.9rem;
-      margin-bottom: 1rem;
-      border: 1px solid #ddd2c0;
-      border-radius: 28px;
-      font-family: inherit;
-    }
-    .contact-info {
-      flex: 0.9;
-      background: #faf8f2;
-      border-radius: 32px;
-      padding: 2rem;
-    }
-    .contact-info i {
-      width: 40px;
-      color: #d48f3b;
-      font-size: 1.4rem;
-    }
-    .info-line {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 1.5rem;
-    }
-    .map-container {
-      margin-top: 2rem;
-      border-radius: 28px;
       overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      border: 1px solid #eee5d8;
+      margin: 2rem 0;
     }
+    .garanties-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid #eee5d8;
+    }
+    .garanties-row:last-child {
+      border-bottom: none;
+    }
+    .garantie-item {
+      padding: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .garantie-item:first-child {
+      border-right: 1px solid #eee5d8;
+    }
+    .garantie-icon {
+      font-size: 2rem;
+      color: #d48f3b;
+      min-width: 50px;
+    }
+    .garantie-text h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: #2b5e2b;
+    }
+    .garantie-text p {
+      color: #5a6e4a;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* CTA intermédiaire */
+    .cta-section {
+      background: linear-gradient(135deg, #2b5e2b, #1f461f);
+      border-radius: 48px;
+      padding: 3rem 2rem;
+      text-align: center;
+      color: white;
+      margin: 2rem 0;
+    }
+    .cta-section h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    .cta-section p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+    .cta-section .btn-wa {
+      background: #25D366;
+      color: white;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.1rem;
+      transition: 0.2s;
+    }
+    .cta-section .btn-wa:hover {
+      background: #1daa53;
+      transform: scale(1.02);
+    }
+
+    /* Footer */
     footer {
       background: #1f3620;
       color: #d9e0cb;
+      padding: 3rem 0 2rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .footer-col h4 {
+      color: #d48f3b;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    .footer-col p, .footer-col a {
+      color: #d9e0cb;
+      text-decoration: none;
+      line-height: 1.8;
+    }
+    .footer-col a:hover {
+      color: #d48f3b;
+    }
+    .footer-bottom {
       text-align: center;
-      padding: 2rem 0;
+      padding-top: 2rem;
+      border-top: 1px solid #3a5a3a;
+      font-size: 0.85rem;
+    }
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .social-links a {
+      background: #3a5a3a;
+      padding: 0.5rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+    }
+
+    /* WhatsApp flottant */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25D366;
+      color: white;
+      border-radius: 50px;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 99;
+      font-size: 0.9rem;
+    }
+    .whatsapp-float i {
+      font-size: 1.5rem;
     }
 
     @media (max-width: 860px) {
@@ -470,253 +445,273 @@
         display: block;
       }
       .hero-content h1 {
-        font-size: 2.3rem;
+        font-size: 2rem;
       }
       .section-title {
-        font-size: 1.9rem;
+        font-size: 1.8rem;
       }
-      .preview-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-    @media (max-width: 500px) {
-      .preview-grid {
+      .garanties-row {
         grid-template-columns: 1fr;
+      }
+      .garantie-item:first-child {
+        border-right: none;
+        border-bottom: 1px solid #eee5d8;
       }
     }
   </style>
 </head>
 <body>
+
+<a href="https://wa.me/22655796925?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20vos%20produits%20(poussins%2C%20poulets%20ou%20lapins)" class="whatsapp-float" target="_blank">
+  <i class="fab fa-whatsapp"></i> Commander sur WhatsApp
+</a>
+
 <nav>
   <div class="nav-container container">
-    <div class="logo">Élevage <span>Pastoral</span></div>
+    <div class="logo">Volaille <span>Bio</span></div>
     <div class="menu-toggle" id="mobile-menu">
       <i class="fas fa-bars"></i>
     </div>
     <ul class="nav-links" id="nav-links">
       <li><a href="#accueil">Accueil</a></li>
       <li><a href="#qui-sommes-nous">Qui sommes-nous ?</a></li>
-      <li><a href="#catalogue">Catalogue</a></li>
+      <li><a href="#produits">Nos produits</a></li>
+      <li><a href="#garanties">Nos garanties</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
 </nav>
 
-<!-- ACCUEIL (Vitrine principale + aperçu produits direct) -->
+<!-- SECTION HÉRO (Mise à jour avec vos textes) -->
 <section id="accueil" class="hero">
   <div class="container">
     <div class="hero-grid">
       <div class="hero-content">
-        <div class="hero-badge"><i class="fas fa-leaf"></i> Production locale & durable</div>
-        <h1>Des produits pastoraux de qualité supérieure, élevés localement pour votre santé.</h1>
-        <p>Viande fraîche, volaille, produits laitiers — traçabilité totale, élevage éthique et normes d'hygiène rigoureuses.</p>
+        <div class="hero-badge"><i class="fas fa-map-marker-alt"></i> Ouagadougou - Tampouy</div>
+        <h1>Vos poussins, poulets et lapins élevés au naturel.</h1>
+        <div class="sous-titre">
+          Découvrez nos poussins rigoureux pour réussir votre élevage, ainsi que nos poulets de chair et lapins nourris au naturel pour une alimentation saine, fraîche et savoureuse.
+        </div>
         <div class="btn-group">
-          <a href="#catalogue" class="btn btn-primary">Voir tout le catalogue</a>
-          <a href="#contact" class="btn btn-outline">Nous contacter</a>
+          <a href="#produits" class="btn btn-primary">Découvrir nos produits</a>
+          <a href="https://wa.me/22655796925?text=Bonjour%2C%20je%20souhaite%20commander%20vos%20produits" class="btn btn-outline">Commander sur WhatsApp</a>
         </div>
       </div>
       <div class="hero-image">
-        <img src="https://placehold.co/600x400/e9f0df/4d6a3a?text=Élevage+Propre+%26+Moderne" alt="Ferme moderne">
+        <img src="https://placehold.co/600x400/e9f0df/4d6a3a?text=Volaille+Bio+Elevage+Naturel" alt="Élevage Volaille Bio">
       </div>
     </div>
 
-    <!-- Chiffres clés -->
-    <div class="stats-row">
-      <div class="stat-item"><div class="stat-number">1,200+</div><div>Clients livrés</div></div>
-      <div class="stat-item"><div class="stat-number">14 ans</div><div>Années d'excellence</div></div>
-      <div class="stat-item"><div class="stat-number">25 T</div><div>Capacité mensuelle</div></div>
-    </div>
-
-    <!-- APERÇU PRODUITS DIRECT SUR ACCUEIL (pour éviter de passer à côté) -->
-    <div class="preview-products">
-      <div class="preview-title">🔥 Nos produits les plus demandés</div>
-      <div class="preview-grid" id="preview-products-list"></div>
-      <div style="text-align: center; margin-top: 1.5rem;">
-        <a href="#catalogue" class="btn btn-outline">Découvrir tous nos produits <i class="fas fa-arrow-right"></i></a>
+    <!-- Arrivage poussins -->
+    <div class="poussin-alert">
+      <h3>🐣 ARRIVAGE DE POUSSINS DE QUALITÉ</h3>
+      <div class="mardi"><i class="fas fa-calendar-week"></i> Disponible sur commande chaque MARDI</div>
+      <div class="poussin-grid">
+        <div class="poussin-tag">Coquelets <span>8 500 F</span></div>
+        <div class="poussin-tag">Bleu d'Hollande <span>17 500 F</span></div>
+        <div class="poussin-tag">Local Amélioré <span>25 000 F</span></div>
+        <div class="poussin-tag">Pondeuses <span>45 000 F</span></div>
+        <div class="poussin-tag">Chair Cob500 <span>35 000 F</span></div>
+        <div class="poussin-tag">Sasso <span>30 000 F</span></div>
       </div>
-    </div>
-
-    <!-- Avis clients -->
-    <div class="testimonials">
-      <h3 style="text-align:center; margin-bottom:1.5rem;">💬 Ce qu'ils disent de nous</h3>
-      <div class="testimonial-grid">
-        <div class="testi-card"><i class="fas fa-star-of-life"></i><p>"Viande exceptionnelle, respect des délais et qualité irréprochable. Notre cantine scolaire est ravie."</p><strong>- Mme Diop, Restauration collective</strong></div>
-        <div class="testi-card"><i class="fas fa-tractor"></i><p>"Œufs frais et poulets savoureux. Le sérieux de leur élevage se voit à la propreté des installations."</p><strong>- Karim, Grossiste</strong></div>
-        <div class="testi-card"><i class="fas fa-hand-holding-heart"></i><p>"Un service client réactif et des produits qui respectent la santé des consommateurs. Je recommande!"</p><strong>- Aïcha, Particulière</strong></div>
-      </div>
+      <a href="https://wa.me/22655796925?text=Bonjour%2C%20je%20souhaite%20commander%20des%20poussins%20(pr%C3%A9ciser%20la%20vari%C3%A9t%C3%A9%20et%20la%20quantit%C3%A9)" class="btn btn-primary" style="margin-top:1rem; display:inline-flex; gap:8px;"><i class="fab fa-whatsapp"></i> Commander vos poussins</a>
     </div>
   </div>
 </section>
 
-<!-- QUI SOMMES-NOUS -->
+<!-- SECTION : QUI SOMMES-NOUS -->
 <section id="qui-sommes-nous">
   <div class="container">
-    <div class="section-title">Qui sommes-nous ?</div>
-    <div class="about-grid">
-      <div class="about-text">
-        <h3>Notre histoire & mission</h3>
-        <p>Fondée en 2010 par la famille Diallo, notre exploitation pastorale est née d'une passion : fournir des produits animaux sains, tout en respectant le bien-être animal et l'environnement. Nous avons bâti notre réputation sur la transparence et la rigueur sanitaire.</p>
-        <div class="valeurs-list">
-          <span class="valeur-item"><i class="fas fa-stethoscope"></i> Suivi vétérinaire rigoureux</span>
-          <span class="valeur-item"><i class="fas fa-apple-alt"></i> Alimentation saine & contrôlée</span>
-          <span class="valeur-item"><i class="fas fa-hand-sparkles"></i> Normes d'hygiène locales certifiées</span>
-        </div>
-        <p><strong>Notre engagement :</strong> Zéro additif nocif, pâturages naturels, traçabilité complète de l'élevage à la livraison.</p>
-      </div>
-      <div class="about-img">
-        <img src="https://placehold.co/500x400/d9e3cf/3c5a2f?text=Coulisses+Elevage" alt="Ferme">
-      </div>
+    <div class="section-title">Notre Engagement pour une Qualité Authentique</div>
+    <div style="max-width: 900px; margin: 0 auto; text-align: center; font-size: 1.1rem; line-height: 1.7; color: #3f5a3a;">
+      <p>Bienvenue chez <strong>Volaille Bio</strong>, votre partenaire de confiance pour un élevage sain et responsable. Passionnés par la terre et le bien-être animal, nous mettons un point d'honneur à bannir les produits chimiques et les traitements artificiels de notre cycle de production.</p>
+      <p style="margin-top: 1.5rem;">Notre mission est double : fournir aux éleveurs des poussins de premier choix pour garantir la réussite de leurs investissements, et offrir aux familles une viande tendre, nutritive et d'une fraîcheur irréprochable. En choisissant nos produits, vous optez pour un circuit court, le respect de la nature et le goût authentique du terroir.</p>
     </div>
   </div>
 </section>
 
-<!-- CATALOGUE COMPLET -->
-<section id="catalogue">
+<!-- SECTION : NOS PRODUITS (CATALOGUE) -->
+<section id="produits">
   <div class="container">
-    <div class="section-title">Notre catalogue complet</div>
-    <div class="filters" id="filter-buttons">
-      <button class="filter-btn active" data-cat="all">Tous</button>
-      <button class="filter-btn" data-cat="volaille">Volaille</button>
-      <button class="filter-btn" data-cat="betail">Bétail</button>
-      <button class="filter-btn" data-cat="laitier">Produits laitiers</button>
-      <button class="filter-btn" data-cat="aliments">Aliments</button>
+    <div class="section-title">Le Catalogue de la Ferme</div>
+    
+    <div class="categories-grid">
+      <!-- Catégorie 1 : Poussins -->
+      <div class="category-card">
+        <div class="category-img">🐣</div>
+        <div class="category-content">
+          <h3>Poussins Vigoureux de Premier Choix</h3>
+          <p>Vous lancez ou développez votre élevage ? Nous mettons à votre disposition différentes sortes de poussins (poulets de chair, pondeuses, locaux améliorés) sélectionnés pour leur excellente robustesse, leur taux de croissance optimal et leur grande résistance. Démarrez votre activité sur des bases solides avec notre cheptel de qualité supérieure.</p>
+          <div class="price-tag">À partir de 8 500 FCFA</div>
+          <a href="https://wa.me/22655796925?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20vos%20POUSSINS" class="wa-btn"><i class="fab fa-whatsapp"></i> Commander des poussins</a>
+        </div>
+      </div>
+
+      <!-- Catégorie 2 : Poulets -->
+      <div class="category-card">
+        <div class="category-img">🍗</div>
+        <div class="category-content">
+          <h3>Poulets de Chair & Volailles Locales</h3>
+          <p>Élevés avec une alimentation 100% naturelle et équilibrée, nos poulets de chair se distinguent par leur viande tendre, généreuse et pauvre en graisses superflues. Que ce soit pour vos repas de famille, vos cérémonies ou vos approvisionnements professionnels, profitez d'une volaille de qualité premium, disponible sur pied ou prête à cuire.</p>
+          <div class="price-tag">À partir de 5 000 FCFA</div>
+          <a href="https://wa.me/22655796925?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20vos%20POULETS%20DE%20CHAIR" class="wa-btn"><i class="fab fa-whatsapp"></i> Commander des poulets</a>
+        </div>
+      </div>
+
+      <!-- Catégorie 3 : Cuniculture -->
+      <div class="category-card">
+        <div class="category-img">🐇</div>
+        <div class="category-content">
+          <h3>Lapins Élevés au Naturel</h3>
+          <p>Découvrez notre viande de lapin, réputée pour sa tendreté, sa finesse et ses qualités diététiques exceptionnelles. Nos lapins sont élevés dans des conditions d'hygiène strictes et nourris avec des aliments sains, garantissant une chair savoureuse, riche en protéines et idéale pour une alimentation équilibrée.</p>
+          <div class="price-tag">Sur commande</div>
+          <a href="https://wa.me/22655796925?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20vos%20LAPINS" class="wa-btn"><i class="fab fa-whatsapp"></i> Commander des lapins</a>
+        </div>
+      </div>
     </div>
-    <div class="products-grid" id="products-container"></div>
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- SECTION : POURQUOI NOUS CHOISIR (GARANTIES) -->
+<section id="garanties">
+  <div class="container">
+    <div class="section-title">Les Garanties de Volaille Bio</div>
+    
+    <div class="garanties-table">
+      <div class="garanties-row">
+        <div class="garantie-item">
+          <div class="garantie-icon"><i class="fas fa-leaf"></i></div>
+          <div class="garantie-text">
+            <h4>Alimentation Saine</h4>
+            <p>Tous nos animaux sont nourris avec des aliments naturels, sans hormones de croissance ni additifs chimiques.</p>
+          </div>
+        </div>
+        <div class="garantie-item">
+          <div class="garantie-icon"><i class="fas fa-dna"></i></div>
+          <div class="garantie-text">
+            <h4>Souche Sélectionnée</h4>
+            <p>Nos poussins proviennent de souches rigoureusement sélectionnées pour assurer un excellent rendement.</p>
+          </div>
+        </div>
+      </div>
+      <div class="garanties-row">
+        <div class="garantie-item">
+          <div class="garantie-icon"><i class="fas fa-clinic-medical"></i></div>
+          <div class="garantie-text">
+            <h4>Hygiène & Traçabilité</h4>
+            <p>Nos infrastructures respectent des normes sanitaires strictes pour garantir des produits sains et sûrs.</p>
+          </div>
+        </div>
+        <div class="garantie-item">
+          <div class="garantie-icon"><i class="fas fa-truck"></i></div>
+          <div class="garantie-text">
+            <h4>Service de Livraison</h4>
+            <p>Commandez en toute simplicité et faites-vous livrer rapidement à domicile ou sur le site de votre exploitation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION : CTA INTERMÉDIAIRE -->
+<section>
+  <div class="container">
+    <div class="cta-section">
+      <h3>Prêt à passer commande ou besoin d'un conseil pour votre élevage ?</h3>
+      <p>Notre équipe est à votre écoute pour vous conseiller sur le choix de vos poussins ou planifier votre prochaine livraison de poulets et lapins frais.</p>
+      <a href="https://wa.me/22655796925?text=Bonjour%2C%20j%27ai%20besoin%20d%27un%20conseil%20pour%20mon%20%C3%A9levage%20ou%20je%20souhaite%20passer%20commande" class="btn-wa" target="_blank"><i class="fab fa-whatsapp"></i> Discuter avec un conseiller sur WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION CONTACT -->
 <section id="contact">
   <div class="container">
     <div class="section-title">Contact & Localisation</div>
-    <div class="contact-wrap">
-      <div class="contact-form">
-        <h3>Demande de devis professionnel</h3>
+    <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+      <div style="flex: 1; background: white; padding: 2rem; border-radius: 32px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+        <h3 style="margin-bottom: 1.5rem; color: #2b5e2b;">Envoyez-nous un message</h3>
         <form id="devisForm">
-          <input type="text" placeholder="Nom complet" required id="name">
-          <input type="email" placeholder="Email professionnel" required id="email">
-          <input type="tel" placeholder="Téléphone">
-          <textarea rows="4" placeholder="Votre message (hôtels, restaurants, collectivités...)" id="message"></textarea>
+          <input type="text" placeholder="Votre nom" required id="name" style="width:100%; padding:0.9rem; margin-bottom:1rem; border:1px solid #ddd2c0; border-radius:28px;">
+          <input type="tel" placeholder="Votre téléphone" required id="phone" style="width:100%; padding:0.9rem; margin-bottom:1rem; border:1px solid #ddd2c0; border-radius:28px;">
+          <textarea rows="4" placeholder="Votre message (produits, quantité, livraison...)" id="message" style="width:100%; padding:0.9rem; margin-bottom:1rem; border:1px solid #ddd2c0; border-radius:28px;"></textarea>
           <button type="submit" class="btn btn-primary" style="width:100%">Envoyer la demande</button>
         </form>
-        <p id="formFeedback" style="margin-top:10px;font-size:0.85rem;"></p>
+        <p id="formFeedback" style="margin-top:10px; font-size:0.85rem;"></p>
       </div>
-      <div class="contact-info">
-        <h3>Coordonnées directes</h3>
-        <div class="info-line"><i class="fas fa-phone-alt"></i> <span>+221 77 123 45 67</span></div>
-        <div class="info-line"><i class="fab fa-whatsapp"></i> <span>+221 78 987 65 43 (WhatsApp Business)</span></div>
-        <div class="info-line"><i class="fas fa-envelope"></i> <span>contact@elevagepastoral.sn</span></div>
-        <div class="info-line"><i class="fas fa-map-marker-alt"></i> <span>Ferme de Keur Mbaye, Route de Thiès, Sénégal</span></div>
-        <a href="https://wa.me/221789876543?text=Bonjour%2C%20je%20souhaite%20obtenir%20un%20devis%20ou%20plus%20d%27informations" class="btn btn-primary" style="display:flex; gap:8px; justify-content:center; margin-top:1rem;"><i class="fab fa-whatsapp"></i>Nous écrire sur WhatsApp</a>
-        <div class="map-container">
-          <iframe width="100%" height="180" style="border:0; border-radius:20px;" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d123456!2d-17.463129!3d14.6937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDQxJzM3LjIiTiAxN8KwMjcnNDcuMiJX!5e0!3m2!1sfr!2ssn!4v1680000000000!5m2!1sfr!2ssn"></iframe>
+      <div style="flex: 0.8; background: #faf8f2; padding: 2rem; border-radius: 32px;">
+        <h3 style="margin-bottom: 1.5rem; color: #2b5e2b;">Nos coordonnées</h3>
+        <p><i class="fas fa-map-marker-alt" style="color:#d48f3b; width:30px;"></i> <strong>Tampouy, Ouagadougou</strong> (Burkina Faso)</p>
+        <p style="margin-top: 1rem;"><i class="fab fa-whatsapp" style="color:#25D366; width:30px;"></i> <strong>+226 55 79 69 25</strong> (WhatsApp)</p>
+        <p style="margin-top: 0.5rem;"><i class="fas fa-phone-alt" style="color:#34B7F1; width:30px;"></i> <strong>+226 61 15 66 88</strong> (Appels)</p>
+        <div style="margin: 1.5rem 0; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="https://wa.me/22655796925" class="btn btn-primary" style="background:#25D366; display:inline-flex; gap:8px;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+          <a href="tel:+22661156688" class="btn btn-primary" style="background:#34B7F1; display:inline-flex; gap:8px;"><i class="fas fa-phone"></i> Appeler</a>
         </div>
+        <p><i class="fas fa-truck" style="color:#d48f3b; width:30px;"></i> <strong>Zone de livraison :</strong> Ouagadougou et ses environs</p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <div class="container">
-    <p>© 2025 Élevage Pastoral – Des produits frais et sains, directement de notre ferme à votre table.</p>
-    <p style="margin-top: 8px;"><i class="fas fa-heart" style="color:#d48f3b;"></i> Élevage responsable, qualité certifiée</p>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Volaille Bio</h4>
+        <p>Le choix de la nature et de la fraîcheur pour votre élevage et votre table.</p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/volaillebio1" target="_blank" style="color:white;"><i class="fab fa-facebook"></i> Facebook</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p><i class="fas fa-phone"></i> +226 55 79 69 25 (WhatsApp)</p>
+        <p><i class="fas fa-phone-alt"></i> +226 61 15 66 88</p>
+        <p><i class="fas fa-map-marker-alt"></i> Tampouy, Ouagadougou</p>
+      </div>
+      <div class="footer-col">
+        <h4>Liens utiles</h4>
+        <p><a href="#produits">Nos produits</a></p>
+        <p><a href="#garanties">Nos garanties</a></p>
+        <p><a href="#contact">Contact</a></p>
+        <p><a href="https://www.facebook.com/volaillebio1" target="_blank">Page Facebook</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Volaille Bio – Tous droits réservés</p>
+      <p>Site web développé avec expertise par <strong>Sion Tech Solution</strong></p>
+    </div>
   </div>
 </footer>
 
 <script>
-  // Base de données produits
-  const products = [
-    { id:1, name:"Poulet de chair", desc:"Poids moyen 2.2kg, élevé en plein air", category:"volaille", icon:"🐔", price:"4 500 FCFA" },
-    { id:2, name:"Carton d'œufs frais (30 œufs)", desc:"Œufs extra frais, label fermier", category:"volaille", icon:"🥚", price:"3 500 FCFA" },
-    { id:3, name:"Mouton pour Tabaski", desc:"Sélectionné, suivi vétérinaire, 35-45kg", category:"betail", icon:"🐏", price:"Sur devis" },
-    { id:4, name:"Viande bovine (1/4 bœuf)", desc:"Découpe personnalisée, prairie naturelle", category:"betail", icon:"🐄", price:"Sur mesure" },
-    { id:5, name:"Lait frais pasteurisé (1L)", desc:"Sans conservateurs, normes HACCP", category:"laitier", icon:"🥛", price:"1 200 FCFA" },
-    { id:6, name:"Fromage blanc fermier (250g)", desc:"Saveur authentique, artisanal", category:"laitier", icon:"🧀", price:"2 000 FCFA" },
-    { id:7, name:"Aliment volaille (sac 25kg)", desc:"Mélange céréales + protéines", category:"aliments", icon:"🌽", price:"12 500 FCFA" },
-    { id:8, name:"Aliment bétail (sac 50kg)", desc:"Complément nutritif", category:"aliments", icon:"🌾", price:"18 500 FCFA" }
-  ];
-
-  const whatsappNumber = "221789876543";
-
-  function getWhatsappLink(productName, productPrice) {
-    const msg = encodeURIComponent(`Bonjour, je souhaite commander le produit "${productName}" (${productPrice}) vu sur votre site. Merci de me donner les détails de disponibilité.`);
-    return `https://wa.me/${whatsappNumber}?text=${msg}`;
-  }
-
-  // Aperçu sur accueil (4 produits phares)
-  function renderPreview() {
-    const previewContainer = document.getElementById("preview-products-list");
-    if(!previewContainer) return;
-    const topProducts = products.slice(0, 4);
-    previewContainer.innerHTML = topProducts.map(prod => `
-      <div class="preview-card">
-        <div class="preview-icon">${prod.icon}</div>
-        <h4>${prod.name}</h4>
-        <p>${prod.desc.substring(0, 50)}...</p>
-        <div class="preview-price">${prod.price}</div>
-        <a href="${getWhatsappLink(prod.name, prod.price)}" target="_blank" class="wa-small-btn"><i class="fab fa-whatsapp"></i> Commander</a>
-      </div>
-    `).join('');
-  }
-
-  // Catalogue complet avec filtres
-  function renderProducts(category = "all") {
-    const container = document.getElementById("products-container");
-    if(!container) return;
-    let filtered = category === "all" ? products : products.filter(p => p.category === category);
-    container.innerHTML = filtered.map(prod => `
-      <div class="product-card">
-        <div class="product-img">${prod.icon}</div>
-        <div class="product-info">
-          <div class="product-title">${prod.name}</div>
-          <div class="product-desc" style="margin:8px 0; font-size:0.9rem;">${prod.desc}</div>
-          <div style="font-weight:700; margin:0.3rem 0;">💰 ${prod.price}</div>
-          <a href="${getWhatsappLink(prod.name, prod.price)}" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Commander via WhatsApp</a>
-        </div>
-      </div>
-    `).join('');
-  }
-
-  // Filtres dynamiques
-  function setupFilters() {
-    const btns = document.querySelectorAll('.filter-btn');
-    btns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        btns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const cat = btn.getAttribute('data-cat');
-        renderProducts(cat);
-      });
+  // Formulaire contact
+  const form = document.getElementById('devisForm');
+  if(form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name')?.value.trim();
+      const phone = document.getElementById('phone')?.value.trim();
+      if(!name || !phone) {
+        document.getElementById('formFeedback').innerHTML = '⚠️ Veuillez remplir votre nom et téléphone.';
+        return;
+      }
+      document.getElementById('formFeedback').innerHTML = '✅ Demande envoyée ! Nous vous contacterons rapidement.';
+      form.reset();
+      setTimeout(() => document.getElementById('formFeedback').innerHTML = '', 4000);
     });
   }
 
   // Menu mobile
-  function mobileMenu() {
-    const toggle = document.getElementById('mobile-menu');
-    const navLinks = document.getElementById('nav-links');
-    if(toggle && navLinks) {
-      toggle.addEventListener('click', () => navLinks.classList.toggle('show'));
-      document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => navLinks.classList.remove('show'));
-      });
-    }
-  }
-
-  // Formulaire contact
-  function initContactForm() {
-    const form = document.getElementById('devisForm');
-    if(!form) return;
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('name')?.value.trim();
-      const email = document.getElementById('email')?.value.trim();
-      if(!name || !email) {
-        document.getElementById('formFeedback').innerHTML = '⚠️ Veuillez remplir nom et email.';
-        return;
-      }
-      document.getElementById('formFeedback').innerHTML = '✅ Demande envoyée ! Notre équipe vous recontactera sous 24h.';
-      form.reset();
-      setTimeout(() => document.getElementById('formFeedback').innerHTML = '', 4000);
+  const toggle = document.getElementById('mobile-menu');
+  const navLinks = document.getElementById('nav-links');
+  if(toggle && navLinks) {
+    toggle.addEventListener('click', () => navLinks.classList.toggle('show'));
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('show'));
     });
   }
 
@@ -732,13 +727,6 @@
       }
     });
   });
-
-  // Initialisation
-  renderPreview();
-  renderProducts('all');
-  setupFilters();
-  mobileMenu();
-  initContactForm();
 </script>
 </body>
 </html>
