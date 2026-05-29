@@ -31,7 +31,21 @@
         header.scrolled { background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); }
         .header-container { display: flex; justify-content: space-between; align-items: center; padding: 8px 20px; max-width: 1280px; margin: 0 auto; gap: 15px; }
         .logo { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-        .logo-img { width: 50px; height: 50px; background: #1B5E20; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FCDD11; font-weight: bold; font-size: 1.3rem; }
+        .logo-img { 
+            width: 50px; 
+            height: 50px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            overflow: hidden;
+            background: #1B5E20;
+        }
+        .logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
         .logo-text h1 { font-size: 1.2rem; font-weight: 700; color: #1B5E20; line-height: 1.2; }
         .logo-text p { font-size: 0.6rem; color: #7A3A07; letter-spacing: 0.5px; }
         nav ul { display: flex; gap: 25px; list-style: none; }
@@ -82,7 +96,7 @@
         .presentation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
         .presentation-text p { margin-bottom: 15px; color: #475569; line-height: 1.7; }
         .presentation-image { border-radius: 28px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
-        .presentation-image img { width: 100%; height: auto; display: block; }
+        .presentation-image img { width: 100%; height: auto; display: block; object-fit: cover; }
         
         /* Cartes catégories */
         .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 20px; }
@@ -93,7 +107,7 @@
         .card-content h3 { font-size: 1.3rem; color: #1B5E20; margin-bottom: 10px; }
         .card-content p { color: #64748b; font-size: 0.9rem; line-height: 1.5; margin-bottom: 15px; }
         
-        /* Style amélioré pour la liste des poussins */
+        /* Style pour la liste des poussins */
         .poussin-list { margin: 15px 0; }
         .poussin-item { 
             display: flex; 
@@ -122,16 +136,6 @@
             background: white;
             padding: 3px 10px;
             border-radius: 20px;
-        }
-        .poussin-badge {
-            display: inline-block;
-            background: #FCDD11;
-            color: #1B5E20;
-            font-size: 0.7rem;
-            font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 20px;
-            margin-left: 8px;
         }
         
         /* Tableau garanties */
@@ -180,9 +184,6 @@
             .hero-content h2 { font-size: 1.5rem; }
             .hero-content h2 span { font-size: 1rem; }
             .section-title { font-size: 1.6rem; }
-            .poussin-item { padding: 8px 10px; }
-            .poussin-name { font-size: 0.8rem; }
-            .poussin-price { font-size: 0.85rem; }
         }
         @media (min-width: 769px) and (max-width: 1024px) {
             .cards-grid { grid-template-columns: repeat(2, 1fr); }
@@ -198,7 +199,9 @@
 <header>
     <div class="header-container">
         <div class="logo">
-            <div class="logo-img">🐔</div>
+            <div class="logo-img">
+                <img src="elevage/logo.jpg" alt="Volaille Bio Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='🐔'">
+            </div>
             <div class="logo-text">
                 <h1>Volaille Bio</h1>
                 <p>Élevage naturel à Ouagadougou</p>
@@ -218,7 +221,7 @@
 </header>
 
 <main>
-    <!-- SECTION HERO SLIDER -->
+    <!-- SECTION HERO SLIDER avec vos images -->
     <section id="accueil" class="hero">
         <div class="hero-slides" id="heroSlides"></div>
         <div class="hero-overlay"></div>
@@ -257,7 +260,7 @@
                     <p><strong>📍 Situé à Tampouy, Ouagadougou</strong> – Livraison possible sur toute la ville.</p>
                 </div>
                 <div class="presentation-image animate-on-scroll">
-                    <img src="https://placehold.co/600x400/1B5E20/FCDD11?text=Notre+Ferme" alt="Ferme Volaille Bio" style="width:100%; border-radius: 24px;">
+                    <img src="elevage/im4.jpg" alt="Notre ferme Volaille Bio" onerror="this.src='https://placehold.co/600x400/1B5E20/FCDD11?text=Notre+Ferme'">
                 </div>
             </div>
         </div>
@@ -268,37 +271,19 @@
         <div class="container">
             <h2 class="section-title animate-on-scroll">Le Catalogue de la Ferme</h2>
             <div class="cards-grid">
-                <!-- Carte 1 : Poussins (avec les 6 variétés bien mises en avant) -->
+                <!-- Carte 1 : Poussins -->
                 <div class="card animate-on-scroll">
                     <div class="card-icon">🐣</div>
                     <div class="card-content">
                         <h3>Poussins Vigoureux <span style="font-size:0.7rem; background:#FCDD11; padding:2px 8px; border-radius:20px; margin-left:8px;">Arrivage chaque mardi</span></h3>
                         <p>Vous lancez ou développez votre élevage ? 6 souches sélectionnées pour leur robustesse et leur croissance optimale.</p>
                         <div class="poussin-list">
-                            <div class="poussin-item">
-                                <span class="poussin-name">🐤 Coquelets</span>
-                                <span class="poussin-price">8 500 F</span>
-                            </div>
-                            <div class="poussin-item">
-                                <span class="poussin-name">🇳🇱 Bleu d'Hollande</span>
-                                <span class="poussin-price">17 500 F</span>
-                            </div>
-                            <div class="poussin-item">
-                                <span class="poussin-name">🌿 Local Amélioré</span>
-                                <span class="poussin-price">25 000 F</span>
-                            </div>
-                            <div class="poussin-item">
-                                <span class="poussin-name">🥚 Pondeuses</span>
-                                <span class="poussin-price">45 000 F</span>
-                            </div>
-                            <div class="poussin-item">
-                                <span class="poussin-name">🍗 Chair Cob500</span>
-                                <span class="poussin-price">35 000 F</span>
-                            </div>
-                            <div class="poussin-item">
-                                <span class="poussin-name">🏆 Sasso</span>
-                                <span class="poussin-price">30 000 F</span>
-                            </div>
+                            <div class="poussin-item"><span class="poussin-name">🐤 Coquelets</span><span class="poussin-price">8 500 F</span></div>
+                            <div class="poussin-item"><span class="poussin-name">🇳🇱 Bleu d'Hollande</span><span class="poussin-price">17 500 F</span></div>
+                            <div class="poussin-item"><span class="poussin-name">🌿 Local Amélioré</span><span class="poussin-price">25 000 F</span></div>
+                            <div class="poussin-item"><span class="poussin-name">🥚 Pondeuses</span><span class="poussin-price">45 000 F</span></div>
+                            <div class="poussin-item"><span class="poussin-name">🍗 Chair Cob500</span><span class="poussin-price">35 000 F</span></div>
+                            <div class="poussin-item"><span class="poussin-name">🏆 Sasso</span><span class="poussin-price">30 000 F</span></div>
                         </div>
                         <a href="https://wa.me/22655796925?text=Bonjour%2C%20je%20souhaite%20commander%20des%20poussins" class="btn btn-primary btn-wa" style="width:100%; justify-content:center;"><i class="fab fa-whatsapp"></i> Commander des poussins</a>
                     </div>
@@ -414,11 +399,11 @@
 </footer>
 
 <script>
-    // SLIDER HERO
+    // SLIDER HERO avec VOS 3 IMAGES
     const slides = [
-        { image: "https://placehold.co/1600x600/1B5E20/FCDD11?text=Élevage+Bio", titre: "Vos poussins, poulets et lapins", badge: "élevés au naturel", text: "Découvrez nos poussins rigoureux pour réussir votre élevage, ainsi que nos poulets de chair et lapins nourris au naturel pour une alimentation saine, fraîche et savoureuse." },
-        { image: "https://placehold.co/1600x600/2E7D32/white?text=Poussins+de+qualité", titre: "Poussins de qualité", badge: "disponibles chaque mardi", text: "Coquelets, Bleu d'Hollande, Local Amélioré, Pondeuses, Chair Cob500, Sasso – commandez dès maintenant !" },
-        { image: "https://placehold.co/1600x600/3C8C40/white?text=Volaille+frais", titre: "Poulets et lapins", badge: "fraîcheur garantie", text: "Viande tendre, savoureuse et élevée sans aucun additif chimique. Livraison rapide sur Ouagadougou." }
+        { image: "elevage/im1.jpg", titre: "Vos poussins, poulets et lapins", badge: "élevés au naturel", text: "Découvrez nos poussins rigoureux pour réussir votre élevage, ainsi que nos poulets de chair et lapins nourris au naturel pour une alimentation saine, fraîche et savoureuse." },
+        { image: "elevage/im2.jpg", titre: "Poussins de qualité", badge: "disponibles chaque mardi", text: "Coquelets, Bleu d'Hollande, Local Amélioré, Pondeuses, Chair Cob500, Sasso – commandez dès maintenant !" },
+        { image: "elevage/im3.jpg", titre: "Poulets et lapins", badge: "fraîcheur garantie", text: "Viande tendre, savoureuse et élevée sans aucun additif chimique. Livraison rapide sur Ouagadougou." }
     ];
 
     let currentIndex = 0, autoInterval;
@@ -435,6 +420,12 @@
             div.style.backgroundImage = `url('${slide.image}')`;
             div.style.backgroundSize = 'cover';
             div.style.backgroundPosition = 'center';
+            // Gestionnaire d'erreur si l'image ne charge pas
+            const img = new Image();
+            img.src = slide.image;
+            img.onerror = function() {
+                div.style.backgroundImage = `url('https://placehold.co/1600x600/1B5E20/FCDD11?text=Volaille+Bio')`;
+            };
             slidesContainer.appendChild(div);
         });
     }
