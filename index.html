@@ -76,12 +76,10 @@
         .presentation-simple { max-width: 800px; margin: 0 auto; text-align: center; }
         .presentation-simple p { margin-bottom: 15px; color: #475569; line-height: 1.8; }
         
-        /* Filtres catégories fixes */
         .filters { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
         .filter-btn { background: transparent; border: 2px solid #5A9E3A; color: #2D6A2E; padding: 0.5rem 1.5rem; border-radius: 50px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
         .filter-btn.active, .filter-btn:hover { background: #2D6A2E; color: white; border-color: #2D6A2E; }
         
-        /* Grille produits - Option A (cartes individuelles) */
         .produits-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem; }
         .produit-card { background: #FDF6E3; border-radius: 24px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; border: 1px solid #eef2f6; }
         .produit-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
@@ -98,7 +96,6 @@
         .btn-commande-produit { background: #2D6A2E; color: white; border: none; padding: 0.6rem 1rem; border-radius: 50px; font-size: 0.8rem; font-weight: 500; cursor: pointer; margin-top: 1rem; width: 100%; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
         .btn-commande-produit:hover { background: #D4A017; color: #5C3D11; }
         
-        /* Admin Zone */
         .admin-controls { display: none; margin-top: 30px; padding: 20px; background: #f8fafc; border-radius: 24px; border: 2px dashed #1B5E20; position: relative; }
         .admin-controls.visible { display: block; }
         .close-admin-btn { position: absolute; top: 10px; right: 10px; background: #dc3545; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
@@ -108,7 +105,20 @@
         .btn-edit { background: #FCDD11; color: #1B5E20; padding: 6px 12px; border-radius: 20px; border: none; cursor: pointer; font-size: 0.7rem; font-weight: 600; margin-right: 5px; }
         .btn-delete { background: #dc3545; color: white; padding: 6px 12px; border-radius: 20px; border: none; cursor: pointer; font-size: 0.7rem; font-weight: 600; }
         
-        /* Modales */
+        /* Styles pour la gestion des catégories */
+        .categories-section { margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd; }
+        .categories-title { color: #1B5E20; margin-bottom: 15px; font-size: 1.1rem; }
+        .categories-list { margin: 15px 0; padding: 10px; background: #f0f0f0; border-radius: 16px; max-height: 300px; overflow-y: auto; }
+        .category-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; margin-bottom: 8px; background: white; border-radius: 12px; border-left: 4px solid #FCDD11; }
+        .category-name { font-weight: 500; font-size: 0.95rem; }
+        .category-icon { font-size: 1.2rem; margin-right: 8px; }
+        .delete-category { background: none; border: none; color: #dc3545; cursor: pointer; font-size: 1rem; padding: 5px 8px; border-radius: 20px; transition: all 0.2s; }
+        .delete-category:hover { background: #dc3545; color: white; transform: scale(1.05); }
+        .add-category-form { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+        .add-category-form input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 12px; font-size: 0.9rem; }
+        .add-category-form select { padding: 10px; border: 1px solid #ddd; border-radius: 12px; background: white; cursor: pointer; }
+        .empty-categories { text-align: center; padding: 20px; color: #666; font-style: italic; }
+        
         .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; }
         .modal-content { background: white; padding: 25px; border-radius: 24px; max-width: 550px; width: 90%; max-height: 85vh; overflow-y: auto; position: relative; }
         .close-modal-btn { position: absolute; top: 15px; right: 15px; background: #dc3545; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
@@ -179,6 +189,7 @@
             .hero-content h2 { font-size: 1.5rem; }
             .section-title { font-size: 1.6rem; }
             .whatsapp-float { width: 50px; height: 50px; font-size: 25px; }
+            .add-category-form { flex-direction: column; }
         }
         @media (min-width: 769px) and (max-width: 1024px) {
             .produits-grid { grid-template-columns: repeat(2, 1fr); }
@@ -258,13 +269,9 @@
             <h2 class="section-title animate-on-scroll">Le Catalogue de la Ferme</h2>
             <p style="text-align: center; color: #666; margin-bottom: 1rem;">Découvrez nos produits directement issus de notre ferme. Qualité garantie et fraîcheur assurée.</p>
             
-            <!-- Filtres catégories fixes -->
+            <!-- Filtres catégories (dynamiques depuis Supabase) -->
             <div class="filters" id="filtersContainer">
-                <button class="filter-btn active" data-category="all">Tous</button>
-                <button class="filter-btn" data-category="poussin">🐣 Poussins</button>
-                <button class="filter-btn" data-category="poulet">🍗 Poulets</button>
-                <button class="filter-btn" data-category="lapin">🐇 Lapins</button>
-                <button class="filter-btn" data-category="aliment">🌾 Aliments</button>
+                <div class="skeleton-card" style="height: 50px; width: 200px;"></div>
             </div>
             
             <div id="productsContainer" class="produits-grid">
@@ -277,9 +284,36 @@
             <div id="adminZone" class="admin-controls">
                 <button class="close-admin-btn" id="closeAdminBtn"><i class="fas fa-times"></i></button>
                 <h3 style="text-align: center; color: #1B5E20;">👨‍🌾 Zone d'administration</h3>
+                
                 <div class="admin-buttons">
                     <button id="addProductBtn" class="btn-add"><i class="fas fa-plus"></i> Ajouter un produit</button>
                     <button id="refreshProductsBtn" class="btn-add" style="background: #7A3A07;"><i class="fas fa-sync-alt"></i> Rafraîchir</button>
+                </div>
+                
+                <!-- Gestion des catégories -->
+                <div class="categories-section">
+                    <h4 class="categories-title"><i class="fas fa-tags"></i> Gestion des catégories</h4>
+                    <div id="categoriesList" class="categories-list">
+                        <div class="skeleton-card" style="height: 80px;"></div>
+                    </div>
+                    <div class="add-category-form">
+                        <input type="text" id="newCategoryName" placeholder="Nouvelle catégorie (ex: Canard, Dinde...)">
+                        <select id="newCategoryIcon">
+                            <option value="🐔">🐔 Poule</option>
+                            <option value="🐣">🐣 Poussin</option>
+                            <option value="🍗">🍗 Poulet</option>
+                            <option value="🐇">🐇 Lapin</option>
+                            <option value="🦆">🦆 Canard</option>
+                            <option value="🦃">🦃 Dinde</option>
+                            <option value="🥚">🥚 Œuf</option>
+                            <option value="🌾">🌾 Aliment</option>
+                            <option value="📦">📦 Pack</option>
+                        </select>
+                        <button id="addCategoryBtn" class="btn-add" style="padding: 10px 20px;">➕ Ajouter</button>
+                    </div>
+                    <p style="font-size: 0.7rem; color: #666; margin-top: 10px; text-align: center;">
+                        <i class="fas fa-info-circle"></i> Supprimer une catégorie ne supprime pas les produits dedans
+                    </p>
                 </div>
             </div>
         </div>
@@ -390,10 +424,7 @@
         
         <label>Catégorie *</label>
         <select id="productCategorie">
-            <option value="poussin">🐤 Poussin</option>
-            <option value="poulet">🍗 Poulet</option>
-            <option value="lapin">🐇 Lapin</option>
-            <option value="aliment">🌾 Aliment</option>
+            <option value="">Chargement...</option>
         </select>
         
         <label>Image du produit</label>
@@ -504,6 +535,7 @@ const ADMIN_PASSWORD = "volaille2025";
 let logoClickCount = 0;
 let clickTimeout = null;
 let currentCategory = "all";
+let categories = [];
 
 function showToast(message, type = 'success') {
     let toast = document.getElementById('dynamicToast');
@@ -528,11 +560,145 @@ function escapeHtml(str) {
     });
 }
 
-function getCategoryIcon(category) {
-    const icons = { 'poussin': '🐣', 'poulet': '🍗', 'lapin': '🐇', 'aliment': '🌾' };
-    return icons[category] || '🐔';
+// ==================== GESTION DES CATÉGORIES ====================
+async function loadCategories() {
+    if (!supabaseClient) return;
+    
+    try {
+        const { data, error } = await supabaseClient
+            .from('categories')
+            .select('*')
+            .order('nom');
+        
+        if (error) throw error;
+        
+        categories = data || [];
+        
+        // Mettre à jour le select des catégories dans la modale produit
+        const selectCategorie = document.getElementById('productCategorie');
+        if (selectCategorie) {
+            selectCategorie.innerHTML = '';
+            if (categories.length === 0) {
+                selectCategorie.innerHTML = '<option value="">Aucune catégorie</option>';
+            } else {
+                categories.forEach(cat => {
+                    const option = document.createElement('option');
+                    option.value = cat.nom;
+                    option.textContent = `${cat.icone || '📁'} ${cat.nom}`;
+                    selectCategorie.appendChild(option);
+                });
+            }
+        }
+        
+        // Mettre à jour les filtres
+        const filtersContainer = document.getElementById('filtersContainer');
+        if (filtersContainer) {
+            filtersContainer.innerHTML = '<button class="filter-btn active" data-category="all">Tous</button>';
+            categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = 'filter-btn';
+                btn.setAttribute('data-category', cat.nom);
+                btn.innerHTML = `${cat.icone || '📁'} ${cat.nom}`;
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentCategory = cat.nom;
+                    loadProducts();
+                });
+                filtersContainer.appendChild(btn);
+            });
+        }
+        
+        // Afficher les catégories dans l'admin (uniquement si admin)
+        if (isAdmin) {
+            const categoriesListDiv = document.getElementById('categoriesList');
+            if (categoriesListDiv) {
+                if (categories.length === 0) {
+                    categoriesListDiv.innerHTML = '<div class="empty-categories">📭 Aucune catégorie. Ajoutez-en une !</div>';
+                } else {
+                    categoriesListDiv.innerHTML = categories.map(cat => `
+                        <div class="category-item">
+                            <div>
+                                <span class="category-icon">${cat.icone || '📁'}</span>
+                                <span class="category-name">${escapeHtml(cat.nom)}</span>
+                            </div>
+                            <button class="delete-category" onclick="deleteCategory('${cat.nom}')" title="Supprimer cette catégorie">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `).join('');
+                }
+            }
+        }
+        
+    } catch (error) {
+        console.error('Erreur chargement catégories:', error);
+        showToast('Erreur chargement catégories', 'error');
+    }
 }
 
+async function addCategory() {
+    const newCategoryName = document.getElementById('newCategoryName').value.trim();
+    const newCategoryIcon = document.getElementById('newCategoryIcon').value;
+    
+    if (!newCategoryName) {
+        showToast('Veuillez entrer un nom de catégorie', 'error');
+        return;
+    }
+    
+    // Vérifier si la catégorie existe déjà
+    if (categories.some(cat => cat.nom.toLowerCase() === newCategoryName.toLowerCase())) {
+        showToast('Cette catégorie existe déjà', 'error');
+        return;
+    }
+    
+    try {
+        const { error } = await supabaseClient
+            .from('categories')
+            .insert([{ nom: newCategoryName.toLowerCase(), icone: newCategoryIcon }]);
+        
+        if (error) throw error;
+        
+        showToast('✅ Catégorie ajoutée avec succès');
+        document.getElementById('newCategoryName').value = '';
+        await loadCategories();
+        await loadProducts();
+    } catch (error) {
+        console.error('Erreur ajout catégorie:', error);
+        showToast('Erreur lors de l\'ajout', 'error');
+    }
+}
+
+async function deleteCategory(categoryName) {
+    if (!confirm(`⚠️ Supprimer la catégorie "${categoryName}" ?\n\nLes produits dans cette catégorie ne seront pas supprimés, mais ils n'auront plus de catégorie associée.`)) return;
+    
+    try {
+        // Supprimer la catégorie
+        const { error } = await supabaseClient
+            .from('categories')
+            .delete()
+            .eq('nom', categoryName);
+        
+        if (error) throw error;
+        
+        showToast('✅ Catégorie supprimée');
+        await loadCategories();
+        
+        // Si on était sur cette catégorie, revenir à "Tous"
+        if (currentCategory === categoryName) {
+            currentCategory = 'all';
+            // Mettre à jour le bouton actif des filtres
+            const allBtn = document.querySelector('.filter-btn[data-category="all"]');
+            if (allBtn) allBtn.classList.add('active');
+        }
+        await loadProducts();
+    } catch (error) {
+        console.error('Erreur suppression catégorie:', error);
+        showToast('Erreur lors de la suppression', 'error');
+    }
+}
+
+// ==================== GESTION DES PRODUITS ====================
 async function uploadImage(file, productName) {
     if (!file || !supabaseClient) return null;
     
@@ -576,7 +742,7 @@ async function loadProducts() {
         if (error) throw error;
         
         if (!data || data.length === 0) {
-            container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:40px;">Aucun produit dans cette catégorie.</div>';
+            container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:40px;">📭 Aucun produit dans cette catégorie.</div>';
             return;
         }
         
@@ -591,10 +757,14 @@ async function loadProducts() {
                 </div>
             ` : '';
             
+            // Trouver l'icône de la catégorie
+            const cat = categories.find(c => c.nom === product.categorie);
+            const categoryIcon = cat ? cat.icone : '🐔';
+            
             html += `
                 <div class="produit-card animate-on-scroll">
                     <div class="produit-img">
-                        ${product.image_url ? `<img src="${product.image_url}" alt="${escapeHtml(product.nom)}">` : `<div class="produit-emoji">${getCategoryIcon(product.categorie)}</div>`}
+                        ${product.image_url ? `<img src="${product.image_url}" alt="${escapeHtml(product.nom)}">` : `<div class="produit-emoji">${categoryIcon}</div>`}
                     </div>
                     <div class="produit-info">
                         ${tagHtml}
@@ -620,7 +790,7 @@ async function loadProducts() {
         
     } catch (error) {
         console.error('Erreur:', error);
-        container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:40px; color:red;">Erreur de chargement</div>';
+        container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:40px; color:red;">❌ Erreur de chargement</div>';
     }
 }
 
@@ -632,7 +802,9 @@ window.addProduct = function() {
     document.getElementById('productDescription').value = '';
     document.getElementById('productPrix').value = '';
     document.getElementById('productTag').value = '';
-    document.getElementById('productCategorie').value = 'poussin';
+    if (categories.length > 0) {
+        document.getElementById('productCategorie').value = categories[0].nom;
+    }
     document.getElementById('productImageUrl').value = '';
     document.getElementById('productStock').value = 'true';
     document.getElementById('productImageFile').value = '';
@@ -652,7 +824,7 @@ window.editProduct = async function(id) {
     document.getElementById('productDescription').value = data.description || '';
     document.getElementById('productPrix').value = data.prix || '';
     document.getElementById('productTag').value = data.tag || '';
-    document.getElementById('productCategorie').value = data.categorie || 'poussin';
+    document.getElementById('productCategorie').value = data.categorie || (categories.length > 0 ? categories[0].nom : '');
     document.getElementById('productImageUrl').value = data.image_url || '';
     document.getElementById('productStock').value = data.stock_disponible ? 'true' : 'false';
     document.getElementById('productImageFile').value = '';
@@ -711,7 +883,7 @@ window.saveProduct = async function() {
 
 // SUPPRIMER un produit
 window.deleteProduct = async function(id) {
-    if (!confirm('Supprimer ce produit ?')) return;
+    if (!confirm('⚠️ Supprimer ce produit ?')) return;
     try {
         await supabaseClient.from('productelevage').delete().eq('id', id);
         showToast('✅ Produit supprimé');
@@ -719,20 +891,7 @@ window.deleteProduct = async function(id) {
     } catch (error) { showToast('Erreur suppression', 'error'); }
 };
 
-// FILTRES
-function setupFilters() {
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            currentCategory = btn.getAttribute('data-category');
-            loadProducts();
-        });
-    });
-}
-
-// ADMIN LOGIN
+// ==================== ADMIN LOGIN ====================
 function openLoginModal() { 
     const modal = document.getElementById('loginModal');
     if (modal) modal.style.display = 'flex';
@@ -776,16 +935,19 @@ if (secretTrigger) {
     });
 }
 
-// INITIALISATION
+// ==================== INITIALISATION ====================
 if (typeof supabase !== 'undefined' && supabase.createClient) {
     supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     console.log("✅ Supabase connecté");
-    loadProducts();
-    setupFilters();
+    
+    // Charger d'abord les catégories, puis les produits
+    loadCategories().then(() => {
+        loadProducts();
+    });
 } else {
     console.error("Supabase non chargé");
     const container = document.getElementById('productsContainer');
-    if(container) container.innerHTML = '<div style="text-align:center; padding:40px;">Erreur de connexion</div>';
+    if(container) container.innerHTML = '<div style="text-align:center; padding:40px;">❌ Erreur de connexion</div>';
 }
 
 // Vérifier session admin
@@ -793,9 +955,10 @@ if (sessionStorage.getItem('volaille_admin') === 'true') {
     isAdmin = true;
     const adminZone = document.getElementById('adminZone');
     if(adminZone) adminZone.classList.add('visible');
+    loadCategories(); // Recharger pour afficher la liste des catégories
 }
 
-// BOUTONS
+// ==================== BOUTONS ====================
 const addBtn = document.getElementById('addProductBtn');
 const refreshBtn = document.getElementById('refreshProductsBtn');
 const saveBtn = document.getElementById('saveProductBtn');
@@ -804,9 +967,10 @@ const submitLoginBtn = document.getElementById('submitLoginBtn');
 const closeAdminBtn = document.getElementById('closeAdminBtn');
 const closeProductModalBtn = document.getElementById('closeProductModalBtn');
 const closeLoginModalBtn = document.getElementById('closeLoginModalBtn');
+const addCategoryBtn = document.getElementById('addCategoryBtn');
 
 if(addBtn) addBtn.addEventListener('click', window.addProduct);
-if(refreshBtn) refreshBtn.addEventListener('click', loadProducts);
+if(refreshBtn) refreshBtn.addEventListener('click', () => { loadCategories(); loadProducts(); });
 if(saveBtn) saveBtn.addEventListener('click', window.saveProduct);
 if(cancelBtn) cancelBtn.addEventListener('click', () => {
     const modal = document.getElementById('productModal');
@@ -818,13 +982,14 @@ if(closeAdminBtn) closeAdminBtn.addEventListener('click', () => {
     sessionStorage.removeItem('volaille_admin');
     isAdmin = false;
     loadProducts();
-    showToast('👙 Zone admin fermée');
+    showToast('👋 Zone admin fermée');
 });
 if(closeProductModalBtn) closeProductModalBtn.addEventListener('click', () => {
     const modal = document.getElementById('productModal');
     if (modal) modal.style.display = 'none';
 });
 if(closeLoginModalBtn) closeLoginModalBtn.addEventListener('click', closeLoginModal);
+if(addCategoryBtn) addCategoryBtn.addEventListener('click', addCategory);
 if(submitLoginBtn) {
     submitLoginBtn.addEventListener('click', () => {
         const pwd = document.getElementById('adminPassword').value;
@@ -834,8 +999,9 @@ if(submitLoginBtn) {
             const adminZone = document.getElementById('adminZone');
             if(adminZone) adminZone.classList.add('visible');
             closeLoginModal();
+            loadCategories();
             loadProducts();
-            showToast('✅ Connecté admin');
+            showToast('✅ Connecté en tant qu\'administrateur');
         } else {
             const errorDiv = document.getElementById('loginError');
             if (errorDiv) errorDiv.textContent = 'Mot de passe incorrect';
@@ -884,6 +1050,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Rendre deleteCategory accessible globalement
+window.deleteCategory = deleteCategory;
 </script>
 </body>
 </html>
