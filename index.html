@@ -76,10 +76,12 @@
         .presentation-simple { max-width: 800px; margin: 0 auto; text-align: center; }
         .presentation-simple p { margin-bottom: 15px; color: #475569; line-height: 1.8; }
         
+        /* Filtres catégories fixes */
         .filters { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
         .filter-btn { background: transparent; border: 2px solid #5A9E3A; color: #2D6A2E; padding: 0.5rem 1.5rem; border-radius: 50px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
         .filter-btn.active, .filter-btn:hover { background: #2D6A2E; color: white; border-color: #2D6A2E; }
         
+        /* Grille produits - Option A (cartes individuelles) */
         .produits-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem; }
         .produit-card { background: #FDF6E3; border-radius: 24px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; border: 1px solid #eef2f6; }
         .produit-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
@@ -96,16 +98,17 @@
         .btn-commande-produit { background: #2D6A2E; color: white; border: none; padding: 0.6rem 1rem; border-radius: 50px; font-size: 0.8rem; font-weight: 500; cursor: pointer; margin-top: 1rem; width: 100%; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
         .btn-commande-produit:hover { background: #D4A017; color: #5C3D11; }
         
+        /* Admin Zone */
         .admin-controls { display: none; margin-top: 30px; padding: 20px; background: #f8fafc; border-radius: 24px; border: 2px dashed #1B5E20; position: relative; }
         .admin-controls.visible { display: block; }
         .close-admin-btn { position: absolute; top: 10px; right: 10px; background: #dc3545; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
         .close-admin-btn:hover { background: #b91c1c; transform: scale(1.05); }
-        
         .admin-buttons { display: flex; gap: 10px; justify-content: center; margin-top: 15px; flex-wrap: wrap; }
         .btn-add { background: #1B5E20; color: white; padding: 10px 20px; border-radius: 50px; border: none; cursor: pointer; font-weight: 600; }
-        .btn-edit { background: #FCDD11; color: #1B5E20; padding: 6px 12px; border-radius: 20px; border: none; cursor: pointer; font-size: 0.7rem; font-weight: 600; }
+        .btn-edit { background: #FCDD11; color: #1B5E20; padding: 6px 12px; border-radius: 20px; border: none; cursor: pointer; font-size: 0.7rem; font-weight: 600; margin-right: 5px; }
         .btn-delete { background: #dc3545; color: white; padding: 6px 12px; border-radius: 20px; border: none; cursor: pointer; font-size: 0.7rem; font-weight: 600; }
         
+        /* Modales */
         .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; }
         .modal-content { background: white; padding: 25px; border-radius: 24px; max-width: 550px; width: 90%; max-height: 85vh; overflow-y: auto; position: relative; }
         .close-modal-btn { position: absolute; top: 15px; right: 15px; background: #dc3545; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
@@ -121,13 +124,6 @@
         .close-login-btn { position: absolute; top: 15px; right: 15px; background: #dc3545; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
         .close-login-btn:hover { background: #b91c1c; transform: scale(1.05); }
         .login-modal-content input { width: 100%; padding: 12px; margin: 15px 0; border: 1px solid #ddd; border-radius: 12px; }
-        
-        .categories-list { margin: 15px 0; padding: 10px; background: #f0f0f0; border-radius: 16px; }
-        .category-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; margin-bottom: 5px; background: white; border-radius: 12px; }
-        .category-name { font-weight: 500; }
-        .delete-category { background: none; border: none; color: #dc3545; cursor: pointer; font-size: 1rem; }
-        .add-category-form { display: flex; gap: 10px; margin-top: 10px; }
-        .add-category-form input { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 12px; }
         
         .avantages { padding: 70px 0; background: white; }
         .avantages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
@@ -262,8 +258,13 @@
             <h2 class="section-title animate-on-scroll">Le Catalogue de la Ferme</h2>
             <p style="text-align: center; color: #666; margin-bottom: 1rem;">Découvrez nos produits directement issus de notre ferme. Qualité garantie et fraîcheur assurée.</p>
             
+            <!-- Filtres catégories fixes -->
             <div class="filters" id="filtersContainer">
                 <button class="filter-btn active" data-category="all">Tous</button>
+                <button class="filter-btn" data-category="poussin">🐣 Poussins</button>
+                <button class="filter-btn" data-category="poulet">🍗 Poulets</button>
+                <button class="filter-btn" data-category="lapin">🐇 Lapins</button>
+                <button class="filter-btn" data-category="aliment">🌾 Aliments</button>
             </div>
             
             <div id="productsContainer" class="produits-grid">
@@ -272,24 +273,13 @@
                 <div class="skeleton-card"></div>
             </div>
             
+            <!-- Zone Admin -->
             <div id="adminZone" class="admin-controls">
                 <button class="close-admin-btn" id="closeAdminBtn"><i class="fas fa-times"></i></button>
                 <h3 style="text-align: center; color: #1B5E20;">👨‍🌾 Zone d'administration</h3>
-                
                 <div class="admin-buttons">
                     <button id="addProductBtn" class="btn-add"><i class="fas fa-plus"></i> Ajouter un produit</button>
                     <button id="refreshProductsBtn" class="btn-add" style="background: #7A3A07;"><i class="fas fa-sync-alt"></i> Rafraîchir</button>
-                </div>
-                
-                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd;">
-                    <h4 style="color: #1B5E20; margin-bottom: 15px;">📂 Gestion des catégories</h4>
-                    <div id="categoriesList" class="categories-list">
-                        Chargement...
-                    </div>
-                    <div class="add-category-form">
-                        <input type="text" id="newCategoryName" placeholder="Nouvelle catégorie (ex: Canard)">
-                        <button id="addCategoryBtn" class="btn-add" style="padding: 8px 15px;">Ajouter</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -373,6 +363,7 @@
     </div>
 </footer>
 
+<!-- MODALE PRODUIT -->
 <div id="productModal" class="modal">
     <div class="modal-content">
         <button class="close-modal-btn" id="closeProductModalBtn"><i class="fas fa-times"></i></button>
@@ -400,6 +391,9 @@
         <label>Catégorie *</label>
         <select id="productCategorie">
             <option value="poussin">🐤 Poussin</option>
+            <option value="poulet">🍗 Poulet</option>
+            <option value="lapin">🐇 Lapin</option>
+            <option value="aliment">🌾 Aliment</option>
         </select>
         
         <label>Image du produit</label>
@@ -423,6 +417,7 @@
     </div>
 </div>
 
+<!-- MODALE LOGIN -->
 <div id="loginModal" class="login-modal">
     <div class="login-modal-content">
         <button class="close-login-btn" id="closeLoginModalBtn"><i class="fas fa-times"></i></button>
@@ -498,7 +493,7 @@ const nextBtn = document.getElementById('sliderNext');
 if (prevBtn) prevBtn.addEventListener('click', prevSlide);
 if (nextBtn) nextBtn.addEventListener('click', nextSlide);
 
-// ==================== SUPABASE PRODUITS ====================
+// ==================== SUPABASE ====================
 const SUPABASE_URL = "https://otdiywrvzappbmjfkkyi.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im90ZGl5d3J2emFwcGJtamZra3lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk2MTQyMDcsImV4cCI6MjA4NTE5MDIwN30.O5gHqJF1SCvpu19Z0OFHhQsT_ZmeIFbuEu-bpBZXXtY";
 const STORAGE_BUCKET = "product-images";
@@ -509,7 +504,6 @@ const ADMIN_PASSWORD = "volaille2025";
 let logoClickCount = 0;
 let clickTimeout = null;
 let currentCategory = "all";
-let categories = [];
 
 function showToast(message, type = 'success') {
     let toast = document.getElementById('dynamicToast');
@@ -539,117 +533,7 @@ function getCategoryIcon(category) {
     return icons[category] || '🐔';
 }
 
-async function loadCategories() {
-    if (!supabaseClient) return;
-    
-    try {
-        const { data, error } = await supabaseClient
-            .from('categories')
-            .select('*')
-            .order('nom');
-        
-        if (error) throw error;
-        
-        categories = data || [];
-        
-        const selectCategorie = document.getElementById('productCategorie');
-        if (selectCategorie) {
-            selectCategorie.innerHTML = '';
-            categories.forEach(cat => {
-                const option = document.createElement('option');
-                option.value = cat.nom;
-                option.textContent = cat.icone ? `${cat.icone} ${cat.nom}` : cat.nom;
-                selectCategorie.appendChild(option);
-            });
-        }
-        
-        const filtersContainer = document.getElementById('filtersContainer');
-        if (filtersContainer) {
-            filtersContainer.innerHTML = '<button class="filter-btn active" data-category="all">Tous</button>';
-            categories.forEach(cat => {
-                const btn = document.createElement('button');
-                btn.className = 'filter-btn';
-                btn.setAttribute('data-category', cat.nom);
-                btn.textContent = cat.icone ? `${cat.icone} ${cat.nom}` : cat.nom;
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    currentCategory = cat.nom;
-                    loadProducts();
-                });
-                filtersContainer.appendChild(btn);
-            });
-        }
-        
-        if (isAdmin) {
-            const categoriesListDiv = document.getElementById('categoriesList');
-            if (categoriesListDiv) {
-                if (categories.length === 0) {
-                    categoriesListDiv.innerHTML = '<p>Aucune catégorie. Ajoutez-en une !</p>';
-                } else {
-                    categoriesListDiv.innerHTML = categories.map(cat => `
-                        <div class="category-item">
-                            <span class="category-name">${cat.icone || '📁'} ${escapeHtml(cat.nom)}</span>
-                            <button class="delete-category" onclick="deleteCategory('${cat.nom}')"><i class="fas fa-trash"></i></button>
-                        </div>
-                    `).join('');
-                }
-            }
-        }
-        
-    } catch (error) {
-        console.error('Erreur chargement catégories:', error);
-    }
-}
-
-async function addCategory() {
-    const newCategoryName = document.getElementById('newCategoryName').value.trim();
-    if (!newCategoryName) {
-        showToast('Veuillez entrer un nom de catégorie', 'error');
-        return;
-    }
-    
-    try {
-        const { error } = await supabaseClient
-            .from('categories')
-            .insert([{ nom: newCategoryName, icone: '📁' }]);
-        
-        if (error) throw error;
-        
-        showToast('✅ Catégorie ajoutée');
-        document.getElementById('newCategoryName').value = '';
-        loadCategories();
-        loadProducts();
-    } catch (error) {
-        console.error('Erreur ajout catégorie:', error);
-        showToast('Erreur lors de l\'ajout', 'error');
-    }
-}
-
-async function deleteCategory(categoryName) {
-    if (!confirm(`Supprimer la catégorie "${categoryName}" ? Les produits dans cette catégorie ne seront pas supprimés.`)) return;
-    
-    try {
-        const { error } = await supabaseClient
-            .from('categories')
-            .delete()
-            .eq('nom', categoryName);
-        
-        if (error) throw error;
-        
-        showToast('✅ Catégorie supprimée');
-        loadCategories();
-        if (currentCategory === categoryName) {
-            currentCategory = 'all';
-            loadProducts();
-        }
-    } catch (error) {
-        console.error('Erreur suppression catégorie:', error);
-        showToast('Erreur lors de la suppression', 'error');
-    }
-}
-
-async function uploadImageToBucket(file, productName) {
+async function uploadImage(file, productName) {
     if (!file || !supabaseClient) return null;
     
     const fileExt = file.name.split('.').pop();
@@ -658,18 +542,18 @@ async function uploadImageToBucket(file, productName) {
     showToast('📤 Upload en cours...', 'success');
     
     try {
-        const { data, error } = await supabaseClient.storage
+        const { error } = await supabaseClient.storage
             .from(STORAGE_BUCKET)
             .upload(fileName, file, { cacheControl: '3600', upsert: false });
         
         if (error) throw error;
         
         const { data: { publicUrl } } = supabaseClient.storage.from(STORAGE_BUCKET).getPublicUrl(fileName);
-        showToast('✅ Image uploadée avec succès');
+        showToast('✅ Image uploadée');
         return publicUrl;
     } catch (error) {
         console.error('Upload error:', error);
-        showToast('❌ Erreur lors de l\'upload', 'error');
+        showToast('❌ Erreur upload', 'error');
         return null;
     }
 }
@@ -708,7 +592,7 @@ async function loadProducts() {
             ` : '';
             
             html += `
-                <div class="produit-card animate-on-scroll" data-category="${product.categorie}">
+                <div class="produit-card animate-on-scroll">
                     <div class="produit-img">
                         ${product.image_url ? `<img src="${product.image_url}" alt="${escapeHtml(product.nom)}">` : `<div class="produit-emoji">${getCategoryIcon(product.categorie)}</div>`}
                     </div>
@@ -728,18 +612,19 @@ async function loadProducts() {
         
         container.innerHTML = html;
         
-        const newAnimateElements = document.querySelectorAll('.animate-on-scroll');
+        const animateEls = document.querySelectorAll('.animate-on-scroll');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
         }, { threshold: 0.15 });
-        newAnimateElements.forEach(el => observer.observe(el));
+        animateEls.forEach(el => observer.observe(el));
         
     } catch (error) {
-        console.error('Erreur chargement produits:', error);
-        container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:40px; color:red;">Erreur de chargement des produits</div>';
+        console.error('Erreur:', error);
+        container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:40px; color:red;">Erreur de chargement</div>';
     }
 }
 
+// AJOUTER un produit
 window.addProduct = function() {
     document.getElementById('modalTitle').textContent = 'Ajouter un produit';
     document.getElementById('productId').value = '';
@@ -747,9 +632,7 @@ window.addProduct = function() {
     document.getElementById('productDescription').value = '';
     document.getElementById('productPrix').value = '';
     document.getElementById('productTag').value = '';
-    if (categories.length > 0) {
-        document.getElementById('productCategorie').value = categories[0].nom;
-    }
+    document.getElementById('productCategorie').value = 'poussin';
     document.getElementById('productImageUrl').value = '';
     document.getElementById('productStock').value = 'true';
     document.getElementById('productImageFile').value = '';
@@ -757,10 +640,11 @@ window.addProduct = function() {
     document.getElementById('productModal').style.display = 'flex';
 };
 
+// MODIFIER un produit
 window.editProduct = async function(id) {
     if (!supabaseClient) return;
     const { data, error } = await supabaseClient.from('productelevage').select('*').eq('id', id).single();
-    if (error) { showToast('Erreur chargement produit', 'error'); return; }
+    if (error) { showToast('Erreur chargement', 'error'); return; }
     
     document.getElementById('modalTitle').textContent = 'Modifier le produit';
     document.getElementById('productId').value = data.id;
@@ -768,7 +652,7 @@ window.editProduct = async function(id) {
     document.getElementById('productDescription').value = data.description || '';
     document.getElementById('productPrix').value = data.prix || '';
     document.getElementById('productTag').value = data.tag || '';
-    document.getElementById('productCategorie').value = data.categorie || (categories.length > 0 ? categories[0].nom : '');
+    document.getElementById('productCategorie').value = data.categorie || 'poussin';
     document.getElementById('productImageUrl').value = data.image_url || '';
     document.getElementById('productStock').value = data.stock_disponible ? 'true' : 'false';
     document.getElementById('productImageFile').value = '';
@@ -782,6 +666,7 @@ window.editProduct = async function(id) {
     document.getElementById('productModal').style.display = 'flex';
 };
 
+// SAUVEGARDER (ajout ou modification)
 window.saveProduct = async function() {
     if (!supabaseClient) return;
     const id = document.getElementById('productId').value;
@@ -790,7 +675,7 @@ window.saveProduct = async function() {
     
     if (imageFile) {
         const productName = document.getElementById('productNom').value.trim();
-        const uploadedUrl = await uploadImageToBucket(imageFile, productName);
+        const uploadedUrl = await uploadImage(imageFile, productName);
         if (uploadedUrl) imageUrl = uploadedUrl;
     }
     
@@ -805,38 +690,49 @@ window.saveProduct = async function() {
         updated_at: new Date().toISOString()
     };
     
-    if (!productData.nom) { showToast('Le nom du produit est requis', 'error'); return; }
+    if (!productData.nom) { showToast('Le nom est requis', 'error'); return; }
     
     try {
         if (id) {
-            const { error } = await supabaseClient.from('productelevage').update(productData).eq('id', parseInt(id));
-            if (error) throw error;
-            showToast('✅ Produit modifié avec succès');
+            await supabaseClient.from('productelevage').update(productData).eq('id', parseInt(id));
+            showToast('✅ Produit modifié');
         } else {
             productData.created_at = new Date().toISOString();
-            const { error } = await supabaseClient.from('productelevage').insert([productData]);
-            if (error) throw error;
-            showToast('✅ Produit ajouté avec succès');
+            await supabaseClient.from('productelevage').insert([productData]);
+            showToast('✅ Produit ajouté');
         }
         document.getElementById('productModal').style.display = 'none';
         loadProducts();
     } catch (error) {
-        console.error('Erreur sauvegarde:', error);
+        console.error('Erreur:', error);
         showToast('Erreur lors de la sauvegarde', 'error');
     }
 };
 
+// SUPPRIMER un produit
 window.deleteProduct = async function(id) {
-    if (!supabaseClient) return;
-    if (!confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')) return;
+    if (!confirm('Supprimer ce produit ?')) return;
     try {
-        const { error } = await supabaseClient.from('productelevage').delete().eq('id', id);
-        if (error) throw error;
+        await supabaseClient.from('productelevage').delete().eq('id', id);
         showToast('✅ Produit supprimé');
         loadProducts();
-    } catch (error) { showToast('Erreur lors de la suppression', 'error'); }
+    } catch (error) { showToast('Erreur suppression', 'error'); }
 };
 
+// FILTRES
+function setupFilters() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentCategory = btn.getAttribute('data-category');
+            loadProducts();
+        });
+    });
+}
+
+// ADMIN LOGIN
 function openLoginModal() { 
     const modal = document.getElementById('loginModal');
     if (modal) modal.style.display = 'flex';
@@ -850,79 +746,79 @@ function closeLoginModal() {
     if (errorDiv) errorDiv.textContent = '';
 }
 
-const imageFileInput = document.getElementById('productImageFile');
-if (imageFileInput) {
-    imageFileInput.addEventListener('change', function(e) {
+// PREVIEW IMAGE
+const imageInput = document.getElementById('productImageFile');
+if (imageInput) {
+    imageInput.addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = function(event) {
-                const previewImg = document.getElementById('imagePreview');
-                const previewContainer = document.getElementById('imagePreviewContainer');
-                if (previewImg && previewContainer) {
-                    previewImg.src = event.target.result;
-                    previewContainer.style.display = 'block';
-                }
+                document.getElementById('imagePreview').src = event.target.result;
+                document.getElementById('imagePreviewContainer').style.display = 'block';
             };
             reader.readAsDataURL(file);
         }
     });
 }
 
+// SECRET CLICK SUR LOGO (5 clics)
 const secretTrigger = document.getElementById('secretAdminTrigger');
 if (secretTrigger) {
     secretTrigger.addEventListener('click', () => {
         logoClickCount++;
         clearTimeout(clickTimeout);
         clickTimeout = setTimeout(() => { logoClickCount = 0; }, 1000);
-        if (logoClickCount >= 5) { logoClickCount = 0; openLoginModal(); }
+        if (logoClickCount >= 5) {
+            logoClickCount = 0;
+            openLoginModal();
+        }
     });
 }
 
+// INITIALISATION
 if (typeof supabase !== 'undefined' && supabase.createClient) {
     supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     console.log("✅ Supabase connecté");
-    loadCategories().then(() => {
-        loadProducts();
-    });
+    loadProducts();
+    setupFilters();
 } else {
     console.error("Supabase non chargé");
     const container = document.getElementById('productsContainer');
-    if(container) container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:40px;">Erreur de connexion</div>';
+    if(container) container.innerHTML = '<div style="text-align:center; padding:40px;">Erreur de connexion</div>';
 }
 
+// Vérifier session admin
 if (sessionStorage.getItem('volaille_admin') === 'true') {
     isAdmin = true;
     const adminZone = document.getElementById('adminZone');
     if(adminZone) adminZone.classList.add('visible');
-    loadCategories();
 }
 
+// BOUTONS
 const addBtn = document.getElementById('addProductBtn');
 const refreshBtn = document.getElementById('refreshProductsBtn');
 const saveBtn = document.getElementById('saveProductBtn');
 const cancelBtn = document.getElementById('cancelModalBtn');
 const submitLoginBtn = document.getElementById('submitLoginBtn');
-const addCategoryBtn = document.getElementById('addCategoryBtn');
 const closeAdminBtn = document.getElementById('closeAdminBtn');
 const closeProductModalBtn = document.getElementById('closeProductModalBtn');
 const closeLoginModalBtn = document.getElementById('closeLoginModalBtn');
 
 if(addBtn) addBtn.addEventListener('click', window.addProduct);
-if(refreshBtn) refreshBtn.addEventListener('click', () => { loadProducts(); loadCategories(); });
+if(refreshBtn) refreshBtn.addEventListener('click', loadProducts);
 if(saveBtn) saveBtn.addEventListener('click', window.saveProduct);
 if(cancelBtn) cancelBtn.addEventListener('click', () => {
     const modal = document.getElementById('productModal');
     if (modal) modal.style.display = 'none';
 });
-if(addCategoryBtn) addCategoryBtn.addEventListener('click', addCategory);
 if(closeAdminBtn) closeAdminBtn.addEventListener('click', () => {
     const adminZone = document.getElementById('adminZone');
     if(adminZone) adminZone.classList.remove('visible');
     sessionStorage.removeItem('volaille_admin');
     isAdmin = false;
     loadProducts();
-    showToast('👋 Zone admin fermée');
+    showToast('👙 Zone admin fermée');
 });
 if(closeProductModalBtn) closeProductModalBtn.addEventListener('click', () => {
     const modal = document.getElementById('productModal');
@@ -938,9 +834,8 @@ if(submitLoginBtn) {
             const adminZone = document.getElementById('adminZone');
             if(adminZone) adminZone.classList.add('visible');
             closeLoginModal();
-            loadCategories();
             loadProducts();
-            showToast('✅ Connecté en tant qu\'administrateur');
+            showToast('✅ Connecté admin');
         } else {
             const errorDiv = document.getElementById('loginError');
             if (errorDiv) errorDiv.textContent = 'Mot de passe incorrect';
@@ -948,6 +843,7 @@ if(submitLoginBtn) {
     });
 }
 
+// Fermer modales en cliquant à l'extérieur
 window.onclick = function(event) {
     const modal = document.getElementById('productModal');
     const loginModal = document.getElementById('loginModal');
@@ -955,23 +851,27 @@ window.onclick = function(event) {
     if (event.target === loginModal && loginModal) loginModal.style.display = 'none';
 };
 
-const animateElements = document.querySelectorAll('.animate-on-scroll');
-const observerAnim = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observerAnim.unobserve(entry.target); } });
+// Animations
+const animateEls = document.querySelectorAll('.animate-on-scroll');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
 }, { threshold: 0.15 });
-animateElements.forEach(el => observerAnim.observe(el));
+animateEls.forEach(el => observer.observe(el));
 
+// Header scroll
 window.addEventListener('scroll', () => {
     const header = document.querySelector('header');
     if(header) header.classList.toggle('scrolled', window.scrollY > 50);
 });
 
+// Menu mobile
 const menuBtn = document.getElementById('menuBtn');
 const navMenu = document.getElementById('navMenu');
 if (menuBtn && navMenu) {
     menuBtn.addEventListener('click', () => navMenu.classList.toggle('show'));
 }
 
+// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
@@ -984,8 +884,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
-
-window.deleteCategory = deleteCategory;
 </script>
 </body>
 </html>
