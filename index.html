@@ -18,7 +18,6 @@
         body { overflow-x: hidden !important; width: 100%; color: #1e293b; line-height: 1.6; background: #F8F9FA; font-family: 'Inter', system-ui, -apple-system, sans-serif; }
         .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 20px; overflow-x: hidden; }
         
-        /* Animations */
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(35px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInScale { to { opacity: 1; transform: scale(1); } }
         @keyframes slideInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
@@ -28,7 +27,6 @@
         .animate-on-scroll { opacity: 0; transform: translateY(35px); transition: opacity 0.7s cubic-bezier(0.2,0.9,0.4,1.1), transform 0.7s cubic-bezier(0.2,0.9,0.4,1.1); }
         .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
         
-        /* Header */
         header { background: white; box-shadow: 0 2px 20px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; transition: all 0.3s ease; }
         header.scrolled { background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); }
         .header-container { display: flex; justify-content: space-between; align-items: center; padding: 8px 20px; max-width: 1280px; margin: 0 auto; gap: 15px; }
@@ -42,7 +40,6 @@
         nav a:hover { color: #1B5E20; }
         .mobile-menu-btn { display: none; font-size: 24px; background: none; border: none; width: 40px; height: 40px; cursor: pointer; color: #1B5E20; }
         
-        /* Hero Slider */
         .hero { position: relative; min-height: 500px; display: flex; align-items: center; text-align: center; color: white; overflow: hidden; padding: 60px 0; }
         .hero-slides { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
         .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 1s ease-in-out; background-color: #1B5E20; }
@@ -61,7 +58,6 @@
         .dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; border: none; transition: all 0.3s ease; }
         .dot.active { background: #FCDD11; transform: scale(1.2); width: 28px; border-radius: 20px; }
         
-        /* Boutons */
         .btn { display: inline-block; padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; font-size: 0.9rem; border: none; cursor: pointer; }
         .btn-primary { background: #1B5E20; color: white; box-shadow: 0 6px 18px rgba(27,94,32,0.3); }
         .btn-primary:hover { background: #0f3d12; transform: translateY(-3px); }
@@ -70,22 +66,18 @@
         .btn-wa { background: #25D366; color: white; display: inline-flex; align-items: center; gap: 8px; }
         .btn-wa:hover { background: #1daa53; transform: translateY(-2px); }
         
-        /* Sections */
         section { padding: 70px 0; background: white; }
         .section-title { text-align: center; font-size: 2rem; margin-bottom: 40px; font-weight: 700; position: relative; color: #1B5E20; }
         .section-title::after { content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; border-radius: 4px; background: linear-gradient(90deg, #FCDD11, #7A3A07); }
         
-        /* Stats */
         .stats { background: #1B5E20; color: white; padding: 40px 0; text-align: center; }
         .stats-container { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; }
         .stat-number { font-size: 2rem; font-weight: 800; color: #FCDD11; display: block; }
         
-        /* Présentation */
         .presentation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
         .presentation-image { border-radius: 28px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1); transition: transform 0.4s ease; }
         .presentation-image img { width: 100%; height: auto; display: block; }
         
-        /* Produits dynamiques */
         .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 20px; }
         .card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.4s cubic-bezier(0.2,0.9,0.4,1.1), box-shadow 0.3s ease; border: 1px solid #eef2f6; }
         .card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 25px 40px rgba(0,0,0,0.15); }
@@ -101,7 +93,6 @@
         .badge-stock { font-size: 0.7rem; background: #dc3545; color: white; padding: 2px 8px; border-radius: 20px; margin-left: 8px; }
         .skeleton-card { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 24px; height: 450px; }
         
-        /* Admin Zone */
         .admin-controls { display: none; margin-top: 30px; padding: 20px; background: #f8fafc; border-radius: 24px; border: 2px dashed #1B5E20; }
         .admin-controls.visible { display: block; }
         .admin-buttons { display: flex; gap: 10px; justify-content: center; margin-top: 15px; flex-wrap: wrap; }
@@ -109,7 +100,6 @@
         .btn-edit { background: #FCDD11; color: #1B5E20; padding: 6px 12px; border-radius: 20px; border: none; cursor: pointer; font-size: 0.7rem; font-weight: 600; margin-right: 5px; }
         .btn-delete { background: #dc3545; color: white; padding: 6px 12px; border-radius: 20px; border: none; cursor: pointer; font-size: 0.7rem; font-weight: 600; }
         
-        /* Modales */
         .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; }
         .modal-content { background: white; padding: 25px; border-radius: 24px; max-width: 550px; width: 90%; max-height: 85vh; overflow-y: auto; }
         .modal-content input, .modal-content select, .modal-content textarea { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 12px; font-family: inherit; }
@@ -119,7 +109,6 @@
         .login-modal-content { background: white; border-radius: 24px; max-width: 400px; width: 90%; padding: 25px; text-align: center; }
         .login-modal-content input { width: 100%; padding: 12px; margin: 15px 0; border: 1px solid #ddd; border-radius: 12px; }
         
-        /* Avantages */
         .avantages { background: white; padding: 70px 0; }
         .avantages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 20px; }
         .avantage { background: #F9F9F6; border-radius: 20px; padding: 40px 20px; text-align: center; transition: all 0.3s ease; border: 1px solid #eef2f6; opacity: 0; transform: scale(0.95); animation: fadeInScale 0.5s ease forwards; }
@@ -133,7 +122,6 @@
         .av-title { font-size: 1.3rem; font-weight: 700; color: #1B5E20; margin-bottom: 12px; }
         .av-desc { color: #64748b; font-size: 0.95rem; line-height: 1.6; }
         
-        /* Témoignages */
         .temoignages { padding: 70px 0; background: #f8fafc; }
         .temo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 40px; }
         .temo-card { background: white; border-radius: 20px; padding: 25px; border-left: 4px solid #FCDD11; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.05); opacity: 0; animation: slideInLeft 0.5s ease forwards; }
@@ -146,7 +134,6 @@
         .temo-texte { color: #1e293b; font-size: 0.9rem; line-height: 1.6; margin-bottom: 15px; font-style: italic; }
         .temo-nom { font-weight: 600; font-size: 0.85rem; color: #1B5E20; }
         
-        /* Commander */
         .commande-section { background: linear-gradient(135deg, #1B5E20, #0f3d12); padding: 70px 0; text-align: center; }
         .commande-section h2 { font-size: 2rem; color: white; margin-bottom: 15px; }
         .commande-section p { color: rgba(255,255,255,0.85); margin-bottom: 30px; }
@@ -157,7 +144,6 @@
         .btn-fb-commande { background: #1877F2; color: white; }
         .btn-fb-commande:hover { background: #0d6ae0; transform: translateY(-3px); }
         
-        /* Contact */
         .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         .contact-card { background: #f8fafc; border-radius: 24px; padding: 30px; border: 1px solid #eef2f6; transition: transform 0.3s ease; }
         .contact-card:hover { transform: translateY(-3px); }
@@ -167,16 +153,13 @@
         .contact-info-line i:hover { transform: scale(1.1); color: #FCDD11; }
         .double-buttons { display: flex; gap: 12px; margin: 20px 0; flex-wrap: wrap; }
         
-        /* WhatsApp flottant */
         .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 99; animation: float 3s ease-in-out infinite; transition: all 0.3s ease; }
         .whatsapp-float:hover { transform: scale(1.1); background: #1daa53; }
         
-        /* Toast */
         .toast-notification { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(100px); background: #1B5E20; color: white; padding: 12px 24px; border-radius: 50px; font-weight: 500; z-index: 3000; transition: transform 0.3s ease; }
         .toast-notification.show { transform: translateX(-50%) translateY(0); }
         .toast-notification.error { background: #dc3545; }
         
-        /* Footer */
         footer { background: #0f172a; color: #cbd5e1; padding: 45px 0 25px; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; margin-bottom: 30px; }
         .footer-grid h4 { color: #FCDD11; margin-bottom: 15px; }
@@ -201,7 +184,6 @@
 </head>
 <body>
 
-<!-- WhatsApp flottant -->
 <a href="https://wa.me/22655796925?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20vos%20produits" class="whatsapp-float" target="_blank">
     <i class="fab fa-whatsapp"></i>
 </a>
@@ -210,7 +192,7 @@
     <div class="header-container">
         <div class="logo" id="secretAdminTrigger">
             <div class="logo-img">
-                <img src="elevage/logo.jpg" alt="Volaille Bio Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='🐔'">
+                <img src="elevage/logo.jpg" alt="Volaille Bio Logo" onerror="this.parentElement.innerHTML='🐔'">
             </div>
             <div class="logo-text">
                 <h1>Volaille Bio</h1>
@@ -230,7 +212,6 @@
 </header>
 
 <main>
-    <!-- HERO SLIDER -->
     <section id="accueil" class="hero">
         <div class="hero-slides" id="heroSlides"></div>
         <div class="hero-overlay"></div>
@@ -238,7 +219,7 @@
             <div class="hero-content">
                 <h2 id="heroTitle">Vos poussins, poulets et lapins <span>élevés au naturel</span></h2>
                 <p class="hero-slogan" id="heroDynamicText">Découvrez nos poussins rigoureux pour réussir votre élevage, ainsi que nos poulets de chair et lapins nourris au naturel pour une alimentation saine, fraîche et savoureuse.</p>
-                <div class="hero-buttons" id="heroButtons">
+                <div class="hero-buttons">
                     <a href="#produits" class="btn btn-primary">Découvrir nos produits</a>
                     <a href="https://wa.me/22655796925" class="btn btn-outline">Commander sur WhatsApp</a>
                 </div>
@@ -249,7 +230,6 @@
         <div class="slider-dots" id="sliderDots"></div>
     </section>
 
-    <!-- STATS -->
     <div class="stats">
         <div class="container stats-container">
             <div class="stat-item animate-on-scroll"><span class="stat-number">5 ans</span><br>d'expérience</div>
@@ -258,7 +238,6 @@
         </div>
     </div>
 
-    <!-- PRÉSENTATION -->
     <section id="presentation">
         <div class="container">
             <div class="presentation-grid">
@@ -275,7 +254,6 @@
         </div>
     </section>
 
-    <!-- PRODUITS DYNAMIQUE SUPABASE -->
     <section id="produits">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Le Catalogue de la Ferme</h2>
@@ -295,55 +273,28 @@
         </div>
     </section>
 
-    <!-- POURQUOI NOUS CHOISIR -->
     <div class="avantages">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Pourquoi nous choisir</h2>
             <div class="avantages-grid">
-                <div class="avantage">
-                    <span class="av-icon">🌿</span>
-                    <p class="av-title">100% Naturel</p>
-                    <p class="av-desc">Aucun produit chimique, aucun antibiotique. Nos volailles sont élevées en plein air avec une alimentation 100% naturelle.</p>
-                </div>
-                <div class="avantage">
-                    <span class="av-icon">💰</span>
-                    <p class="av-title">Prix abordable</p>
-                    <p class="av-desc">Nous offrons le meilleur rapport qualité-prix du marché.</p>
-                </div>
-                <div class="avantage">
-                    <span class="av-icon">🚚</span>
-                    <p class="av-title">Livraison rapide</p>
-                    <p class="av-desc">Commandez et recevez vos produits frais à domicile. Livraison rapide sur Ouagadougou.</p>
-                </div>
+                <div class="avantage"><span class="av-icon">🌿</span><p class="av-title">100% Naturel</p><p class="av-desc">Aucun produit chimique, aucun antibiotique. Nos volailles sont élevées en plein air avec une alimentation 100% naturelle.</p></div>
+                <div class="avantage"><span class="av-icon">💰</span><p class="av-title">Prix abordable</p><p class="av-desc">Nous offrons le meilleur rapport qualité-prix du marché.</p></div>
+                <div class="avantage"><span class="av-icon">🚚</span><p class="av-title">Livraison rapide</p><p class="av-desc">Commandez et recevez vos produits frais à domicile. Livraison rapide sur Ouagadougou.</p></div>
             </div>
         </div>
     </div>
 
-    <!-- AVIS CLIENTS -->
     <div class="temoignages">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Ils nous font confiance</h2>
             <div class="temo-grid">
-                <div class="temo-card">
-                    <div class="temo-stars">★★★★★</div>
-                    <p class="temo-texte">"Je commande régulièrement des poussins pour mon élevage. Ils sont robustes et le taux de croissance est excellent. Service fiable !"</p>
-                    <p class="temo-nom">— Issa O., Éleveur à Ouagadougou</p>
-                </div>
-                <div class="temo-card">
-                    <div class="temo-stars">★★★★★</div>
-                    <p class="temo-texte">"Le poulet bio est le meilleur que j'ai goûté. Mes clients au restaurant sont ravis. Livraison ponctuelle et qualité constante."</p>
-                    <p class="temo-nom">— Awa D., Restauratrice</p>
-                </div>
-                <div class="temo-card">
-                    <div class="temo-stars">★★★★★</div>
-                    <p class="temo-texte">"Œufs frais et savoureux, poulet tendre. Toute la famille apprécie. Je recommande vivement !"</p>
-                    <p class="temo-nom">— Mariam K.</p>
-                </div>
+                <div class="temo-card"><div class="temo-stars">★★★★★</div><p class="temo-texte">"Je commande régulièrement des poussins pour mon élevage. Ils sont robustes et le taux de croissance est excellent. Service fiable !"</p><p class="temo-nom">— Issa O., Éleveur</p></div>
+                <div class="temo-card"><div class="temo-stars">★★★★★</div><p class="temo-texte">"Le poulet bio est le meilleur que j'ai goûté. Mes clients au restaurant sont ravis."</p><p class="temo-nom">— Awa D., Restauratrice</p></div>
+                <div class="temo-card"><div class="temo-stars">★★★★★</div><p class="temo-texte">"Œufs frais et savoureux, poulet tendre. Toute la famille apprécie."</p><p class="temo-nom">— Mariam K.</p></div>
             </div>
         </div>
     </div>
 
-    <!-- COMMANDER -->
     <div class="commande-section">
         <div class="container">
             <h2>Prêt à commander ?</h2>
@@ -355,7 +306,6 @@
         </div>
     </div>
 
-    <!-- CONTACT -->
     <section id="contact">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Contact & Localisation</h2>
@@ -379,6 +329,9 @@
                     <div class="contact-info-line"><i class="fas fa-clock"></i> <span><strong>Commandes :</strong> Lundi - Dimanche, 7h - 20h</span></div>
                     <div class="contact-info-line"><i class="fas fa-calendar-week"></i> <span><strong>Poussins :</strong> Disponibles toute l'année</span></div>
                     <div class="contact-info-line"><i class="fas fa-store"></i> <span><strong>Vente à la ferme :</strong> Sur rendez-vous</span></div>
+                    <div style="margin-top: 20px; border-radius: 20px; overflow: hidden; height: 200px;">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1986.123456789!2d-1.535678!3d12.371234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDIyJzE2LjQiTiAxwrAzMicsNTQuMiJX!5e0!3m2!1sfr!2sbf!4v1680000000000!5m2!1sfr!2sbf" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
                 </div>
             </div>
         </div>
@@ -399,7 +352,6 @@
     </div>
 </footer>
 
-<!-- Modale ajout/modification produit -->
 <div id="productModal" class="modal">
     <div class="modal-content">
         <h3 id="modalTitle" style="color: #1B5E20; margin-bottom: 20px;">Ajouter un produit</h3>
@@ -431,7 +383,6 @@
     </div>
 </div>
 
-<!-- Modale connexion admin -->
 <div id="loginModal" class="login-modal">
     <div class="login-modal-content">
         <h3 style="color: #1B5E20;">🔐 Espace administration</h3>
@@ -728,26 +679,36 @@
         loadProducts();
     } else {
         console.error("Supabase non chargé");
-        document.getElementById('productsContainer').innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:40px;">Erreur de connexion</div>';
+        if(document.getElementById('productsContainer')) {
+            document.getElementById('productsContainer').innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:40px;">Erreur de connexion</div>';
+        }
     }
 
     if (sessionStorage.getItem('volaille_admin') === 'true') {
         isAdmin = true;
-        document.getElementById('adminZone')?.classList.add('visible');
+        const adminZone = document.getElementById('adminZone');
+        if(adminZone) adminZone.classList.add('visible');
     }
 
-    document.getElementById('addProductBtn')?.addEventListener('click', addProduct);
-    document.getElementById('refreshProductsBtn')?.addEventListener('click', loadProducts);
-    document.getElementById('saveProductBtn')?.addEventListener('click', saveProduct);
-    document.getElementById('cancelModalBtn')?.addEventListener('click', () => {
+    const addBtn = document.getElementById('addProductBtn');
+    const refreshBtn = document.getElementById('refreshProductsBtn');
+    const saveBtn = document.getElementById('saveProductBtn');
+    const cancelBtn = document.getElementById('cancelModalBtn');
+    const submitLoginBtn = document.getElementById('submitLoginBtn');
+    
+    if(addBtn) addBtn.addEventListener('click', addProduct);
+    if(refreshBtn) refreshBtn.addEventListener('click', loadProducts);
+    if(saveBtn) saveBtn.addEventListener('click', saveProduct);
+    if(cancelBtn) cancelBtn.addEventListener('click', () => {
         document.getElementById('productModal').style.display = 'none';
     });
-    document.getElementById('submitLoginBtn')?.addEventListener('click', () => {
+    if(submitLoginBtn) submitLoginBtn.addEventListener('click', () => {
         const pwd = document.getElementById('adminPassword').value;
         if (pwd === ADMIN_PASSWORD) {
             sessionStorage.setItem('volaille_admin', 'true');
             isAdmin = true;
-            document.getElementById('adminZone').classList.add('visible');
+            const adminZone = document.getElementById('adminZone');
+            if(adminZone) adminZone.classList.add('visible');
             closeLoginModal();
             loadProducts();
             showToast('✅ Connecté en tant qu\'administrateur');
@@ -759,8 +720,8 @@
     window.onclick = function(event) {
         const modal = document.getElementById('productModal');
         const loginModal = document.getElementById('loginModal');
-        if (event.target === modal) modal.style.display = 'none';
-        if (event.target === loginModal) loginModal.style.display = 'none';
+        if (event.target === modal && modal) modal.style.display = 'none';
+        if (event.target === loginModal && loginModal) loginModal.style.display = 'none';
     };
 
     window.editProduct = editProduct;
@@ -779,12 +740,13 @@
     animateElements.forEach(el => observer.observe(el));
 
     window.addEventListener('scroll', () => {
-        document.querySelector('header')?.classList.toggle('scrolled', window.scrollY > 50);
+        const header = document.querySelector('header');
+        if(header) header.classList.toggle('scrolled', window.scrollY > 50);
     });
 
     const menuBtn = document.getElementById('menuBtn');
     const navMenu = document.getElementById('navMenu');
-    if (menuBtn) {
+    if (menuBtn && navMenu) {
         menuBtn.addEventListener('click', () => navMenu.classList.toggle('show'));
     }
 
@@ -796,7 +758,7 @@
             if (target) {
                 e.preventDefault();
                 target.scrollIntoView({ behavior: 'smooth' });
-                if (navMenu.classList.contains('show')) navMenu.classList.remove('show');
+                if (navMenu && navMenu.classList.contains('show')) navMenu.classList.remove('show');
             }
         });
     });
