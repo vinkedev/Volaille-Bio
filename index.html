@@ -145,10 +145,11 @@
         .admin-link { color: #334155; font-size: 0.7rem; text-decoration: none; opacity: 0.6; transition: opacity 0.2s; }
         .admin-link:hover { opacity: 1; text-decoration: underline; }
         
-        /* Modal Admin Login avec œil */
+        /* UNE SEULE MODALE ADMIN LOGIN */
         .admin-login-modal { display: none; position: fixed; z-index: 20000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); align-items: center; justify-content: center; }
         .admin-login-content { background: white; border-radius: 24px; max-width: 400px; width: 90%; padding: 25px; text-align: center; position: relative; }
         .close-admin-login { position: absolute; top: 15px; right: 15px; background: #dc3545; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; }
+        .close-admin-login:hover { background: #b91c1c; }
         .password-container { position: relative; margin: 15px 0; }
         .password-container input { width: 100%; padding: 12px 40px 12px 12px; border: 1px solid #ddd; border-radius: 12px; font-size: 1rem; }
         .toggle-password { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #666; background: none; border: none; font-size: 1.1rem; }
@@ -323,7 +324,7 @@
         <div class="footer-grid">
             <div><h4>Volaille Bio</h4><p>Le choix de la nature et de la fraîcheur.</p></div>
             <div><h4>Contact</h4><p><i class="fab fa-whatsapp"></i> +226 55 79 69 25<br><i class="fas fa-phone-alt"></i> +226 61 15 66 88</p></div>
-            <div><h4>Liens rapides</h4><a href="#produits">Nos produits</a><a href="#contact">Contact</a><br><a href="admin.html" class="admin-link">🔐 Espace propriétaire</a></div>
+            <div><h4>Liens rapides</h4><a href="#produits">Nos produits</a><a href="#contact">Contact</a><br><a href="#" id="adminFooterLink" class="admin-link">🔐 Espace propriétaire</a></div>
         </div>
         <div class="footer-bottom">
             <p>© 2026 Volaille Bio – Tous droits réservés</p>
@@ -331,7 +332,7 @@
     </div>
 </footer>
 
-<!-- MODALE LOGIN ADMIN AVEC ŒIL -->
+<!-- UNE SEULE MODALE POUR L'ADMIN -->
 <div id="adminLoginModal" class="admin-login-modal">
     <div class="admin-login-content">
         <button class="close-admin-login" id="closeAdminLoginBtn"><i class="fas fa-times"></i></button>
@@ -466,7 +467,6 @@ async function loadCategories() {
                 btn.setAttribute('data-category', cat.nom);
                 btn.innerHTML = `${cat.icone || '📁'} ${cat.nom}`;
                 btn.addEventListener('click', () => {
-                    // Mettre à jour l'état actif
                     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                     currentCategory = cat.nom;
@@ -543,7 +543,7 @@ async function loadProducts() {
     }
 }
 
-// ==================== ADMIN LOGIN (5 clics + œil) ====================
+// ==================== ADMIN LOGIN (UNIQUE MODALE) ====================
 let logoClickCount = 0;
 let clickTimeout = null;
 
@@ -559,7 +559,7 @@ function closeAdminLoginModal() {
     if (modal) modal.style.display = 'none';
 }
 
-// Secret click sur le logo (5 clics)
+// 1. Secret click sur le logo (5 clics)
 const secretTrigger = document.getElementById('secretAdminTrigger');
 if (secretTrigger) {
     secretTrigger.addEventListener('click', () => {
@@ -573,7 +573,16 @@ if (secretTrigger) {
     });
 }
 
-// Bouton œil pour afficher/masquer le mot de passe
+// 2. Lien dans le footer
+const adminFooterLink = document.getElementById('adminFooterLink');
+if (adminFooterLink) {
+    adminFooterLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        openAdminLoginModal();
+    });
+}
+
+// 3. Bouton œil pour afficher/masquer le mot de passe
 const togglePasswordBtn = document.getElementById('togglePasswordBtn');
 const adminPasswordInput = document.getElementById('adminPasswordInput');
 if (togglePasswordBtn && adminPasswordInput) {
@@ -588,7 +597,7 @@ if (togglePasswordBtn && adminPasswordInput) {
     });
 }
 
-// Bouton de connexion admin
+// 4. Bouton de connexion
 const submitAdminLoginBtn = document.getElementById('submitAdminLoginBtn');
 if (submitAdminLoginBtn) {
     submitAdminLoginBtn.addEventListener('click', () => {
@@ -602,17 +611,13 @@ if (submitAdminLoginBtn) {
     });
 }
 
-// Fermeture de la modale
+// 5. Fermeture de la modale
 const closeAdminLoginBtn = document.getElementById('closeAdminLoginBtn');
 if (closeAdminLoginBtn) {
-    closeAdminLoginBtn.addEventListener('click', closeAdminLoginBtnModal);
+    closeAdminLoginBtn.addEventListener('click', closeAdminLoginModal);
 }
 
-function closeAdminLoginBtnModal() {
-    closeAdminLoginModal();
-}
-
-// Fermer en cliquant à l'extérieur
+// 6. Fermer en cliquant à l'extérieur
 window.onclick = function(event) {
     const modal = document.getElementById('adminLoginModal');
     if (event.target === modal) {
