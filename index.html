@@ -29,7 +29,7 @@
         header { background: white; box-shadow: 0 2px 20px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; transition: all 0.3s ease; }
         header.scrolled { background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); }
         .header-container { display: flex; justify-content: space-between; align-items: center; padding: 8px 20px; max-width: 1280px; margin: 0 auto; gap: 15px; }
-        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo { display: flex; align-items: center; gap: 10px; cursor: pointer; }
         .logo-img { width: 50px; height: 50px; border-radius: 50%; background: #1B5E20; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .logo-img img { width: 100%; height: 100%; object-fit: cover; }
         .logo-text h1 { font-size: 1.2rem; font-weight: 700; color: #1B5E20; }
@@ -145,6 +145,15 @@
         .admin-link { color: #334155; font-size: 0.7rem; text-decoration: none; opacity: 0.6; transition: opacity 0.2s; }
         .admin-link:hover { opacity: 1; text-decoration: underline; }
         
+        /* Modal Admin Login avec œil */
+        .admin-login-modal { display: none; position: fixed; z-index: 20000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); align-items: center; justify-content: center; }
+        .admin-login-content { background: white; border-radius: 24px; max-width: 400px; width: 90%; padding: 25px; text-align: center; position: relative; }
+        .close-admin-login { position: absolute; top: 15px; right: 15px; background: #dc3545; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; }
+        .password-container { position: relative; margin: 15px 0; }
+        .password-container input { width: 100%; padding: 12px 40px 12px 12px; border: 1px solid #ddd; border-radius: 12px; font-size: 1rem; }
+        .toggle-password { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #666; background: none; border: none; font-size: 1.1rem; }
+        .login-error { color: red; margin-bottom: 10px; font-size: 0.85rem; }
+        
         @media (max-width: 768px) {
             .mobile-menu-btn { display: block; }
             nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 20px; gap: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-radius: 0 0 20px 20px; z-index: 999; }
@@ -167,7 +176,7 @@
 
 <header>
     <div class="header-container">
-        <div class="logo">
+        <div class="logo" id="secretAdminTrigger">
             <div class="logo-img">
                 <img src="elevage/logo.jpg" alt="Volaille Bio Logo" onerror="this.parentElement.innerHTML='🐔'">
             </div>
@@ -317,13 +326,29 @@
             <div><h4>Liens rapides</h4><a href="#produits">Nos produits</a><a href="#contact">Contact</a><br><a href="admin.html" class="admin-link">🔐 Espace propriétaire</a></div>
         </div>
         <div class="footer-bottom">
-            <p>© 2025 Volaille Bio – Tous droits réservés</p>
+            <p>© 2026 Volaille Bio – Tous droits réservés</p>
         </div>
     </div>
 </footer>
 
+<!-- MODALE LOGIN ADMIN AVEC ŒIL -->
+<div id="adminLoginModal" class="admin-login-modal">
+    <div class="admin-login-content">
+        <button class="close-admin-login" id="closeAdminLoginBtn"><i class="fas fa-times"></i></button>
+        <h3 style="color: #1B5E20;">🔐 Administration</h3>
+        <div class="password-container">
+            <input type="password" id="adminPasswordInput" placeholder="Mot de passe">
+            <button class="toggle-password" id="togglePasswordBtn">
+                <i class="fas fa-eye"></i>
+            </button>
+        </div>
+        <div id="adminLoginError" class="login-error"></div>
+        <button id="submitAdminLoginBtn" class="btn-add" style="width: 100%; justify-content: center;">Se connecter</button>
+    </div>
+</div>
+
 <script>
-// ==================== SLIDER HERO ====================
+// ==================== SLIDER HERO (3 secondes) ====================
 const slides = [
     { image: "elevage/im1.jpg", titre: "Vos poussins, poulets et lapins", badge: "élevés au naturel", text: "Découvrez nos produits de qualité pour réussir votre élevage." },
     { image: "elevage/im2.jpg", titre: "Poussins de qualité", badge: "disponibles", text: "Plusieurs souches disponibles pour votre élevage." },
@@ -375,7 +400,7 @@ function updateSlidesAndText() {
 function goToSlide(index) { currentIndex = index; updateSlidesAndText(); resetAutoPlay(); }
 function nextSlide() { currentIndex = (currentIndex + 1) % slides.length; updateSlidesAndText(); resetAutoPlay(); }
 function prevSlide() { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateSlidesAndText(); resetAutoPlay(); }
-function resetAutoPlay() { if (autoInterval) clearInterval(autoInterval); autoInterval = setInterval(nextSlide, 4000); }
+function resetAutoPlay() { if (autoInterval) clearInterval(autoInterval); autoInterval = setInterval(nextSlide, 3000); }
 
 createSlides();
 createDots();
@@ -390,6 +415,7 @@ if (nextBtn) nextBtn.addEventListener('click', nextSlide);
 // ==================== SUPABASE ====================
 const SUPABASE_URL = "https://otdiywrvzappbmjfkkyi.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im90ZGl5d3J2emFwcGJtamZra3lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk2MTQyMDcsImV4cCI6MjA4NTE5MDIwN30.O5gHqJF1SCvpu19Z0OFHhQsT_ZmeIFbuEu-bpBZXXtY";
+const ADMIN_PASSWORD = "volaille2026";
 
 let supabaseClient = null;
 let currentCategory = "all";
@@ -440,6 +466,7 @@ async function loadCategories() {
                 btn.setAttribute('data-category', cat.nom);
                 btn.innerHTML = `${cat.icone || '📁'} ${cat.nom}`;
                 btn.addEventListener('click', () => {
+                    // Mettre à jour l'état actif
                     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                     currentCategory = cat.nom;
@@ -516,6 +543,84 @@ async function loadProducts() {
     }
 }
 
+// ==================== ADMIN LOGIN (5 clics + œil) ====================
+let logoClickCount = 0;
+let clickTimeout = null;
+
+function openAdminLoginModal() {
+    const modal = document.getElementById('adminLoginModal');
+    if (modal) modal.style.display = 'flex';
+    document.getElementById('adminPasswordInput').value = '';
+    document.getElementById('adminLoginError').textContent = '';
+}
+
+function closeAdminLoginModal() {
+    const modal = document.getElementById('adminLoginModal');
+    if (modal) modal.style.display = 'none';
+}
+
+// Secret click sur le logo (5 clics)
+const secretTrigger = document.getElementById('secretAdminTrigger');
+if (secretTrigger) {
+    secretTrigger.addEventListener('click', () => {
+        logoClickCount++;
+        clearTimeout(clickTimeout);
+        clickTimeout = setTimeout(() => { logoClickCount = 0; }, 1000);
+        if (logoClickCount >= 5) {
+            logoClickCount = 0;
+            openAdminLoginModal();
+        }
+    });
+}
+
+// Bouton œil pour afficher/masquer le mot de passe
+const togglePasswordBtn = document.getElementById('togglePasswordBtn');
+const adminPasswordInput = document.getElementById('adminPasswordInput');
+if (togglePasswordBtn && adminPasswordInput) {
+    togglePasswordBtn.addEventListener('click', () => {
+        const type = adminPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        adminPasswordInput.setAttribute('type', type);
+        const icon = togglePasswordBtn.querySelector('i');
+        if (icon) {
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+        }
+    });
+}
+
+// Bouton de connexion admin
+const submitAdminLoginBtn = document.getElementById('submitAdminLoginBtn');
+if (submitAdminLoginBtn) {
+    submitAdminLoginBtn.addEventListener('click', () => {
+        const pwd = document.getElementById('adminPasswordInput').value;
+        if (pwd === ADMIN_PASSWORD) {
+            sessionStorage.setItem('volaille_admin', 'true');
+            window.location.href = 'admin.html';
+        } else {
+            document.getElementById('adminLoginError').textContent = 'Mot de passe incorrect';
+        }
+    });
+}
+
+// Fermeture de la modale
+const closeAdminLoginBtn = document.getElementById('closeAdminLoginBtn');
+if (closeAdminLoginBtn) {
+    closeAdminLoginBtn.addEventListener('click', closeAdminLoginBtnModal);
+}
+
+function closeAdminLoginBtnModal() {
+    closeAdminLoginModal();
+}
+
+// Fermer en cliquant à l'extérieur
+window.onclick = function(event) {
+    const modal = document.getElementById('adminLoginModal');
+    if (event.target === modal) {
+        closeAdminLoginModal();
+    }
+};
+
+// ==================== INITIALISATION ====================
 if (typeof supabase !== 'undefined' && supabase.createClient) {
     supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     console.log("✅ Supabase connecté");
@@ -529,23 +634,27 @@ if (typeof supabase !== 'undefined' && supabase.createClient) {
     if(container) container.innerHTML = '<div style="text-align:center; padding:40px;">❌ Erreur de connexion</div>';
 }
 
+// Animations
 const animateEls = document.querySelectorAll('.animate-on-scroll');
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
 }, { threshold: 0.15 });
 animateEls.forEach(el => observer.observe(el));
 
+// Header scroll
 window.addEventListener('scroll', () => {
     const header = document.querySelector('header');
     if(header) header.classList.toggle('scrolled', window.scrollY > 50);
 });
 
+// Menu mobile
 const menuBtn = document.getElementById('menuBtn');
 const navMenu = document.getElementById('navMenu');
 if (menuBtn && navMenu) {
     menuBtn.addEventListener('click', () => navMenu.classList.toggle('show'));
 }
 
+// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
