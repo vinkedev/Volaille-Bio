@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Administration - Volaille Bio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #f5f5f5; font-family: 'Inter', sans-serif; padding: 40px 20px; }
+        .admin-container { max-width: 1200px; margin: 0 auto; }
+        .admin-header { background: #1B5E20; color: white; padding: 20px 25px; border-radius: 20px 20px 0 0; display: flex; justify-content: space-between; align-items: center; }
+        .admin-header h1 { font-size: 1.5rem; }
+        .back-link { color: #FCDD11; text-decoration: none; font-weight: 500; }
+        .back-link:hover { text-decoration: underline; }
+        
+        .admin-tabs { display: flex; background: white; border-bottom: 1px solid #ddd; }
+        .admin-tab { padding: 15px 25px; cursor: pointer; font-weight: 600; border: none; background: none; font-size: 1rem; transition: all 0.2s; }
+        .admin-tab:hover { background: #f0f0f0; }
+        .admin-tab.active { color: #1B5E20; border-bottom: 3px solid #1B5E20; }
+        
+        .admin-panel { background: white; padding: 25px; border-radius: 0 0 20px 20px; display: none; }
+        .admin-panel.active { display: block; }
+        
+        .btn-add { background: #1B5E20; color: white; padding: 10px 20px; border-radius: 50px; border: none; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+        .btn-add:hover { background: #0f3d12; transform: translateY(-2px); }
+        .btn-secondary { background: #7A3A07; color: white; padding: 10px 20px; border-radius: 50px; border: none; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+        .btn-secondary:hover { background: #5a2a05; transform: translateY(-2px); }
+        .btn-danger { background: #dc3545; color: white; padding: 6px 12px; border-radius: 20px; border: none; cursor: pointer; font-size: 0.7rem; font-weight: 600; }
+        .btn-edit { background: #FCDD11; color: #1B5E20; padding: 6px 12px; border-radius: 20px; border: none; cursor: pointer; font-size: 0.7rem; font-weight: 600; margin-right: 5px; }
+        
+        .admin-buttons { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+        
+        .produits-table { width: 100%; border-collapse: collapse; }
+        .produits-table th, .produits-table td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        .produits-table th { background: #f8fafc; font-weight: 600; color: #1B5E20; }
+        .produits-table tr:hover { background: #f9f9f6; }
+        .product-img { width: 50px; height: 50px; object-fit: cover; border-radius: 8px; background: #e8f5e9; }
+        
+        .categories-list { margin-top: 15px; }
+        .category-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; margin-bottom: 8px; background: #f8fafc; border-radius: 12px; border-left: 4px solid #FCDD11; }
+        .category-item:hover { background: #fef9e6; }
+        .delete-category-btn { background: none; border: none; color: #dc3545; cursor: pointer; font-size: 1rem; padding: 5px 10px; border-radius: 20px; opacity: 0; transition: all 0.2s; }
+        .category-item:hover .delete-category-btn { opacity: 1; }
+        .delete-category-btn:hover { background: #dc3545; color: white; transform: scale(1.05); }
+        
+        .add-category-form { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+        .add-category-form input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 12px; }
+        .add-category-form select { padding: 12px; border: 1px solid #ddd; border-radius: 12px; }
+        
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; }
+        .modal-content { background: white; padding: 25px; border-radius: 24px; max-width: 550px; width: 90%; max-height: 85vh; overflow-y: auto; position: relative; }
+        .close-modal { position: absolute; top: 15px; right: 15px; background: #dc3545; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; }
+        .modal-content input, .modal-content select, .modal-content textarea { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 12px; }
+        .modal-content label { font-weight: 600; margin-bottom: 5px; display: block; }
+        .form-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+        .image-preview { margin: 10px 0; max-width: 150px; border-radius: 12px; overflow: hidden; }
+        .image-preview img { width: 100%; height: auto; }
+        
+        .step-indicator { display: flex; justify-content: center; gap: 20px; margin-bottom: 25px; }
+        .step { width: 35px; height: 35px; border-radius: 50%; background: #ddd; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white; }
+        .step.active { background: #1B5E20; }
+        .step.completed { background: #FCDD11; color: #1B5E20; }
+        .step-label { font-size: 0.8rem; margin-top: 5px; color: #666; }
+        .step-wrapper { text-align: center; }
+        .form-step { display: none; }
+        .form-step.active { display: block; }
+        .nav-step { background: #1B5E20; color: white; padding: 8px 20px; border-radius: 50px; border: none; cursor: pointer; margin-top: 15px; width: 100%; }
+        
+        .confirm-modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; }
+        .confirm-modal-content { background: white; border-radius: 24px; max-width: 450px; width: 90%; padding: 25px; text-align: center; }
+        .confirm-modal-content h3 { color: #1B5E20; margin-bottom: 15px; }
+        .confirm-buttons { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }
+        .confirm-yes { background: #dc3545; color: white; padding: 10px 25px; border-radius: 50px; border: none; cursor: pointer; }
+        .confirm-no { background: #6c757d; color: white; padding: 10px 25px; border-radius: 50px; border: none; cursor: pointer; }
+        
+        .toast-notification { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #1B5E20; color: white; padding: 12px 24px; border-radius: 50px; z-index: 3000; transition: transform 0.3s; }
+        .toast-notification.show { transform: translateX(-50%) translateY(0); }
+        .toast-notification.error { background: #dc3545; }
+        
+        .login-container { max-width: 400px; margin: 100px auto; background: white; padding: 30px; border-radius: 24px; text-align: center; }
+        .login-container input { width: 100%; padding: 12px; margin: 15px 0; border: 1px solid #ddd; border-radius: 12px; }
+        .login-error { color: red; margin-bottom: 10px; }
+        
+        @media (max-width: 768px) {
+            .produits-table th, .produits-table td { padding: 8px; font-size: 0.8rem; }
+            .admin-tab { padding: 10px 15px; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <!-- Login screen -->
+    <div id="loginScreen" class="login-container">
+        <h2 style="color: #1B5E20;">🔐 Administration</h2>
+        <input type="password" id="adminPassword" placeholder="Mot de passe">
+        <div id="loginError" class="login-error"></div>
+        <button id="loginBtn" class="btn-add" style="width: 100%;">Se connecter</button>
+    </div>
+    
+    <!-- Admin panel (hidden by default) -->
+    <div id="adminPanel" style="display: none;">
+        <div class="admin-container">
+            <div class="admin-header">
+                <h1><i class="fas fa-cog"></i> Administration Volaille Bio</h1>
+                <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Retour au site</a>
+            </div>
+            
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="products">📦 Produits</button>
+                <button class="admin-tab" data-tab="categories">🏷️ Catégories</button>
+            </div>
+            
+            <!-- Panneau Produits -->
+            <div id="productsPanel" class="admin-panel active">
+                <div class="admin-buttons">
+                    <button id="addProductBtn" class="btn-add"><i class="fas fa-plus"></i> Ajouter un produit</button>
+                    <button id="refreshProductsBtn" class="btn-secondary"><i class="fas fa-sync-alt"></i> Rafraîchir</button>
+                </div>
+                <div id="productsListContainer">
+                    <div style="text-align: center; padding: 40px;">Chargement...</div>
+                </div>
+            </div>
+            
+            <!-- Panneau Catégories -->
+            <div id="categoriesPanel" class="admin-panel">
+                <h4 style="color: #1B5E20; margin-bottom: 15px;"><i class="fas fa-tags"></i> Liste des catégories</h4>
+                <div id="categoriesListContainer">
+                    <div style="text-align: center; padding: 20px;">Chargement...</div>
+                </div>
+                <div class="add-category-form">
+                    <input type="text" id="newCategoryName" placeholder="Nouvelle catégorie (ex: Canard, Dinde...)">
+                    <select id="newCategoryIcon">
+                        <option value="🐔">🐔 Poule</option>
+                        <option value="🐣">🐣 Poussin</option>
+                        <option value="🍗">🍗 Poulet</option>
+                        <option value="🐇">🐇 Lapin</option>
+                        <option value="🦆">🦆 Canard</option>
+                        <option value="🦃">🦃 Dinde</option>
+                        <option value="🥚">🥚 Œuf</option>
+                        <option value="🌾">🌾 Aliment</option>
+                        <option value="📦">📦 Pack</option>
+                    </select>
+                    <button id="addCategoryBtn" class="btn-add">➕ Ajouter</button>
+                </div>
+                <p style="font-size: 0.7rem; color: #666; margin-top: 10px; text-align: center;">
+                    <i class="fas fa-info-circle"></i> Supprimer une catégorie ne supprime pas les produits dedans
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODALE PRODUIT -->
+<div id="productModal" class="modal">
+    <div class="modal-content">
+        <button class="close-modal" id="closeProductModalBtn"><i class="fas fa-times"></i></button>
+        <h3 id="modalTitle" style="color: #1B5E20; margin-bottom: 20px;">Ajouter un produit</h3>
+        <input type="hidden" id="productId">
+        
+        <div class="step-indicator">
+            <div class="step-wrapper"><div class="step" id="step1Indicator">1</div><div class="step-label">Essentiels</div></div>
+            <div class="step-wrapper"><div class="step" id="step2Indicator">2</div><div class="step-label">Détails</div></div>
+        </div>
+        
+        <div id="step1" class="form-step active">
+            <label>Nom du produit *</label>
+            <input type="text" id="productNom" placeholder="Ex: Coquelets">
+            <label>Catégorie *</label>
+            <select id="productCategorie"></select>
+            <label>Prix</label>
+            <input type="text" id="productPrix" placeholder="Ex: 8 500 F">
+            <label>Image du produit</label>
+            <input type="file" id="productImageFile" accept="image/jpeg,image/png,image/webp">
+            <div id="imagePreviewContainer" class="image-preview" style="display: none;"><img id="imagePreview" src=""></div>
+            <button id="nextStepBtn" class="nav-step">Suivant →</button>
+        </div>
+        
+        <div id="step2" class="form-step">
+            <label>Tag (optionnel)</label>
+            <select id="productTag">
+                <option value="">Aucun</option>
+                <option value="Best-seller">⭐ Best-seller</option>
+                <option value="Populaire">🔥 Populaire</option>
+                <option value="Nouveau">🆕 Nouveau</option>
+                <option value="Économique">💰 Économique</option>
+            </select>
+            <label>Description (optionnelle)</label>
+            <textarea id="productDescription" rows="3" placeholder="Description du produit..."></textarea>
+            <label>Stock disponible</label>
+            <select id="productStock">
+                <option value="true">✅ En stock</option>
+                <option value="false">❌ Rupture</option>
+            </select>
+            <div class="form-actions">
+                <button id="prevStepBtn" class="btn-add" style="background: #6c757d;">← Retour</button>
+                <button id="saveProductBtn" class="btn-add">💾 Enregistrer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODALE CONFIRMATION -->
+<div id="confirmModal" class="confirm-modal">
+    <div class="confirm-modal-content">
+        <h3><i class="fas fa-exclamation-triangle"></i> Confirmation</h3>
+        <p id="confirmMessage">Êtes-vous sûr de vouloir supprimer cet élément ?</p>
+        <div class="confirm-buttons">
+            <button id="confirmYesBtn" class="confirm-yes">Oui, supprimer</button>
+            <button id="confirmNoBtn" class="confirm-no">Annuler</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ==================== CONFIGURATION ====================
+const SUPABASE_URL = "https://otdiywrvzappbmjfkkyi.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im90ZGl5d3J2emFwcGJtamZra3lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk2MTQyMDcsImV4cCI6MjA4NTE5MDIwN30.O5gHqJF1SCvpu19Z0OFHhQsT_ZmeIFbuEu-bpBZXXtY";
+const STORAGE_BUCKET = "product-images";
+const ADMIN_PASSWORD = "volaille2026";
+
+let supabaseClient = null;
+let categories = [];
+let pendingDeleteCallback = null;
+let currentStep = 1;
+
+function showToast(message, type = 'success') {
+    let toast = document.getElementById('dynamicToast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'dynamicToast';
+        toast.className = 'toast-notification';
+        document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.className = `toast-notification ${type} show`;
+    setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+    });
+}
+
+function showConfirmModal(message, onConfirm) {
+    const modal = document.getElementById('confirmModal');
+    document.getElementById('confirmMessage').textContent = message;
+    pendingDeleteCallback = onConfirm;
+    modal.style.display = 'flex';
+}
+function closeConfirmModal() {
+    document.getElementById('confirmModal').style.display = 'none';
+    pendingDeleteCallback = null;
+}
+document.getElementById('confirmYesBtn')?.addEventListener('click', () => {
+    if (pendingDeleteCallback) pendingDeleteCallback();
+    closeConfirmModal();
+});
+document.getElementById('confirmNoBtn')?.addEventListener('click', closeConfirmModal);
+
+// ==================== UPLOAD IMAGE ====================
+async function uploadImage(file, productName) {
+    if (!file || !supabaseClient) return null;
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Date.now()}_${productName.replace(/\s/g, '_').substring(0, 30)}.${fileExt}`;
+    showToast('📤 Upload en cours...', 'success');
+    try {
+        const { error } = await supabaseClient.storage.from(STORAGE_BUCKET).upload(fileName, file, { cacheControl: '3600', upsert: false });
+        if (error) throw error;
+        const { data: { publicUrl } } = supabaseClient.storage.from(STORAGE_BUCKET).getPublicUrl(fileName);
+        showToast('✅ Image uploadée');
+        return publicUrl;
+    } catch (error) {
+        console.error('Upload error:', error);
+        showToast('❌ Erreur upload: ' + error.message, 'error');
+        return null;
+    }
+}
+
+// ==================== GESTION PRODUITS ====================
+async function loadProducts() {
+    if (!supabaseClient) return;
+    const container = document.getElementById('productsListContainer');
+    container.innerHTML = '<div style="text-align: center; padding: 40px;">Chargement...</div>';
+    
+    try {
+        const { data, error } = await supabaseClient.from('productelevage').select('*').order('ordre', { ascending: true });
+        if (error) throw error;
+        
+        if (!data || data.length === 0) {
+            container.innerHTML = '<div style="text-align: center; padding: 40px;">📭 Aucun produit</div>';
+            return;
+        }
+        
+        let html = '<table class="produits-table"><thead><tr><th>Image</th><th>Nom</th><th>Catégorie</th><th>Prix</th><th>Stock</th><th>Actions</th></tr></thead><tbody>';
+        data.forEach(product => {
+            const cat = categories.find(c => c.nom === product.categorie);
+            const categoryIcon = cat ? cat.icone : '🐔';
+            html += `
+                <tr>
+                    <td>${product.image_url ? `<img src="${product.image_url}" class="product-img" onerror="this.src=''">` : `<div class="product-img" style="display:flex;align-items:center;justify-content:center;font-size:1.5rem;">${categoryIcon}</div>`}</td>
+                    <td><strong>${escapeHtml(product.nom)}</strong></td>
+                    <td>${escapeHtml(product.categorie || '-')}</td>
+                    <td>${escapeHtml(product.prix || 'Sur devis')}</td>
+                    <td>${product.stock_disponible ? '✅ En stock' : '❌ Rupture'}</td>
+                    <td><button class="btn-edit" onclick="editProduct(${product.id})"><i class="fas fa-edit"></i> Modifier</button><button class="btn-danger" onclick="requestDeleteProduct(${product.id})"><i class="fas fa-trash"></i> Supprimer</button></td>
+                </tr>
+            `;
+        });
+        html += '</tbody></table>';
+        container.innerHTML = html;
+    } catch (error) {
+        console.error('Erreur:', error);
+        container.innerHTML = '<div style="text-align: center; padding: 40px; color: red;">❌ Erreur de chargement</div>';
+    }
+}
+
+function requestDeleteProduct(id) {
+    showConfirmModal('⚠️ Supprimer ce produit ? Cette action est irréversible.', () => deleteProduct(id));
+}
+async function deleteProduct(id) {
+    try {
+        const { error } = await supabaseClient.from('productelevage').delete().eq('id', id);
+        if (error) throw error;
+        showToast('✅ Produit supprimé');
+        loadProducts();
+    } catch (error) { 
+        showToast('❌ Erreur: ' + error.message, 'error'); 
+    }
+}
+
+async function addProduct() {
+    document.getElementById('modalTitle').textContent = 'Ajouter un produit';
+    document.getElementById('productId').value = '';
+    document.getElementById('productNom').value = '';
+    document.getElementById('productDescription').value = '';
+    document.getElementById('productPrix').value = '';
+    document.getElementById('productTag').value = '';
+    if (categories.length > 0) document.getElementById('productCategorie').value = categories[0].nom;
+    document.getElementById('productStock').value = 'true';
+    document.getElementById('productImageFile').value = '';
+    document.getElementById('imagePreviewContainer').style.display = 'none';
+    resetFormSteps();
+    document.getElementById('productModal').style.display = 'flex';
+}
+
+async function editProduct(id) {
+    const { data, error } = await supabaseClient.from('productelevage').select('*').eq('id', id).single();
+    if (error) { showToast('Erreur chargement: ' + error.message, 'error'); return; }
+    
+    document.getElementById('modalTitle').textContent = 'Modifier le produit';
+    document.getElementById('productId').value = data.id;
+    document.getElementById('productNom').value = data.nom || '';
+    document.getElementById('productDescription').value = data.description || '';
+    document.getElementById('productPrix').value = data.prix || '';
+    document.getElementById('productTag').value = data.tag || '';
+    document.getElementById('productCategorie').value = data.categorie || (categories.length > 0 ? categories[0].nom : '');
+    document.getElementById('productStock').value = data.stock_disponible ? 'true' : 'false';
+    document.getElementById('productImageFile').value = '';
+    if (data.image_url) {
+        document.getElementById('imagePreview').src = data.image_url;
+        document.getElementById('imagePreviewContainer').style.display = 'block';
+    } else {
+        document.getElementById('imagePreviewContainer').style.display = 'none';
+    }
+    resetFormSteps();
+    document.getElementById('productModal').style.display = 'flex';
+}
+
+async function saveProduct() {
+    const id = document.getElementById('productId').value;
+    const imageFile = document.getElementById('productImageFile').files[0];
+    let imageUrl = null;
+    
+    if (imageFile) {
+        const productName = document.getElementById('productNom').value.trim();
+        const uploadedUrl = await uploadImage(imageFile, productName);
+        if (uploadedUrl) imageUrl = uploadedUrl;
+    }
+    
+    const productData = {
+        nom: document.getElementById('productNom').value.trim(),
+        description: document.getElementById('productDescription').value.trim(),
+        prix: document.getElementById('productPrix').value.trim(),
+        tag: document.getElementById('productTag').value || null,
+        categorie: document.getElementById('productCategorie').value,
+        image_url: imageUrl,
+        stock_disponible: document.getElementById('productStock').value === 'true',
+        updated_at: new Date().toISOString()
+    };
+    
+    if (!productData.nom) { showToast('Le nom est requis', 'error'); return; }
+    
+    try {
+        if (id) {
+            const { error } = await supabaseClient.from('productelevage').update(productData).eq('id', parseInt(id));
+            if (error) throw error;
+            showToast('✅ Produit modifié');
+        } else {
+            productData.created_at = new Date().toISOString();
+            const { data, error } = await supabaseClient.from('productelevage').insert([productData]);
+            if (error) throw error;
+            showToast('✅ Produit ajouté');
+        }
+        document.getElementById('productModal').style.display = 'none';
+        loadProducts();
+    } catch (error) {
+        console.error('Erreur Supabase:', error);
+        showToast('❌ Erreur: ' + error.message, 'error');
+    }
+}
+
+// ==================== GESTION CATÉGORIES ====================
+async function loadCategories() {
+    if (!supabaseClient) return;
+    try {
+        const { data, error } = await supabaseClient.from('categories').select('*').order('nom');
+        if (error) throw error;
+        categories = data || [];
+        
+        const selectCategorie = document.getElementById('productCategorie');
+        if (selectCategorie) {
+            selectCategorie.innerHTML = '';
+            if (categories.length === 0) selectCategorie.innerHTML = '<option value="">Aucune catégorie</option>';
+            else categories.forEach(cat => {
+                const option = document.createElement('option');
+                option.value = cat.nom;
+                option.textContent = `${cat.icone || '📁'} ${cat.nom}`;
+                selectCategorie.appendChild(option);
+            });
+        }
+        
+        const container = document.getElementById('categoriesListContainer');
+        if (container) {
+            if (categories.length === 0) container.innerHTML = '<div style="text-align: center; padding: 20px;">📭 Aucune catégorie</div>';
+            else {
+                container.innerHTML = categories.map(cat => `
+                    <div class="category-item">
+                        <div><span style="font-size:1.2rem; margin-right:8px;">${cat.icone || '📁'}</span><strong>${escapeHtml(cat.nom)}</strong></div>
+                        <button class="delete-category-btn" onclick="requestDeleteCategory('${cat.nom}')"><i class="fas fa-trash"></i></button>
+                    </div>
+                `).join('');
+            }
+        }
+    } catch (error) {
+        console.error('Erreur:', error);
+    }
+}
+
+async function addCategory() {
+    const newCategoryName = document.getElementById('newCategoryName').value.trim();
+    const newCategoryIcon = document.getElementById('newCategoryIcon').value;
+    if (!newCategoryName) { showToast('Veuillez entrer un nom', 'error'); return; }
+    if (categories.some(cat => cat.nom.toLowerCase() === newCategoryName.toLowerCase())) { showToast('Cette catégorie existe déjà', 'error'); return; }
+    
+    try {
+        const { error } = await supabaseClient.from('categories').insert([{ nom: newCategoryName.toLowerCase(), icone: newCategoryIcon }]);
+        if (error) throw error;
+        showToast('✅ Catégorie ajoutée');
+        document.getElementById('newCategoryName').value = '';
+        await loadCategories();
+        await loadProducts();
+    } catch (error) { showToast('❌ Erreur: ' + error.message, 'error'); }
+}
+
+function requestDeleteCategory(categoryName) {
+    showConfirmModal(`⚠️ Supprimer la catégorie "${categoryName}" ?\n\nLes produits dans cette catégorie ne seront pas supprimés.`, () => deleteCategory(categoryName));
+}
+async function deleteCategory(categoryName) {
+    try {
+        const { error } = await supabaseClient.from('categories').delete().eq('nom', categoryName);
+        if (error) throw error;
+        showToast('✅ Catégorie supprimée');
+        await loadCategories();
+        await loadProducts();
+    } catch (error) { showToast('❌ Erreur: ' + error.message, 'error'); }
+}
+
+// ==================== FORMULAIRE 2 ÉTAPES ====================
+function showStep(step) {
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const step1Indicator = document.getElementById('step1Indicator');
+    const step2Indicator = document.getElementById('step2Indicator');
+    if (step === 1) {
+        step1.classList.add('active');
+        step2.classList.remove('active');
+        step1Indicator.classList.add('active');
+        step2Indicator.classList.remove('active');
+        step2Indicator.classList.remove('completed');
+    } else {
+        step1.classList.remove('active');
+        step2.classList.add('active');
+        step1Indicator.classList.remove('active');
+        step1Indicator.classList.add('completed');
+        step2Indicator.classList.add('active');
+    }
+    currentStep = step;
+}
+function resetFormSteps() {
+    currentStep = 1;
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const step1Indicator = document.getElementById('step1Indicator');
+    const step2Indicator = document.getElementById('step2Indicator');
+    step1.classList.add('active');
+    step2.classList.remove('active');
+    step1Indicator.classList.add('active');
+    step2Indicator.classList.remove('active');
+    step2Indicator.classList.remove('completed');
+}
+
+// ==================== INITIALISATION ====================
+if (typeof supabase !== 'undefined' && supabase.createClient) {
+    supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    console.log("✅ Supabase connecté");
+}
+
+document.getElementById('loginBtn')?.addEventListener('click', async () => {
+    const pwd = document.getElementById('adminPassword').value;
+    if (pwd === ADMIN_PASSWORD) {
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('adminPanel').style.display = 'block';
+        await loadCategories();
+        await loadProducts();
+    } else {
+        document.getElementById('loginError').textContent = 'Mot de passe incorrect';
+    }
+});
+
+document.getElementById('addProductBtn')?.addEventListener('click', addProduct);
+document.getElementById('refreshProductsBtn')?.addEventListener('click', () => { loadProducts(); loadCategories(); });
+document.getElementById('saveProductBtn')?.addEventListener('click', saveProduct);
+document.getElementById('addCategoryBtn')?.addEventListener('click', addCategory);
+document.getElementById('nextStepBtn')?.addEventListener('click', () => showStep(2));
+document.getElementById('prevStepBtn')?.addEventListener('click', () => showStep(1));
+document.getElementById('closeProductModalBtn')?.addEventListener('click', () => document.getElementById('productModal').style.display = 'none');
+
+document.querySelectorAll('.admin-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+        document.getElementById(tab.dataset.tab + 'Panel').classList.add('active');
+    });
+});
+
+document.getElementById('productImageFile')?.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            document.getElementById('imagePreview').src = event.target.result;
+            document.getElementById('imagePreviewContainer').style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+window.requestDeleteProduct = requestDeleteProduct;
+window.requestDeleteCategory = requestDeleteCategory;
+window.editProduct = editProduct;
+</script>
+</body>
+</html>
