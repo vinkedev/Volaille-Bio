@@ -12,55 +12,58 @@
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #f5f5f5; font-family: 'Inter', sans-serif; padding: 20px; }
+        body { background: #f5f5f5; font-family: 'Inter', sans-serif; padding: 15px; }
         .admin-container { max-width: 1400px; margin: 0 auto; }
         
         /* Header responsive */
         .admin-header { background: #1B5E20; color: white; padding: 15px 20px; border-radius: 20px 20px 0 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
         .admin-header h1 { font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
-        .admin-header h1 i { font-size: 1.1rem; }
         .back-link { color: #FCDD11; text-decoration: none; font-weight: 500; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 5px; }
-        .back-link:hover { text-decoration: underline; }
         
         /* Tabs responsive */
         .admin-tabs { display: flex; background: white; border-bottom: 1px solid #ddd; flex-wrap: wrap; }
         .admin-tab { padding: 12px 16px; cursor: pointer; font-weight: 600; border: none; background: none; font-size: 0.85rem; transition: all 0.2s; flex: 1; min-width: 100px; white-space: nowrap; }
-        .admin-tab:hover { background: #f0f0f0; }
         .admin-tab.active { color: #1B5E20; border-bottom: 3px solid #1B5E20; }
         
         .admin-panel { background: white; padding: 20px; border-radius: 0 0 20px 20px; display: none; }
         .admin-panel.active { display: block; }
         
-        .btn-add { background: #1B5E20; color: white; padding: 10px 18px; border-radius: 50px; border: none; cursor: pointer; font-weight: 600; transition: all 0.2s; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-add { background: #1B5E20; color: white; padding: 10px 18px; border-radius: 50px; border: none; cursor: pointer; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 8px; }
         .btn-add:hover { background: #0f3d12; transform: translateY(-2px); }
-        .btn-secondary { background: #7A3A07; color: white; padding: 10px 18px; border-radius: 50px; border: none; cursor: pointer; font-weight: 600; transition: all 0.2s; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-secondary { background: #7A3A07; color: white; padding: 10px 18px; border-radius: 50px; border: none; cursor: pointer; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 8px; }
         .btn-secondary:hover { background: #5a2a05; transform: translateY(-2px); }
         .btn-danger { background: #dc3545; color: white; padding: 6px 12px; border-radius: 20px; border: none; cursor: pointer; font-size: 0.7rem; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
         .btn-edit { background: #FCDD11; color: #1B5E20; padding: 6px 12px; border-radius: 20px; border: none; cursor: pointer; font-size: 0.7rem; font-weight: 600; margin-right: 5px; display: inline-flex; align-items: center; gap: 4px; }
         
         .admin-buttons { display: flex; gap: 10px; justify-content: flex-start; margin-bottom: 20px; flex-wrap: wrap; }
         
-        /* Table responsive */
-        .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -5px; padding: 0 5px; }
-        .produits-table { width: 100%; border-collapse: collapse; min-width: 500px; }
-        .produits-table th, .produits-table td { padding: 10px 8px; text-align: left; border-bottom: 1px solid #ddd; font-size: 0.85rem; }
-        .produits-table th { background: #f8fafc; font-weight: 600; color: #1B5E20; }
-        .produits-table tr:hover { background: #f9f9f6; }
-        .product-img { width: 40px; height: 40px; object-fit: cover; border-radius: 8px; background: #e8f5e9; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+        /* Style carte pour mobile (pas de tableau) */
+        .products-cards { display: flex; flex-direction: column; gap: 15px; }
+        .product-card { background: #f8fafc; border-radius: 16px; padding: 15px; border: 1px solid #eef2f6; border-left: 4px solid #FCDD11; transition: all 0.2s; }
+        .product-card:hover { background: #fef9e6; transform: translateX(3px); }
+        .product-card-header { display: flex; gap: 15px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+        .product-card-image { width: 50px; height: 50px; background: #e8f5e9; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; overflow: hidden; }
+        .product-card-image img { width: 100%; height: 100%; object-fit: cover; }
+        .product-card-title { flex: 1; }
+        .product-card-title h3 { font-size: 1rem; color: #1B5E20; margin-bottom: 4px; }
+        .product-card-title p { font-size: 0.75rem; color: #666; }
+        .product-card-details { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; padding: 10px 0; border-top: 1px solid #eef2f6; border-bottom: 1px solid #eef2f6; }
+        .product-detail { display: flex; flex-direction: column; }
+        .product-detail-label { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
+        .product-detail-value { font-size: 0.9rem; font-weight: 500; color: #333; }
+        .product-card-actions { display: flex; gap: 8px; justify-content: flex-end; }
         
         /* Categories responsive */
-        .categories-list { margin-top: 15px; }
-        .category-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; margin-bottom: 8px; background: #f8fafc; border-radius: 12px; border-left: 4px solid #FCDD11; flex-wrap: wrap; gap: 10px; }
-        .category-item > div { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-        .delete-category-btn { background: none; border: none; color: #dc3545; cursor: pointer; font-size: 1rem; padding: 5px 10px; border-radius: 20px; opacity: 0.7; transition: all 0.2s; }
-        .category-item:hover .delete-category-btn { opacity: 1; }
-        .delete-category-btn:hover { background: #dc3545; color: white; transform: scale(1.05); }
+        .categories-list { margin-top: 15px; display: flex; flex-direction: column; gap: 10px; }
+        .category-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background: #f8fafc; border-radius: 12px; border-left: 4px solid #FCDD11; flex-wrap: wrap; gap: 10px; }
+        .category-item > div { display: flex; align-items: center; gap: 10px; }
+        .delete-category-btn { background: none; border: none; color: #dc3545; cursor: pointer; padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 5px; }
+        .delete-category-btn:hover { background: #dc3545; color: white; }
         
         /* Formulaire ajout catégorie responsive */
         .add-category-form { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
         .add-category-form input { flex: 2; min-width: 150px; padding: 12px; border: 1px solid #ddd; border-radius: 12px; font-size: 0.9rem; }
         .add-category-form select { padding: 12px; border: 1px solid #ddd; border-radius: 12px; background: white; cursor: pointer; font-size: 0.9rem; }
-        .add-category-form button { white-space: nowrap; }
         
         /* Modal responsive */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; }
@@ -69,59 +72,54 @@
         .modal-content input, .modal-content select, .modal-content textarea { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 12px; font-size: 0.9rem; }
         .modal-content label { font-weight: 600; margin-bottom: 5px; display: block; font-size: 0.85rem; }
         .form-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; flex-wrap: wrap; }
-        .image-preview { margin: 10px 0; max-width: 120px; border-radius: 12px; overflow: hidden; }
+        .image-preview { margin: 10px 0; max-width: 100px; border-radius: 12px; overflow: hidden; }
         .image-preview img { width: 100%; height: auto; }
         
-        /* Confirm modal responsive */
+        /* Confirm modal */
         .confirm-modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; }
-        .confirm-modal-content { background: white; border-radius: 24px; max-width: 400px; width: 90%; padding: 20px; text-align: center; margin: 20px; }
-        .confirm-modal-content h3 { color: #1B5E20; margin-bottom: 12px; font-size: 1.2rem; }
-        .confirm-modal-content p { font-size: 0.9rem; line-height: 1.5; white-space: pre-line; }
-        .confirm-buttons { display: flex; gap: 15px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
-        .confirm-yes { background: #dc3545; color: white; padding: 10px 20px; border-radius: 50px; border: none; cursor: pointer; font-weight: 600; font-size: 0.85rem; }
-        .confirm-no { background: #6c757d; color: white; padding: 10px 20px; border-radius: 50px; border: none; cursor: pointer; font-weight: 600; font-size: 0.85rem; }
+        .confirm-modal-content { background: white; border-radius: 24px; max-width: 350px; width: 90%; padding: 20px; text-align: center; margin: 20px; }
+        .confirm-modal-content h3 { color: #1B5E20; margin-bottom: 12px; font-size: 1.1rem; }
+        .confirm-modal-content p { font-size: 0.85rem; line-height: 1.4; white-space: pre-line; }
+        .confirm-buttons { display: flex; gap: 12px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+        .confirm-yes { background: #dc3545; color: white; padding: 8px 18px; border-radius: 50px; border: none; cursor: pointer; font-weight: 600; font-size: 0.8rem; }
+        .confirm-no { background: #6c757d; color: white; padding: 8px 18px; border-radius: 50px; border: none; cursor: pointer; font-weight: 600; font-size: 0.8rem; }
         
-        /* Toast responsive */
-        .toast-notification { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(100px); background: #1B5E20; color: white; padding: 10px 20px; border-radius: 50px; z-index: 3000; transition: transform 0.3s; font-size: 0.85rem; white-space: nowrap; }
-        @media (max-width: 480px) { .toast-notification { white-space: normal; text-align: center; max-width: 90%; } }
+        /* Toast */
+        .toast-notification { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(100px); background: #1B5E20; color: white; padding: 10px 20px; border-radius: 50px; z-index: 3000; transition: transform 0.3s; font-size: 0.85rem; text-align: center; max-width: 90%; }
         .toast-notification.show { transform: translateX(-50%) translateY(0); }
         .toast-notification.error { background: #dc3545; }
         
-        /* Login responsive */
-        .login-container { max-width: 380px; margin: 50px auto; background: white; padding: 25px; border-radius: 24px; text-align: center; }
+        /* Login */
+        .login-container { max-width: 350px; margin: 50px auto; background: white; padding: 25px; border-radius: 24px; text-align: center; }
         .login-container h2 { font-size: 1.3rem; margin-bottom: 10px; }
         .login-container input { width: 100%; padding: 12px; margin: 15px 0; border: 1px solid #ddd; border-radius: 12px; font-size: 1rem; }
         .login-error { color: red; margin-bottom: 10px; font-size: 0.85rem; }
         
-        /* Empty state */
         .empty-state { text-align: center; padding: 40px 20px; color: #666; font-size: 0.9rem; }
         
-        /* Actions cell in table */
-        .actions-cell { white-space: nowrap; }
+        /* Desktop: affichage tableau */
+        @media (min-width: 768px) {
+            .products-cards { display: none; }
+            .products-table-wrapper { display: block; }
+            .produits-table { width: 100%; border-collapse: collapse; }
+            .produits-table th, .produits-table td { padding: 12px 10px; text-align: left; border-bottom: 1px solid #ddd; font-size: 0.85rem; }
+            .produits-table th { background: #f8fafc; font-weight: 600; color: #1B5E20; }
+            .produits-table tr:hover { background: #f9f9f6; }
+            .product-img-table { width: 40px; height: 40px; object-fit: cover; border-radius: 8px; background: #e8f5e9; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+        }
         
-        /* Tableau sur mobile - transformation en cartes */
-        @media (max-width: 640px) {
+        /* Mobile: affichage cartes */
+        @media (max-width: 767px) {
             body { padding: 10px; }
             .admin-header { padding: 12px 15px; }
             .admin-header h1 { font-size: 1rem; }
             .admin-panel { padding: 15px; }
-            
-            /* Version carte pour mobile */
-            .table-responsive { overflow-x: visible; }
-            .produits-table, .produits-table thead, .produits-table tbody, .produits-table th, .produits-table td, .produits-table tr { display: block; }
-            .produits-table thead { display: none; }
-            .produits-table tr { border: 1px solid #ddd; border-radius: 16px; margin-bottom: 15px; padding: 12px; background: white; }
-            .produits-table td { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; gap: 10px; flex-wrap: wrap; }
-            .produits-table td:last-child { border-bottom: none; }
-            .produits-table td:before { content: attr(data-label); font-weight: 700; color: #1B5E20; min-width: 80px; font-size: 0.75rem; }
-            .product-img { width: 35px; height: 35px; }
-            .actions-cell { white-space: normal; justify-content: flex-end; }
-        }
-        
-        /* Tablette */
-        @media (min-width: 641px) and (max-width: 1024px) {
-            .admin-tab { padding: 12px 20px; font-size: 0.9rem; }
-            .produits-table th, .produits-table td { padding: 10px 8px; font-size: 0.8rem; }
+            .admin-tab { padding: 10px 12px; font-size: 0.75rem; min-width: 80px; }
+            .products-table-wrapper { display: none; }
+            .products-cards { display: flex; }
+            .product-card-header { flex-wrap: nowrap; }
+            .product-card-details { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .add-category-form input { min-width: 120px; }
         }
     </style>
 </head>
@@ -185,7 +183,7 @@
     </div>
 </div>
 
-<!-- MODALE PRODUIT SIMPLIFIÉE -->
+<!-- MODALE PRODUIT -->
 <div id="productModal" class="modal">
     <div class="modal-content">
         <button class="close-modal" id="closeProductModalBtn"><i class="fas fa-times"></i></button>
@@ -298,7 +296,73 @@ async function uploadImage(file, productName) {
     }
 }
 
-// ==================== GESTION PRODUITS ====================
+// ==================== AFFICHAGE PRODUITS ====================
+// Version carte pour mobile, tableau pour desktop
+function renderProducts(products) {
+    const container = document.getElementById('productsListContainer');
+    if (!products || products.length === 0) {
+        container.innerHTML = '<div class="empty-state">📭 Aucun produit</div>';
+        return;
+    }
+    
+    // Version TABLEAU pour desktop
+    let tableHtml = '<div class="products-table-wrapper"><table class="produits-table"><thead><tr><th>Image</th><th>Nom</th><th>Catégorie</th><th>Prix</th><th>Actions</th></tr></thead><tbody>';
+    
+    // Version CARTES pour mobile
+    let cardsHtml = '<div class="products-cards">';
+    
+    products.forEach(product => {
+        const cat = categories.find(c => c.nom === product.categorie);
+        const categoryIcon = cat ? cat.icone : '🐔';
+        const imageHtml = product.image_url 
+            ? `<img src="${product.image_url}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='${categoryIcon}'">` 
+            : categoryIcon;
+        
+        // Ligne pour le tableau desktop
+        tableHtml += `
+            <tr>
+                <td><div class="product-img-table">${product.image_url ? `<img src="${product.image_url}" class="product-img-table" style="width:40px;height:40px;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.parentElement.innerHTML='${categoryIcon}'">` : categoryIcon}</div></td>
+                <td><strong>${escapeHtml(product.nom)}</strong></td>
+                <td>${escapeHtml(product.categorie || '-')}</td>
+                <td>${escapeHtml(product.prix || 'Sur devis')}</td>
+                <td><button class="btn-edit" onclick="editProduct(${product.id})"><i class="fas fa-edit"></i> Modifier</button><button class="btn-danger" onclick="requestDeleteProduct(${product.id})"><i class="fas fa-trash"></i> Supprimer</button></td>
+            </tr>
+        `;
+        
+        // Carte pour mobile
+        cardsHtml += `
+            <div class="product-card">
+                <div class="product-card-header">
+                    <div class="product-card-image">${product.image_url ? `<img src="${product.image_url}" onerror="this.parentElement.innerHTML='${categoryIcon}'">` : categoryIcon}</div>
+                    <div class="product-card-title">
+                        <h3>${escapeHtml(product.nom)}</h3>
+                        <p>${escapeHtml(product.categorie || 'Sans catégorie')}</p>
+                    </div>
+                </div>
+                <div class="product-card-details">
+                    <div class="product-detail">
+                        <span class="product-detail-label">💰 Prix</span>
+                        <span class="product-detail-value">${escapeHtml(product.prix || 'Sur devis')}</span>
+                    </div>
+                    <div class="product-detail">
+                        <span class="product-detail-label">📝 Description</span>
+                        <span class="product-detail-value">${escapeHtml(product.description ? product.description.substring(0, 60) : '—')}${product.description && product.description.length > 60 ? '...' : ''}</span>
+                    </div>
+                </div>
+                <div class="product-card-actions">
+                    <button class="btn-edit" onclick="editProduct(${product.id})"><i class="fas fa-edit"></i> Modifier</button>
+                    <button class="btn-danger" onclick="requestDeleteProduct(${product.id})"><i class="fas fa-trash"></i> Supprimer</button>
+                </div>
+            </div>
+        `;
+    });
+    
+    tableHtml += '</tbody></table></div>';
+    cardsHtml += '</div>';
+    
+    container.innerHTML = tableHtml + cardsHtml;
+}
+
 async function loadProducts() {
     if (!supabaseClient) return;
     const container = document.getElementById('productsListContainer');
@@ -307,31 +371,7 @@ async function loadProducts() {
     try {
         const { data, error } = await supabaseClient.from('productelevage').select('*').order('ordre', { ascending: true });
         if (error) throw error;
-        
-        if (!data || data.length === 0) {
-            container.innerHTML = '<div class="empty-state">📭 Aucun produit</div>';
-            return;
-        }
-        
-        let html = '<div class="table-responsive"><table class="produits-table"><thead><tr><th>Image</th><th>Nom</th><th>Catégorie</th><th>Prix</th><th>Actions</th></tr></thead><tbody>';
-        data.forEach(product => {
-            const cat = categories.find(c => c.nom === product.categorie);
-            const categoryIcon = cat ? cat.icone : '🐔';
-            const imageHtml = product.image_url 
-                ? `<img src="${product.image_url}" class="product-img" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=\"product-img\">${categoryIcon}</div>'">` 
-                : `<div class="product-img">${categoryIcon}</div>`;
-            html += `
-                <tr>
-                    <td data-label="Image">${imageHtml}</td>
-                    <td data-label="Nom"><strong>${escapeHtml(product.nom)}</strong></td>
-                    <td data-label="Catégorie">${escapeHtml(product.categorie || '-')}</td>
-                    <td data-label="Prix">${escapeHtml(product.prix || 'Sur devis')}</td>
-                    <td data-label="Actions" class="actions-cell"><button class="btn-edit" onclick="editProduct(${product.id})"><i class="fas fa-edit"></i> Modifier</button><button class="btn-danger" onclick="requestDeleteProduct(${product.id})"><i class="fas fa-trash"></i> Supprimer</button></td>
-                </tr>
-            `;
-        });
-        html += '</tbody></table></div>';
-        container.innerHTML = html;
+        renderProducts(data || []);
     } catch (error) {
         console.error('Erreur:', error);
         container.innerHTML = '<div class="empty-state" style="color: red;">❌ Erreur de chargement</div>';
@@ -480,7 +520,7 @@ async function addCategory() {
 }
 
 function requestDeleteCategory(categoryName) {
-    showConfirmModal(`⚠️ Supprimer la catégorie "${categoryName}" ?\n\nLes produits dans cette catégorie ne seront pas supprimés.`, () => deleteCategory(categoryName));
+    showConfirmModal(`⚠️ Supprimer la catégorie "${categoryName}" ?\n\nLes produits ne seront pas supprimés.`, () => deleteCategory(categoryName));
 }
 async function deleteCategory(categoryName) {
     try {
